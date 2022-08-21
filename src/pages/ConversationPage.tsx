@@ -12,7 +12,7 @@ export const ConversationPage = () => {
 
   return (
     <Page>
-      <ConversationSidebar conversations={mockConversations} />
+      <ConversationSidebar conversations={[]} />
       {!id && <ConversationPanel />}
       <Outlet />
     </Page>

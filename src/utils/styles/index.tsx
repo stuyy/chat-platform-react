@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { PageProps } from './styleTypes';
+import { InputContainerProps, PageProps } from './styleTypes';
 
 export const SIDEBAR_WIDTH = 400;
 
@@ -16,8 +16,8 @@ export const InputField = styled.input`
   margin: 4px 0;
 `;
 
-export const InputContainer = styled.div`
-  background-color: #131313;
+export const InputContainer = styled.div<InputContainerProps>`
+  background-color: ${(prop) => prop.backgroundColor || '#131313'};
   padding: 12px 16px;
   border-radius: 10px;
   width: 100%;
@@ -112,4 +112,57 @@ export const ConversationSidebarItem = styled.div`
   box-sizing: border-box;
   border-bottom: 1px solid #5454543d;
   background-color: #131313;
+`;
+
+export const OverlayStyle = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: #000000c4;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+`;
+
+export const ModalContainerStyle = styled.div`
+  background-color: #121212;
+  width: 650px;
+  box-sizing: border-box;
+  border-radius: 10px;
+`;
+
+export const ModalHeaderStyle = styled.header`
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  & h2 {
+    font-weight: 500;
+    margin: 0;
+  }
+`;
+
+export const ModalContentBodyStyle = styled.div`
+  padding: 24px;
+`;
+
+export const TextField = styled.textarea`
+  font-family: 'Inter';
+  outline: none;
+  border: none;
+  background-color: inherit;
+  color: #fff;
+  font-size: 18px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 4px 0;
+  resize: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
