@@ -1,11 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { postRegisterUser } from '../../utils/api';
 import {
   Button,
   InputContainer,
   InputField,
   InputLabel,
 } from '../../utils/styles';
+import { CreateUserParams } from '../../utils/types';
 import styles from './index.module.scss';
 
 export const RegisterForm = () => {
@@ -13,12 +15,19 @@ export const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<CreateUserParams>();
 
   console.log(errors);
-  const onSubmit = (data: any) => {
+
+  const onSubmit = async (data: CreateUserParams) => {
     console.log(data);
+    try {
+      await postRegisterUser(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <InputContainer>
