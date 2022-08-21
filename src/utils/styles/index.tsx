@@ -38,6 +38,15 @@ export const Button = styled.button`
   color: #fff;
   border-radius: 10px;
   padding: 25px 0;
+  font-weight: 500;
+  transition: 250ms background-color ease;
+  &:hover {
+    cursor: pointer;
+    background-color: #3415ff;
+  }
+  &:active {
+    background-color: #3a1cff;
+  }
 `;
 
 export const Page = styled.div`
