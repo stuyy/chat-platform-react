@@ -16,3 +16,7 @@ html {
   font-family: 'Inter';
   color: #fff;
 }
+
+h1 {
+  margin: 0;
+}
