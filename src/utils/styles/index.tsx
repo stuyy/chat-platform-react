@@ -102,7 +102,9 @@ export const ConversationChannelPageStyle = styled.div`
   margin-left: ${SIDEBAR_WIDTH}px;
 `;
 
-export const ConversationSidebarContainer = styled.div``;
+export const ConversationSidebarContainer = styled.div`
+  margin-top: 100px;
+`;
 
 export const ConversationSidebarItem = styled.div`
   display: flex;

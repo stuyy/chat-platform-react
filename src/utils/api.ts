@@ -12,3 +12,6 @@ export const postLoginUser = (data: UserCredentialsParams) =>
 
 export const getAuthUser = () =>
   axios.get<User>(`${API_URL}/auth/status`, config);
+
+export const getConversations = () =>
+  axios.get(`${API_URL}/conversations`, config);
