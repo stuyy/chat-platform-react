@@ -22,3 +22,10 @@ export type ConversationType = {
   creator: User;
   recipient: User;
 };
+
+export type MessageType = {
+  id: number;
+  content: string;
+  createdAt: string;
+  author: User;
+};
