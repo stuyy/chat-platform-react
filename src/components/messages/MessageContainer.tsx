@@ -18,6 +18,7 @@ type Props = {
 type FormattedMessageProps = {
   user?: User;
   message: MessageType;
+  key: number;
 };
 export const FormattedMessage: FC<FormattedMessageProps> = ({
   user,
@@ -57,17 +58,17 @@ export const MessageContainer: FC<Props> = ({ messages }) => {
       const currentMessage = arr[index];
       const nextMessage = arr[nextIndex];
       if (arr.length === nextIndex)
-        return <FormattedMessage user={user} message={m} />;
+        return <FormattedMessage key={m.id} user={user} message={m} />;
       if (currentMessage.author.id === nextMessage.author.id) {
         return (
-          <MessageItemContainer>
+          <MessageItemContainer key={m.id}>
             <MessageItemContent padding="0 0 0 70px">
               {m.content}
             </MessageItemContent>
           </MessageItemContainer>
         );
       }
-      return <FormattedMessage user={user} message={m} />;
+      return <FormattedMessage key={m.id} user={user} message={m} />;
     });
   };
 
