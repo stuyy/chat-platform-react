@@ -1,5 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { CreateUserParams, User, UserCredentialsParams } from './types';
+import {
+  CreateMessageParams,
+  CreateUserParams,
+  User,
+  UserCredentialsParams,
+} from './types';
 
 const API_URL = process.env.REACT_APP_API_URL;
 const config: AxiosRequestConfig = { withCredentials: true };
@@ -18,3 +23,6 @@ export const getConversations = () =>
 
 export const getConversationMessages = (id: number) =>
   axios.get(`${API_URL}/messages/${id}`, config);
+
+export const postNewMessage = (data: CreateMessageParams) =>
+  axios.post(`${API_URL}/messages`, data, config);
