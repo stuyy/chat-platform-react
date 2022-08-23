@@ -11,6 +11,9 @@ import { socket, SocketContext } from './utils/context/SocketContext';
 import { User } from './utils/types';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './store';
+import { enableMapSet } from 'immer';
+
+enableMapSet();
 
 type Props = {
   user?: User;

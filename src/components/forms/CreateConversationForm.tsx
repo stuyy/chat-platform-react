@@ -6,6 +6,8 @@ import {
   TextField,
 } from '../../utils/styles';
 import styles from './index.module.scss';
+import { useDispatch } from 'react-redux';
+import { addConversation } from '../../store/conversationSlice';
 
 export const CreateConversationForm = () => {
   return (
@@ -22,7 +24,13 @@ export const CreateConversationForm = () => {
           <TextField />
         </InputContainer>
       </section>
-      <Button onClick={(e) => e.preventDefault()}>Create Conversation</Button>
+      <Button
+        onClick={(e) => {
+          e.preventDefault();
+        }}
+      >
+        Create Conversation
+      </Button>
     </form>
   );
 };
