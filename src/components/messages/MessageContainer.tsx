@@ -56,7 +56,7 @@ export const MessageContainer: FC<Props> = ({ messages }) => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const conversationMessages = useSelector(
-    (state: RootState) => state.conversation.messages
+    (state: RootState) => state.messages.messages
   );
 
   useEffect(() => {

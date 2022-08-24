@@ -8,7 +8,7 @@ import { SocketContext } from '../utils/context/SocketContext';
 import { ConversationChannelPageStyle } from '../utils/styles';
 import { MessageEventPayload, MessageType } from '../utils/types';
 import { AppDispatch, RootState } from '../store';
-import { fetchMessagesThunk } from '../store/conversationSlice';
+import { fetchMessagesThunk } from '../store/messageSlice';
 
 export const ConversationChannelPage = () => {
   const { user } = useContext(AuthContext);
