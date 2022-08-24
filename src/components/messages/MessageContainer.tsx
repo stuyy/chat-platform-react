@@ -52,7 +52,7 @@ export const FormattedMessage: FC<FormattedMessageProps> = ({
   );
 };
 
-export const MessageContainer: FC<Props> = ({ messages }) => {
+export const MessageContainer = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const conversationMessages = useSelector(

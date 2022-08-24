@@ -7,11 +7,7 @@ import { MessageContainer } from './MessageContainer';
 import { MessageInputField } from './MessageInputField';
 import { MessagePanelHeader } from './MessagePanelHeader';
 
-type Props = {
-  messages: MessageType[];
-};
-
-export const MessagePanel: FC<Props> = ({ messages }) => {
+export const MessagePanel = () => {
   const [content, setContent] = useState('');
   const { id } = useParams();
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,7 +29,7 @@ export const MessagePanel: FC<Props> = ({ messages }) => {
       <MessagePanelHeader />
       <MessagePanelStyle>
         <MessagePanelBody>
-          <MessageContainer messages={messages} />
+          <MessageContainer />
           <MessageInputField
             content={content}
             setContent={setContent}
