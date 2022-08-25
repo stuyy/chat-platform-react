@@ -15,6 +15,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { CreateConversationParams } from '../../utils/types';
 import { AppDispatch } from '../../store';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
@@ -26,14 +27,17 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal }) => {
     formState: { errors },
   } = useForm<CreateConversationParams>({});
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const onSubmit = (data: CreateConversationParams) => {
     console.log(data);
     dispatch(createConversationThunk(data))
-      .then((data) => {
+      .unwrap()
+      .then(({ data }) => {
         console.log(data);
         console.log('done');
         setShowModal(false);
+        navigate(`/conversations/${data.id}`);
       })
       .catch((err) => console.log(err));
   };
