@@ -12,6 +12,7 @@ export const ConversationPage = () => {
   const { id } = useParams();
   const [conversations, setConversations] = useState<ConversationType[]>([]);
   const dispatch = useDispatch<AppDispatch>();
+
   const conversationsState = useSelector(
     (state: RootState) => state.conversation.conversations
   );

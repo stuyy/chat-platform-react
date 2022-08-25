@@ -7,7 +7,10 @@ import { MessageContainer } from './MessageContainer';
 import { MessageInputField } from './MessageInputField';
 import { MessagePanelHeader } from './MessagePanelHeader';
 
-export const MessagePanel = () => {
+type Props = {
+  sendTypingStatus: () => void;
+};
+export const MessagePanel: FC<Props> = ({ sendTypingStatus }) => {
   const [content, setContent] = useState('');
   const { id } = useParams();
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +19,6 @@ export const MessagePanel = () => {
     console.log('Sending Message', content);
     if (!id || !content) return;
     const conversationId = parseInt(id);
-
     try {
       await postNewMessage({ conversationId, content });
       setContent('');
@@ -34,6 +36,7 @@ export const MessagePanel = () => {
             content={content}
             setContent={setContent}
             sendMessage={sendMessage}
+            sendTypingStatus={sendTypingStatus}
           />
         </MessagePanelBody>
       </MessagePanelStyle>

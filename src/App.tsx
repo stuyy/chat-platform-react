@@ -39,6 +39,7 @@ function AppWithProviders({
 
 function App() {
   const [user, setUser] = useState<User>();
+
   return (
     <AppWithProviders user={user} setUser={setUser} socket={socket}>
       <Routes>
