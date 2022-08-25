@@ -22,23 +22,6 @@ export const ConversationChannelPage = () => {
     dispatch(fetchMessagesThunk(conversationId));
   }, [id]);
 
-  useEffect(() => {
-    socket.emit('onClientConnect', {
-      conversationId: parseInt(id!),
-    });
-    socket.on('onMessage', (payload: MessageEventPayload) => {
-      console.log('Message Received');
-      const { conversation, message } = payload;
-      console.log(conversation, message);
-      dispatch(addMessage(payload));
-      dispatch(updateConversation(conversation));
-    });
-    return () => {
-      socket.off('connected');
-      socket.off('onMessage');
-    };
-  }, [id]);
-
   const sendTypingStatus = () => {
     console.log('You are typing');
     socket.emit('onUserTyping', { conversationId: id });
