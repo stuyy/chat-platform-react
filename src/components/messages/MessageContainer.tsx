@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { formatRelative } from 'date-fns';
 import {
   MessageContainerStyle,
@@ -13,6 +13,8 @@ import { AuthContext } from '../../utils/context/AuthContext';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useParams } from 'react-router-dom';
+import { MessageMenuContext } from '../../utils/context/MessageMenuContext';
+import { SelectedMessageContextMenu } from '../context-menus/SelectedMessageContextMenu';
 
 type Props = {
   messages: MessageType[];
@@ -22,13 +24,15 @@ type FormattedMessageProps = {
   user?: User;
   message: MessageType;
   key: number;
+  onContextMenu: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 export const FormattedMessage: FC<FormattedMessageProps> = ({
   user,
   message,
+  onContextMenu,
 }) => {
   return (
-    <MessageItemContainer>
+    <MessageItemContainer onContextMenu={onContextMenu}>
       <MessageItemAvatar />
       <MessageItemDetails>
         <MessageItemHeader>
@@ -53,14 +57,32 @@ export const FormattedMessage: FC<FormattedMessageProps> = ({
 };
 
 export const MessageContainer = () => {
+  const [showMenu, setShowMenu] = useState(false);
+  const [points, setPoints] = useState({ x: 0, y: 0 });
   const { user } = useContext(AuthContext);
   const { id } = useParams();
+  const [selectedMessage, setSelectedMessage] = useState<MessageType | null>(
+    null
+  );
+
   const conversationMessages = useSelector(
     (state: RootState) => state.messages.messages
   );
 
+  const onContextMenu = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    message: MessageType
+  ) => {
+    e.preventDefault();
+    setShowMenu(true);
+    setPoints({ x: e.pageX, y: e.pageY });
+    setSelectedMessage(message);
+  };
+
   useEffect(() => {
-    console.log(id);
+    const handleClick = () => setShowMenu(false);
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
   }, []);
 
   const formatMessages = () => {
@@ -71,23 +93,44 @@ export const MessageContainer = () => {
       const currentMessage = arr[index];
       const nextMessage = arr[nextIndex];
       if (arr.length === nextIndex)
-        return <FormattedMessage key={m.id} user={user} message={m} />;
+        return (
+          <FormattedMessage
+            onContextMenu={(e) => onContextMenu(e, m)}
+            key={m.id}
+            user={user}
+            message={m}
+          />
+        );
       if (currentMessage.author.id === nextMessage.author.id) {
         return (
-          <MessageItemContainer key={m.id}>
+          <MessageItemContainer
+            key={m.id}
+            onContextMenu={(e) => onContextMenu(e, m)}
+          >
             <MessageItemContent padding="0 0 0 70px">
               {m.content}
             </MessageItemContent>
           </MessageItemContainer>
         );
       }
-      return <FormattedMessage key={m.id} user={user} message={m} />;
+      return (
+        <FormattedMessage
+          onContextMenu={(e) => onContextMenu(e, m)}
+          key={m.id}
+          user={user}
+          message={m}
+        />
+      );
     });
   };
-
-  useEffect(() => {
-    formatMessages();
-  });
-
-  return <MessageContainerStyle>{formatMessages()}</MessageContainerStyle>;
+  return (
+    <MessageMenuContext.Provider
+      value={{ message: selectedMessage, setMessage: setSelectedMessage }}
+    >
+      <MessageContainerStyle>
+        <>{formatMessages()}</>
+        {showMenu && <SelectedMessageContextMenu points={points} />}
+      </MessageContainerStyle>
+    </MessageMenuContext.Provider>
+  );
 };

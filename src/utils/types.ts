@@ -58,3 +58,8 @@ export type ConversationMessage = {
   id: number;
   messages: MessageType[];
 };
+
+export type DeleteMessageParams = {
+  conversationId: number;
+  messageId: number;
+};
