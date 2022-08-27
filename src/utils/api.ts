@@ -5,6 +5,7 @@ import {
   CreateMessageParams,
   CreateUserParams,
   DeleteMessageParams,
+  DeleteMessageResponse,
   FetchMessagePayload,
   User,
   UserCredentialsParams,
@@ -48,7 +49,7 @@ export const deleteMessage = ({
   conversationId,
   messageId,
 }: DeleteMessageParams) =>
-  axios.delete(
+  axios.delete<DeleteMessageResponse>(
     `${API_URL}/conversations/${conversationId}/messages/${messageId}`,
     config
   );

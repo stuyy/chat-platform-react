@@ -9,7 +9,7 @@ import {
   fetchConversationsThunk,
   updateConversation,
 } from '../store/conversationSlice';
-import { addMessage } from '../store/messageSlice';
+import { addMessage, deleteMessage } from '../store/messageSlice';
 import { SocketContext } from '../utils/context/SocketContext';
 import { Page } from '../utils/styles';
 import { ConversationType, MessageEventPayload } from '../utils/types';
@@ -51,10 +51,16 @@ export const ConversationPage = () => {
       console.log(payload);
       dispatch(addConversation(payload));
     });
+    socket.on('onMessageDelete', (payload) => {
+      console.log('Message Deleted');
+      console.log(payload);
+      dispatch(deleteMessage(payload));
+    });
     return () => {
       socket.off('connected');
       socket.off('onMessage');
       socket.off('onConversation');
+      socket.off('onMessageDelete');
     };
   }, [id]);
 
