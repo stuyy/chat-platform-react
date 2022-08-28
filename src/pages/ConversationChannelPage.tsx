@@ -5,7 +5,7 @@ import { MessagePanel } from '../components/messages/MessagePanel';
 import { SocketContext } from '../utils/context/SocketContext';
 import { ConversationChannelPageStyle } from '../utils/styles';
 import { AppDispatch } from '../store';
-import { fetchMessagesThunk } from '../store/messageSlice';
+import { editMessage, fetchMessagesThunk } from '../store/messageSlice';
 
 export const ConversationChannelPage = () => {
   const { id } = useParams();
@@ -40,12 +40,19 @@ export const ConversationChannelPage = () => {
       setIsRecipientTyping(false);
     });
 
+    socket.on('onMessageUpdate', (message) => {
+      console.log('onMessageUpdate received');
+      console.log(message);
+      dispatch(editMessage(message));
+    });
+
     return () => {
       socket.emit('onConversationLeave', { conversationId });
       socket.off('userJoin');
       socket.off('userLeave');
       socket.off('onTypingStart');
       socket.off('onTypingStop');
+      socket.off('onMessageUpdate');
     };
   }, [id]);
 
