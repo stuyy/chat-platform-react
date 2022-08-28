@@ -32,13 +32,6 @@ export const ConversationPage = () => {
   }, []);
 
   useEffect(() => {
-    socket.emit('onClientConnect', {
-      conversationId: parseInt(id!),
-    });
-    socket.on('connected', (data) => {
-      console.log('Connected to Websocket');
-      console.log(data);
-    });
     socket.on('onMessage', (payload: MessageEventPayload) => {
       console.log('Message Received');
       const { conversation, message } = payload;
