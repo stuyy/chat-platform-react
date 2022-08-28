@@ -275,6 +275,7 @@ export const MessageItemHeader = styled.div`
 
 export const MessageItemContent = styled.div<MessageItemContentProps>`
   padding: ${({ padding }) => padding};
+  width: 100%;
 `;
 
 export const ContextMenuStyle = styled.div<ContextMenuProps>`
@@ -312,4 +313,25 @@ export const MessageTypingStatus = styled.div`
   box-sizing: border-box;
   margin-top: 10px;
   height: 20px;
+`;
+
+export const EditMessageInputField = styled.input`
+  outline: none;
+  border: none;
+  background-color: #222;
+  color: #bababa;
+  font-family: 'Inter';
+  box-sizing: border-box;
+  font-size: 15px;
+  padding: 18px 22px;
+  border-radius: 5px;
+  margin: 4px 0;
+  width: 100%;
+`;
+
+export const EditMessageActionsContainer = styled.div`
+  font-size: 12px;
+  & span {
+    color: #1d77ff;
+  }
 `;

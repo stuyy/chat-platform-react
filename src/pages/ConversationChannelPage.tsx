@@ -65,9 +65,6 @@ export const ConversationChannelPage = () => {
       setIsTyping(true);
       socket.emit('onTypingStart', { conversationId: id });
     }
-    // clearTimeout(timer);
-    // socket.emit('onUserTyping', { conversationId: id });
-    // setTimer(setTimeout(() => console.log('User stopped typing'), 2000));
   };
 
   return (
