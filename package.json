@@ -12,6 +12,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "akar-icons": "^1.9.20",
     "axios": "^0.27.2",
     "date-fns": "^2.29.2",
     "react": "^18.2.0",

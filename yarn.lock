@@ -2508,6 +2508,13 @@ ajv@^8.0.0, ajv@^8.6.0, ajv@^8.8.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
+akar-icons@^1.9.20:
+  version "1.9.20"
+  resolved "https://registry.yarnpkg.com/akar-icons/-/akar-icons-1.9.20.tgz#51c43abcb1bdbd2cda930b8a218950cfc879f88c"
+  integrity sha512-tBeVAKQZ710C6a8lq5gVmwhOqSpCedUeZZUwGi3fU3sbgnwja43rOjNNOSfSSQKHTF+4CQK+Y7SIQgCqazOoig==
+  dependencies:
+    prop-types "^15.7.2"
+
 ansi-escapes@^4.2.1, ansi-escapes@^4.3.1:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-4.3.2.tgz#6b2291d1db7d98b6521d5f1efa42d0f3a9feb65e"
@@ -7269,7 +7276,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.8.1:
+prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
