@@ -19,7 +19,7 @@ export type User = {
   lastName: string;
 };
 
-export type ConversationType = {
+export type Conversation = {
   id: number;
   creator: User;
   recipient: User;
@@ -37,7 +37,7 @@ export type MessageType = {
   content: string;
   createdAt: string;
   author: User;
-  conversation: ConversationType;
+  conversation: Conversation;
 };
 
 export type FetchMessagePayload = {
@@ -47,7 +47,7 @@ export type FetchMessagePayload = {
 
 export type MessageEventPayload = {
   message: MessageType;
-  conversation: ConversationType;
+  conversation: Conversation;
 };
 
 export type CreateMessageParams = {
@@ -77,4 +77,22 @@ export type EditMessagePayload = {
   conversationId: number;
   messageId: number;
   content: string;
+};
+
+export type ConversationType = 'group' | 'private';
+
+export type ConversationTypeData = {
+  type: ConversationType;
+  label: string;
+};
+
+export type Group = {
+  id: number;
+  title?: string;
+  users: User[];
+  creator: User;
+  messages: MessageType[];
+  createdAt: number;
+  lastMessageSent: MessageType;
+  lastMessageSentAt: Date;
 };

@@ -9,26 +9,20 @@ import {
   fetchConversationsThunk,
   updateConversation,
 } from '../store/conversationSlice';
+import { fetchGroupsThunk } from '../store/groupSlice';
 import { addMessage, deleteMessage } from '../store/messageSlice';
 import { SocketContext } from '../utils/context/SocketContext';
 import { Page } from '../utils/styles';
-import { ConversationType, MessageEventPayload } from '../utils/types';
+import { Conversation, MessageEventPayload } from '../utils/types';
 
 export const ConversationPage = () => {
   const { id } = useParams();
-  const [conversations, setConversations] = useState<ConversationType[]>([]);
   const dispatch = useDispatch<AppDispatch>();
-
   const socket = useContext(SocketContext);
 
-  const conversationsState = useSelector(
-    (state: RootState) => state.conversation.conversations
-  );
-
   useEffect(() => {
-    console.log('Fetching Conversations in ConversationPage');
-    console.log(conversationsState.find((c) => c.id === 15));
     dispatch(fetchConversationsThunk());
+    dispatch(fetchGroupsThunk());
   }, []);
 
   useEffect(() => {
@@ -39,7 +33,7 @@ export const ConversationPage = () => {
       dispatch(addMessage(payload));
       dispatch(updateConversation(conversation));
     });
-    socket.on('onConversation', (payload: ConversationType) => {
+    socket.on('onConversation', (payload: Conversation) => {
       console.log('Received onConversation Event');
       console.log(payload);
       dispatch(addConversation(payload));
@@ -59,7 +53,7 @@ export const ConversationPage = () => {
 
   return (
     <Page>
-      <ConversationSidebar conversations={conversations} />
+      <ConversationSidebar />
       {!id && <ConversationPanel />}
       <Outlet />
     </Page>
