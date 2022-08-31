@@ -13,7 +13,24 @@ import { fetchGroupsThunk } from '../store/groupSlice';
 import { addMessage, deleteMessage } from '../store/messageSlice';
 import { SocketContext } from '../utils/context/SocketContext';
 import { Page } from '../utils/styles';
-import { Conversation, MessageEventPayload } from '../utils/types';
+import { Conversation, DeleteMessageResponse, MessageEventPayload } from '../utils/types';
+
+type SocketPayloadMap = {
+  onMessage: MessageEventPayload,
+  onConversation: Conversation,
+  onMessageDelete: DeleteMessageResponse
+}
+
+const useSocket = <K extends keyof SocketPayloadMap>(event: K, listener: (payload: SocketPayloadMap[K]) => void) => {
+  const socket = useContext(SocketContext);
+
+  useEffect(() => {
+    socket.on(event as string, listener)
+    return () => {
+      socket.off(event as string, listener)
+    }
+  }, [socket, event, listener])
+}
 
 export const ConversationPage = () => {
   const { id } = useParams();
@@ -25,29 +42,26 @@ export const ConversationPage = () => {
     dispatch(fetchGroupsThunk());
   }, []);
 
+  useSocket('onMessage', (payload) => {
+    const { conversation, message } = payload;
+    console.log(conversation, message);
+    dispatch(addMessage(payload));
+    dispatch(updateConversation(conversation));
+  })
+  useSocket('onConversation', (payload) => {
+    console.log('Received onConversation Event');
+    console.log(payload);
+    dispatch(addConversation(payload));
+  })
+  useSocket('onMessageDelete', (payload) => {
+    console.log('Message Deleted');
+    console.log(payload);
+    dispatch(deleteMessage(payload));
+  })
+
   useEffect(() => {
-    socket.on('onMessage', (payload: MessageEventPayload) => {
-      console.log('Message Received');
-      const { conversation, message } = payload;
-      console.log(conversation, message);
-      dispatch(addMessage(payload));
-      dispatch(updateConversation(conversation));
-    });
-    socket.on('onConversation', (payload: Conversation) => {
-      console.log('Received onConversation Event');
-      console.log(payload);
-      dispatch(addConversation(payload));
-    });
-    socket.on('onMessageDelete', (payload) => {
-      console.log('Message Deleted');
-      console.log(payload);
-      dispatch(deleteMessage(payload));
-    });
     return () => {
-      socket.off('connected');
-      socket.off('onMessage');
-      socket.off('onConversation');
-      socket.off('onMessageDelete');
+      socket.off('connected'); // NOT SURE WHAT THIS IS SORRY
     };
   }, [id]);
 
