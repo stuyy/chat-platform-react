@@ -348,16 +348,15 @@ export const ConversationSelectedStyle = styled.div`
 `;
 
 export const ConversationSelectedItem = styled.div<ConversationSelectedProps>`
-  padding: 10px 24px;
-  border-radius: 50px;
+  padding: 12px 28px;
+  border-radius: 10px;
   font-size: 15px;
   font-weight: 500;
-  border: 0.15em solid #d3d3d3;
+  background-color: #212121;
+  color: #f0f0f0;
   ${(props) =>
     props.selected &&
     css`
-      background-color: #b1b1b1;
-      border: 0.15em solid #b1b1b1;
-      color: #292929;
+      background-color: #444444;
     `};
 `;

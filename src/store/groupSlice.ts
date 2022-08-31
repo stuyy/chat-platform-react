@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+} from '@reduxjs/toolkit';
+import { RootState } from '.';
 import { fetchGroups as fetchGroupsAPI } from '../utils/api';
 import { Group } from '../utils/types';
 
@@ -26,6 +31,14 @@ export const groupsSlice = createSlice({
     });
   },
 });
+
+const selectGroups = (state: RootState) => state.groups.groups;
+const selectGroupId = (state: RootState, id: number) => id;
+
+export const selectGroupById = createSelector(
+  [selectGroups, selectGroupId],
+  (groups, groupId) => groups.find((g) => g.id === groupId)
+);
 
 export const {} = groupsSlice.actions;
 

@@ -1,16 +1,16 @@
-import { useContext, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useContext, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Outlet, useParams } from 'react-router-dom';
 import { ConversationPanel } from '../components/conversations/ConversationPanel';
 import { ConversationSidebar } from '../components/conversations/ConversationSidebar';
-import { AppDispatch, RootState } from '../store';
+import { AppDispatch } from '../store';
 import {
   addConversation,
   fetchConversationsThunk,
   updateConversation,
 } from '../store/conversationSlice';
-import { fetchGroupsThunk } from '../store/groupSlice';
 import { addMessage, deleteMessage } from '../store/messageSlice';
+import { updateType } from '../store/selectedSlice';
 import { SocketContext } from '../utils/context/SocketContext';
 import { Page } from '../utils/styles';
 import { Conversation, MessageEventPayload } from '../utils/types';
@@ -21,8 +21,8 @@ export const ConversationPage = () => {
   const socket = useContext(SocketContext);
 
   useEffect(() => {
+    dispatch(updateType('private'));
     dispatch(fetchConversationsThunk());
-    dispatch(fetchGroupsThunk());
   }, []);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '.';
 import { ConversationType } from '../utils/types';
 
 export interface SelectedTypeState {
@@ -18,6 +19,9 @@ export const selectedTypeSlice = createSlice({
     },
   },
 });
+
+export const selectType = (state: RootState) =>
+  state.selectedConversationType.type;
 
 export const { updateType } = selectedTypeSlice.actions;
 
