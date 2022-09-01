@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {
   EditMessageInputField,
   MessageContainerStyle,
@@ -14,6 +14,7 @@ import { MessageMenuContext } from '../../utils/context/MessageMenuContext';
 import { SelectedMessageContextMenu } from '../context-menus/SelectedMessageContextMenu';
 import { FormattedMessage } from './FormattedMessage';
 import { EditMessageContainer } from './EditMessageContainer';
+import { selectConversationMessage } from '../../store/messageSlice';
 
 export const MessageContainer = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -28,8 +29,8 @@ export const MessageContainer = () => {
   const [originalEditMessage, setOriginalEditMessage] =
     useState(selectedEditMessage);
   const [isEditing, setIsEditing] = useState(false);
-  const conversationMessages = useSelector(
-    (state: RootState) => state.messages.messages
+  const conversationMessages = useSelector((state: RootState) =>
+    selectConversationMessage(state, parseInt(id!))
   );
 
   const onContextMenu = (
@@ -71,10 +72,14 @@ export const MessageContainer = () => {
     };
   }, [id]);
 
+  const formatChatMessages = () => {
+    
+  };
+
   const formatMessages = () => {
-    const msgs = conversationMessages.find((cm) => cm.id === parseInt(id!));
-    if (!msgs) return [];
-    return msgs?.messages?.map((m, index, arr) => {
+    if (!conversationMessages) return [];
+    console.log(conversationMessages);
+    return conversationMessages.messages.map((m, index, arr) => {
       const nextIndex = index + 1;
       const currentMessage = arr[index];
       const nextMessage = arr[nextIndex];
