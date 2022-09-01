@@ -118,7 +118,6 @@ export const ConversationSidebarItemStyle = styled.div`
   gap: 20px;
   padding: 10px 32px;
   box-sizing: border-box;
-  background-color: #131313;
 `;
 
 export const OverlayStyle = styled.div`
