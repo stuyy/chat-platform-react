@@ -12,9 +12,19 @@ type Props = {
 };
 
 export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
+  const MESSAGE_LENGTH_MAX = 50;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const recipient = getRecipientFromConversation(conversation, user);
+  const lastMessageContent = () => {
+    const { lastMessageSent } = conversation;
+    if (lastMessageSent)
+      return lastMessageSent.content.length >= MESSAGE_LENGTH_MAX
+        ? lastMessageSent.content.slice(0, MESSAGE_LENGTH_MAX).concat('...')
+        : lastMessageSent.content;
+    return null;
+  };
+
   return (
     <>
       <ConversationSidebarItemStyle
@@ -26,7 +36,7 @@ export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
             {`${recipient?.firstName} ${recipient?.lastName}`}
           </span>
           <span className={styles.conversationLastMessage}>
-            {conversation.lastMessageSent?.content}
+            {lastMessageContent()}
           </span>
         </div>
       </ConversationSidebarItemStyle>
