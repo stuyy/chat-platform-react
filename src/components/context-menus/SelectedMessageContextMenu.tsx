@@ -1,25 +1,26 @@
-import { Dispatch, FC, SetStateAction, useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { AppDispatch } from '../../store';
+import { AppDispatch, RootState } from '../../store';
+import {
+  setIsEditing,
+  setMessageBeingEdited,
+} from '../../store/messageContainerSlice';
 import { deleteMessageThunk } from '../../store/messageSlice';
 import { AuthContext } from '../../utils/context/AuthContext';
-import { MessageMenuContext } from '../../utils/context/MessageMenuContext';
 import { ContextMenuStyle } from '../../utils/styles';
 
 type Props = {
   points: { x: number; y: number };
-  setIsEditing: Dispatch<SetStateAction<boolean>>;
 };
 
-export const SelectedMessageContextMenu: FC<Props> = ({
-  points,
-  setIsEditing,
-}) => {
-  const { message, setEditMessage } = useContext(MessageMenuContext);
+export const SelectedMessageContextMenu: FC<Props> = ({ points }) => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
   const dispatch = useDispatch<AppDispatch>();
+  const { selectedMessage: message } = useSelector(
+    (state: RootState) => state.messageContainer
+  );
 
   const deleteMessage = () => {
     const conversationId = parseInt(id!);
@@ -29,8 +30,8 @@ export const SelectedMessageContextMenu: FC<Props> = ({
   };
 
   const editMessage = () => {
-    setIsEditing(true);
-    setEditMessage(message);
+    dispatch(setIsEditing(true));
+    dispatch(setMessageBeingEdited(message));
   };
 
   return (
