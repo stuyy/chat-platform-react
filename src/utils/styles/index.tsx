@@ -133,6 +133,7 @@ export const OverlayStyle = styled.div`
 `;
 
 export const ModalContainerStyle = styled.div`
+  position: relative;
   background-color: #121212;
   width: 650px;
   box-sizing: border-box;
@@ -155,6 +156,7 @@ export const ModalHeaderStyle = styled.header`
 
 export const ModalContentBodyStyle = styled.div`
   padding: 24px;
+  position: relative;
 `;
 
 export const TextField = styled.textarea`
@@ -483,11 +485,23 @@ export const SidebarContainerItemContent = styled.div`
     font-size: 18px;
     font-weight: 600;
   }
-
   & .lastMessage {
     display: block;
     font-size: 16px;
     color: #797979;
     font-weight: 500;
+  }
+`;
+
+export const RecipientResultContainer = styled.div`
+  position: absolute;
+  background-color: #161616;
+  right: 0;
+  left: 0;
+  margin: 4px 24px;
+  height: 190px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
