@@ -34,3 +34,37 @@ form {
 .message {
   margin: 8px 0;
 }
+
+.conversationTypeForm {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+.radio {
+  display: none;
+  &:hover + .radioLabel::before {
+    background-color: #000;
+  }
+  &:checked + .radioLabel::before {
+    content: '\2714';
+    color: rgb(32, 32, 32);
+    background-color: rgb(222, 222, 222);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.radioLabel {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  &::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid #2b09ff;
+    border-radius: 5px;
+    margin-right: 8px;
+  }
+}

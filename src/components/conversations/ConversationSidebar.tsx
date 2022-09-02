@@ -18,7 +18,6 @@ export const ConversationSidebar = () => {
     (state: RootState) => state.conversation.conversations
   );
   const groups = useSelector((state: RootState) => state.groups.groups);
-
   const selectedConversationType = useSelector(
     (state: RootState) => state.selectedConversationType.type
   );
