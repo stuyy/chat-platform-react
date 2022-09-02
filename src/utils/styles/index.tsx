@@ -505,3 +505,15 @@ export const RecipientResultContainer = styled.div`
     display: none;
   }
 `;
+
+export const RecipientResultItem = styled.div`
+  padding: 20px 28px;
+  transition: 100ms background-color ease;
+  border: 2px solid #161616;
+  box-sizing: border-box;
+  &:hover {
+    cursor: pointer;
+    background-color: #0c0c0c;
+    border: 2px solid #4e4e4e78;
+  }
+`;
