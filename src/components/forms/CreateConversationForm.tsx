@@ -1,30 +1,23 @@
-import React, { Dispatch, FC, useCallback, useEffect, useState } from 'react';
+import React, { Dispatch, FC, useEffect, useState } from 'react';
 import {
   Button,
   InputContainer,
   InputField,
   InputLabel,
-  RecipientResultContainer,
-  RecipientResultItem,
   TextField,
 } from '../../utils/styles';
 import styles from './index.module.scss';
 import { useDispatch } from 'react-redux';
-import {
-  addConversation,
-  createConversationThunk,
-} from '../../store/conversationSlice';
-import { useForm } from 'react-hook-form';
-import {
-  ConversationType,
-  CreateConversationParams,
-  User,
-} from '../../utils/types';
+import { createConversationThunk } from '../../store/conversationSlice';
+import { ConversationType, User } from '../../utils/types';
 import { AppDispatch } from '../../store';
 import { useNavigate } from 'react-router-dom';
 import { useDebounce } from '../../utils/hooks/useDebounce';
 import { searchUsers } from '../../utils/api';
 import { SelectedRecipientChip } from '../recipients/SelectedRecipientChip';
+import { RecipientResultContainer } from '../recipients/RecipientResultContainer';
+import { RecipientField } from '../recipients/RecipientField';
+import { createGroupThunk } from '../../store/groupSlice';
 
 type Props = {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
@@ -38,6 +31,7 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal, type }) => {
   const [selectedUser, setSelectedUser] = useState<User>();
   const [searching, setSearching] = useState(false);
   const [message, setMessage] = useState('');
+  const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
 
   const debouncedQuery = useDebounce(query, 1000);
   const dispatch = useDispatch<AppDispatch>();
@@ -58,16 +52,34 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal, type }) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!selectedUser || !message) return;
-    dispatch(createConversationThunk({ email: selectedUser.email, message }))
-      .unwrap()
-      .then(({ data }) => {
-        console.log(data);
-        console.log('done');
-        setShowModal(false);
-        navigate(`/conversations/${data.id}`);
-      })
-      .catch((err) => console.log(err));
+    console.log('hi?');
+    if (!message) return;
+    if (type === 'private' && selectedUser)
+      return dispatch(
+        createConversationThunk({ email: selectedUser.email, message })
+      )
+        .unwrap()
+        .then(({ data }) => {
+          console.log(data);
+          console.log('done');
+          setShowModal(false);
+          navigate(`/conversations/${data.id}`);
+        })
+        .catch((err) => console.log(err));
+
+    if (type === 'group' && selectedUsers.length > 0) {
+      const users = selectedUsers.map((user) => user.email);
+      console.log(users);
+      return dispatch(createGroupThunk(users))
+        .unwrap()
+        .then(({ data }) => {
+          console.log(data);
+          console.log('done');
+          setShowModal(false);
+          navigate(`/groups/${data.id}`);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleUserSelect = (user: User) => {
@@ -76,29 +88,43 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal, type }) => {
     setQuery('');
   };
 
+  const handleMultipleUserSelect = (user: User) => {
+    console.log(user);
+    const exists = selectedUsers.find((u) => u.id === user.id);
+    console.log(exists);
+    if (!exists) setSelectedUsers((prev) => [...prev, user]);
+  };
+
+  const removeAllSelectedUsers = () => {
+    setQuery('');
+    setUserResults([]);
+    setSelectedUsers([]);
+  };
+
+  const saveResults = () => {
+    setQuery('');
+    setUserResults([]);
+  };
+
   return (
     <form className={styles.createConversationForm} onSubmit={onSubmit}>
-      <section>
-        <InputContainer backgroundColor="#161616">
-          <InputLabel>Recipient</InputLabel>
-          {!selectedUser ? (
-            <InputField onChange={(e) => setQuery(e.target.value)} />
-          ) : (
-            <SelectedRecipientChip
-              user={selectedUser}
-              setSelectedUser={setSelectedUser}
-            />
-          )}
-        </InputContainer>
-      </section>
+      <RecipientField
+        selectedUser={selectedUser}
+        selectedUsers={selectedUsers}
+        setQuery={setQuery}
+        setSelectedUser={setSelectedUser}
+        setSelectedUsers={setSelectedUsers}
+        type={type}
+      />
       {!selectedUser && userResults.length > 0 && query && (
-        <RecipientResultContainer>
-          {userResults.map((user) => (
-            <RecipientResultItem onClick={() => handleUserSelect(user)}>
-              <span>{user.email}</span>
-            </RecipientResultItem>
-          ))}
-        </RecipientResultContainer>
+        <RecipientResultContainer
+          type={type}
+          userResults={userResults}
+          handleUserSelect={handleUserSelect}
+          handleMultipleUserSelect={handleMultipleUserSelect}
+          removeAllSelectedUsers={removeAllSelectedUsers}
+          saveResults={saveResults}
+        />
       )}
       <section className={styles.message}>
         <InputContainer backgroundColor="#161616">
