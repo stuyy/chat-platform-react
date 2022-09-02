@@ -517,3 +517,26 @@ export const RecipientResultItem = styled.div`
     border: 2px solid #4e4e4e78;
   }
 `;
+
+export const SelectedRecipientPillStyle = styled.div`
+  margin-top: 10px;
+  background-color: #111;
+  border-radius: 14px;
+  width: fit-content;
+  padding: 8px 18px;
+  & .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  & .icon {
+    margin-left: 10px;
+    color: #656565;
+    cursor: pointer;
+    transition: 300ms color ease;
+    :hover {
+      color: #c62d2d;
+    }
+  }
+`;

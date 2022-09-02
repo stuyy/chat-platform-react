@@ -24,6 +24,7 @@ import { AppDispatch } from '../../store';
 import { useNavigate } from 'react-router-dom';
 import { useDebounce } from '../../utils/hooks/useDebounce';
 import { searchUsers } from '../../utils/api';
+import { SelectedRecipientChip } from '../recipients/SelectedRecipientChip';
 
 type Props = {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
@@ -31,14 +32,10 @@ type Props = {
 };
 
 export const CreateConversationForm: FC<Props> = ({ setShowModal, type }) => {
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreateConversationParams>({});
-
   const [query, setQuery] = useState('');
   const [email, setEmail] = useState('');
   const [userResults, setUserResults] = useState<User[]>([]);
+  const [selectedUser, setSelectedUser] = useState<User>();
   const [searching, setSearching] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -59,9 +56,10 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal, type }) => {
     }
   }, [debouncedQuery]);
 
-  const onSubmit = (data: CreateConversationParams) => {
-    console.log(data);
-    dispatch(createConversationThunk(data))
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!selectedUser || !message) return;
+    dispatch(createConversationThunk({ email: selectedUser.email, message }))
       .unwrap()
       .then(({ data }) => {
         console.log(data);
@@ -72,21 +70,31 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal, type }) => {
       .catch((err) => console.log(err));
   };
 
+  const handleUserSelect = (user: User) => {
+    setSelectedUser(user);
+    setUserResults([]);
+    setQuery('');
+  };
+
   return (
-    <form
-      className={styles.createConversationForm}
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className={styles.createConversationForm} onSubmit={onSubmit}>
       <section>
         <InputContainer backgroundColor="#161616">
           <InputLabel>Recipient</InputLabel>
-          <InputField onChange={(e) => setQuery(e.target.value)} />
+          {!selectedUser ? (
+            <InputField onChange={(e) => setQuery(e.target.value)} />
+          ) : (
+            <SelectedRecipientChip
+              user={selectedUser}
+              setSelectedUser={setSelectedUser}
+            />
+          )}
         </InputContainer>
       </section>
-      {!searching && userResults.length > 0 && query && (
+      {!selectedUser && userResults.length > 0 && query && (
         <RecipientResultContainer>
           {userResults.map((user) => (
-            <RecipientResultItem>
+            <RecipientResultItem onClick={() => handleUserSelect(user)}>
               <span>{user.email}</span>
             </RecipientResultItem>
           ))}
@@ -95,7 +103,10 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal, type }) => {
       <section className={styles.message}>
         <InputContainer backgroundColor="#161616">
           <InputLabel>Message (optional)</InputLabel>
-          <TextField />
+          <TextField
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
         </InputContainer>
       </section>
       <Button>Create Conversation</Button>
