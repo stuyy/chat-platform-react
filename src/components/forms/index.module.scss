@@ -47,8 +47,8 @@ form {
   }
   &:checked + .radioLabel::before {
     content: '\2714';
-    color: rgb(32, 32, 32);
-    background-color: rgb(222, 222, 222);
+    color: rgb(193, 193, 193);
+    background-color: #2b09ff;
     display: flex;
     justify-content: center;
     align-items: center;

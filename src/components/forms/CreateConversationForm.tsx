@@ -13,14 +13,16 @@ import {
   createConversationThunk,
 } from '../../store/conversationSlice';
 import { useForm } from 'react-hook-form';
-import { CreateConversationParams } from '../../utils/types';
+import { ConversationType, CreateConversationParams } from '../../utils/types';
 import { AppDispatch } from '../../store';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
+  type: ConversationType;
 };
-export const CreateConversationForm: FC<Props> = ({ setShowModal }) => {
+
+export const CreateConversationForm: FC<Props> = ({ setShowModal, type }) => {
   const {
     register,
     handleSubmit,
@@ -42,6 +44,12 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal }) => {
       .catch((err) => console.log(err));
   };
 
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (type === 'group') {
+      console.log(e.target.value);
+    }
+  };
+
   return (
     <form
       className={styles.createConversationForm}
@@ -50,9 +58,7 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal }) => {
       <section>
         <InputContainer backgroundColor="#161616">
           <InputLabel>Recipient</InputLabel>
-          <InputField
-            {...register('email', { required: 'Email is required' })}
-          />
+          <InputField onChange={onChange} />
         </InputContainer>
       </section>
       <section className={styles.message}>
