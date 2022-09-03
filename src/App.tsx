@@ -16,6 +16,8 @@ import { GroupChannelPage } from './pages/group/GroupChannelPage';
 import { GroupPage } from './pages/group/GroupPage';
 import { UserSidebar } from './components/sidebars/UserSidebar';
 import { AppPage } from './pages/AppPage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 enableMapSet();
 
@@ -64,6 +66,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
+      <ToastContainer theme="dark" />
     </AppWithProviders>
   );
 }
