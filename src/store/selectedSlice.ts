@@ -1,6 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '.';
 import { ConversationType } from '../utils/types';
+import { deleteGroupMessageThunk } from './groupMessageSlice';
 
 export interface SelectedTypeState {
   type: ConversationType;

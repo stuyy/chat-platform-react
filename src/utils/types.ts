@@ -79,12 +79,22 @@ export type GroupMessage = {
 };
 
 export type DeleteMessageParams = {
-  conversationId: number;
+  id: number;
+  messageId: number;
+};
+
+export type DeleteGroupMessageParams = {
+  id: number;
   messageId: number;
 };
 
 export type DeleteMessageResponse = {
   conversationId: number;
+  messageId: number;
+};
+
+export type DeleteGroupMessageResponse = {
+  groupId: number;
   messageId: number;
 };
 
