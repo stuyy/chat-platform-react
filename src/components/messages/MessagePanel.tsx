@@ -8,6 +8,7 @@ import { AuthContext } from '../../utils/context/AuthContext';
 import { getRecipientFromConversation } from '../../utils/helpers';
 import {
   MessagePanelBody,
+  MessagePanelFooter,
   MessagePanelStyle,
   MessageTypingStatus,
 } from '../../utils/styles';
@@ -47,32 +48,25 @@ export const MessagePanel: FC<Props> = ({
       return postGroupMessage(params)
         .then(() => setContent(''))
         .catch((err) => console.log(err));
-
-    // try {
-    //   await postNewMessage(conversationId, { content });
-    //   setContent('');
-    // } catch (err) {
-    //   console.log(err);
-    // }
   };
   return (
     <>
-      <MessagePanelHeader />
       <MessagePanelStyle>
+        <MessagePanelHeader />
         <MessagePanelBody>
           <MessageContainer />
-          <div>
-            <MessageInputField
-              content={content}
-              setContent={setContent}
-              sendMessage={sendMessage}
-              sendTypingStatus={sendTypingStatus}
-            />
-            <MessageTypingStatus>
-              {isRecipientTyping ? `${recipient?.firstName} is typing...` : ''}
-            </MessageTypingStatus>
-          </div>
-        </MessagePanelBody>
+        </MessagePanelBody>{' '}
+        <MessagePanelFooter>
+          <MessageInputField
+            content={content}
+            setContent={setContent}
+            sendMessage={sendMessage}
+            sendTypingStatus={sendTypingStatus}
+          />
+          <MessageTypingStatus>
+            {isRecipientTyping ? `${recipient?.firstName} is typing...` : ''}
+          </MessageTypingStatus>
+        </MessagePanelFooter>
       </MessagePanelStyle>
     </>
   );
