@@ -13,6 +13,7 @@ import {
   FetchGroupMessagePayload,
   FetchMessagePayload,
   Group,
+  GroupMessageType,
   MessageType,
   User,
   UserCredentialsParams,
@@ -52,13 +53,9 @@ export const deleteMessage = ({ id, messageId }: DeleteMessageParams) =>
     config
   );
 
-export const editMessage = ({
-  content,
-  conversationId,
-  messageId,
-}: EditMessagePayload) =>
+export const editMessage = ({ content, id, messageId }: EditMessagePayload) =>
   axiosClient.patch<MessageType>(
-    `/conversations/${conversationId}/messages/${messageId}`,
+    `/conversations/${id}/messages/${messageId}`,
     { content },
     config
   );
@@ -83,5 +80,16 @@ export const deleteGroupMessage = ({
 }: DeleteGroupMessageParams) =>
   axiosClient.delete<DeleteGroupMessageResponse>(
     `/groups/${id}/messages/${messageId}`,
+    config
+  );
+
+export const editGroupMessage = ({
+  content,
+  id,
+  messageId,
+}: EditMessagePayload) =>
+  axiosClient.patch<GroupMessageType>(
+    `/groups/${id}/messages/${messageId}`,
+    { content },
     config
   );

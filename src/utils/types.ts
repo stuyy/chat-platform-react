@@ -103,7 +103,7 @@ export type MessagePanelBodyProps = {
 };
 
 export type EditMessagePayload = {
-  conversationId: number;
+  id: number;
   messageId: number;
   content: string;
 };
@@ -120,7 +120,7 @@ export type Group = {
   title?: string;
   users: User[];
   creator: User;
-  messages: MessageType[];
+  messages: GroupMessageType[];
   createdAt: number;
   lastMessageSent: MessageType;
   lastMessageSentAt: Date;
