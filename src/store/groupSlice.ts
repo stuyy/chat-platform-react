@@ -9,7 +9,7 @@ import {
   fetchGroups as fetchGroupsAPI,
   createGroup as createGroupAPI,
 } from '../utils/api';
-import { Group, User } from '../utils/types';
+import { CreateGroupParams, Group, User } from '../utils/types';
 
 export interface GroupState {
   groups: Group[];
@@ -25,7 +25,7 @@ export const fetchGroupsThunk = createAsyncThunk('groups/fetch', () => {
 
 export const createGroupThunk = createAsyncThunk(
   'groups/create',
-  (users: string[]) => createGroupAPI(users)
+  (params: CreateGroupParams) => createGroupAPI(params)
 );
 
 export const groupsSlice = createSlice({

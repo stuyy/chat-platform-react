@@ -6,6 +6,7 @@ import {
   TextField,
   Button,
   RecipientChipContainer,
+  InputField,
 } from '../../utils/styles';
 import styles from './index.module.scss';
 import { User } from '../../utils/types';
@@ -23,6 +24,7 @@ type Props = {
 };
 
 export const CreateGroupForm: FC<Props> = ({ setShowModal }) => {
+  const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<User[]>([]);
@@ -47,9 +49,9 @@ export const CreateGroupForm: FC<Props> = ({ setShowModal }) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (selectedRecipients.length === 0 || !message) return;
-    const emails = selectedRecipients.map((user) => user.email);
-    return dispatch(createGroupThunk(emails))
+    if (selectedRecipients.length === 0 || !message || !title) return;
+    const users = selectedRecipients.map((user) => user.email);
+    return dispatch(createGroupThunk({ title, users }))
       .unwrap()
       .then(({ data }) => {
         console.log(data);
@@ -82,6 +84,15 @@ export const CreateGroupForm: FC<Props> = ({ setShowModal }) => {
           handleUserSelect={handleUserSelect}
         />
       )}
+      <section className={styles.message}>
+        <InputContainer backgroundColor="#161616">
+          <InputLabel>Title</InputLabel>
+          <InputField
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </InputContainer>
+      </section>
       <section className={styles.message}>
         <InputContainer backgroundColor="#161616">
           <InputLabel>Message (optional)</InputLabel>
