@@ -1,31 +1,33 @@
-import React, { Dispatch, FC, useEffect, useState } from 'react';
+import { Dispatch, FC, useEffect, useState } from 'react';
+import { GroupRecipientsField } from '../recipients/GroupRecipientsField';
 import {
-  Button,
   InputContainer,
   InputLabel,
   TextField,
+  Button,
+  RecipientChipContainer,
 } from '../../utils/styles';
 import styles from './index.module.scss';
-import { useDispatch } from 'react-redux';
-import { createConversationThunk } from '../../store/conversationSlice';
 import { User } from '../../utils/types';
-import { AppDispatch } from '../../store';
-import { useNavigate } from 'react-router-dom';
 import { useDebounce } from '../../utils/hooks/useDebounce';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { AppDispatch } from '../../store';
 import { searchUsers } from '../../utils/api';
 import { RecipientResultContainer } from '../recipients/RecipientResultContainer';
-import { RecipientField } from '../recipients/RecipientField';
+import { SelectedGroupRecipientChip } from '../recipients/SelectedGroupRecipientChip';
+import { createGroupThunk } from '../../store/groupSlice';
 
 type Props = {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const CreateConversationForm: FC<Props> = ({ setShowModal }) => {
-  const [query, setQuery] = useState('');
-  const [userResults, setUserResults] = useState<User[]>([]);
-  const [selectedUser, setSelectedUser] = useState<User>();
-  const [searching, setSearching] = useState(false);
+export const CreateGroupForm: FC<Props> = ({ setShowModal }) => {
   const [message, setMessage] = useState('');
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<User[]>([]);
+  const [selectedRecipients, setSelectedRecipients] = useState<User[]>([]);
+  const [searching, setSearching] = useState(false);
   const debouncedQuery = useDebounce(query, 1000);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal }) => {
       searchUsers(debouncedQuery)
         .then(({ data }) => {
           console.log(data);
-          setUserResults(data);
+          setResults(data);
         })
         .catch((err) => console.log(err))
         .finally(() => setSearching(false));
@@ -45,36 +47,38 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal }) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!message || !selectedUser) return;
-    return dispatch(
-      createConversationThunk({ email: selectedUser.email, message })
-    )
+    if (selectedRecipients.length === 0 || !message) return;
+    const emails = selectedRecipients.map((user) => user.email);
+    return dispatch(createGroupThunk(emails))
       .unwrap()
       .then(({ data }) => {
         console.log(data);
         console.log('done');
         setShowModal(false);
-        navigate(`/conversations/${data.id}`);
+        navigate(`/groups/${data.id}`);
       })
       .catch((err) => console.log(err));
   };
 
   const handleUserSelect = (user: User) => {
-    setSelectedUser(user);
-    setUserResults([]);
-    setQuery('');
+    const exists = selectedRecipients.find((u) => u.id === user.id);
+    if (!exists) setSelectedRecipients((prev) => [...prev, user]);
   };
+
+  const removeUser = (user: User) =>
+    setSelectedRecipients((prev) => prev.filter((u) => u.id !== user.id));
 
   return (
     <form className={styles.createConversationForm} onSubmit={onSubmit}>
-      <RecipientField
-        selectedUser={selectedUser}
-        setQuery={setQuery}
-        setSelectedUser={setSelectedUser}
-      />
-      {!selectedUser && userResults.length > 0 && query && (
+      <RecipientChipContainer>
+        {selectedRecipients.map((user) => (
+          <SelectedGroupRecipientChip user={user} removeUser={removeUser} />
+        ))}
+      </RecipientChipContainer>
+      <GroupRecipientsField setQuery={setQuery} />
+      {results.length > 0 && query && (
         <RecipientResultContainer
-          userResults={userResults}
+          userResults={results}
           handleUserSelect={handleUserSelect}
         />
       )}

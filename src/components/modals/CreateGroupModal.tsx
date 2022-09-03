@@ -1,15 +1,17 @@
-import { createRef, Dispatch, FC, useEffect } from 'react';
+import { createRef, Dispatch, FC, useEffect, useState } from 'react';
 import { ModalContainer, ModalContentBody, ModalHeader } from '.';
 import { OverlayStyle } from '../../utils/styles';
-import { CreateConversationForm } from '../forms/CreateConversationForm';
 import { MdClose } from 'react-icons/md';
+import { ConversationType } from '../../utils/types';
+import { CreateGroupForm } from '../forms/CreateGroupForm';
 
 type Props = {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const CreateConversationModal: FC<Props> = ({ setShowModal }) => {
+export const CreateGroupModal: FC<Props> = ({ setShowModal }) => {
   const ref = createRef<HTMLDivElement>();
+  const [type, setType] = useState<ConversationType>('group');
 
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) =>
@@ -32,12 +34,11 @@ export const CreateConversationModal: FC<Props> = ({ setShowModal }) => {
     <OverlayStyle ref={ref} onClick={handleOverlayClick}>
       <ModalContainer>
         <ModalHeader>
-          <h2>Create a Conversation</h2>
+          <h2>Create a Group</h2>
           <MdClose size={32} onClick={() => setShowModal(false)} />
         </ModalHeader>
         <ModalContentBody>
-          {/* <ConversationTypeForm type={type} setType={setType} /> */}
-          <CreateConversationForm setShowModal={setShowModal} />
+          <CreateGroupForm setShowModal={setShowModal} />
         </ModalContentBody>
       </ModalContainer>
     </OverlayStyle>

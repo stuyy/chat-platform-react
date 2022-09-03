@@ -1,15 +1,10 @@
-import {
-  UserAvatar,
-  UserSidebarBottom,
-  UserSidebarTop,
-  UserSidebarTopIcons,
-} from '../../utils/styles';
+import { UserAvatar } from '../../utils/styles';
 import styles from './index.module.scss';
 import { ChatDots, Person, ArrowCycle } from 'akar-icons';
 import avatar from '../../__assets__/avatar_1.png';
 import { useState } from 'react';
 import { CreateConversationModal } from '../modals/CreateConversationModal';
-import { UserSidebarItem, UserSidebarStyle } from '../../utils/styles/sidebars';
+import { UserSidebarItem, UserSidebarStyle } from '../../utils/styles';
 
 export const UserSidebar = () => {
   const ICON_SIZE = 30;

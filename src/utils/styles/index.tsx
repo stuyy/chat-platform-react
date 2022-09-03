@@ -34,7 +34,9 @@ export const InputContainer = styled.div<InputContainerProps>`
 export const RecipientChipContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  gap: 4px 10px;
 `;
 
 export const InputLabel = styled.label`
@@ -444,7 +446,7 @@ export const RecipientResultContainerStyle = styled.div`
 `;
 
 export const RecipientScrollableItemContainer = styled.div`
-  height: 140px;
+  max-height: 200px;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -471,11 +473,11 @@ export const RecipientResultItem = styled.div`
 `;
 
 export const SelectedRecipientPillStyle = styled.div`
-  margin-top: 10px;
-  background-color: #111;
+  border: 2px solid #323232b0;
   border-radius: 14px;
   width: fit-content;
-  padding: 8px 18px;
+  padding: 6px 18px;
+  font-size: 14px;
   & .container {
     display: flex;
     align-items: center;
@@ -524,6 +526,7 @@ export const ConversationSidebarHeader = styled.header`
   box-shadow: 5px 0 5px 1px #000;
   display: flex;
   align-items: center;
+  gap: 20px;
 `;
 
 export const ConversationsScrollableContainer = styled.div`
@@ -558,4 +561,10 @@ export const UserSidebarItem = styled.div<SidebarItemProps>`
   padding: 18px;
   box-sizing: border-box;
   background-color: ${({ active }) => active && '#1e1e1e'};
+`;
+
+export const ConversationCreateButton = styled.div`
+  background-color: #1a1a1a;
+  padding: 10px;
+  box-sizing: border-box;
 `;
