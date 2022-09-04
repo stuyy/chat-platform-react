@@ -12,6 +12,7 @@ import {
   MessagePanelStyle,
   MessageTypingStatus,
 } from '../../utils/styles';
+import { GroupRecipientsSidebar } from '../sidebars/GroupRecipientsSidebar';
 import { MessageContainer } from './MessageContainer';
 import { MessageInputField } from './MessageInputField';
 import { MessagePanelHeader } from './MessagePanelHeader';

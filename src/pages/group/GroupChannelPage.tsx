@@ -11,6 +11,7 @@ import {
   fetchGroupMessagesThunk,
 } from '../../store/groupMessageSlice';
 import { GroupMessage, GroupMessageType } from '../../utils/types';
+import { GroupRecipientsSidebar } from '../../components/sidebars/GroupRecipientsSidebar';
 
 export const GroupChannelPage = () => {
   const { id } = useParams();
@@ -43,11 +44,14 @@ export const GroupChannelPage = () => {
   const sendTypingStatus = () => {};
 
   return (
-    <ConversationChannelPageStyle>
-      <MessagePanel
-        sendTypingStatus={sendTypingStatus}
-        isRecipientTyping={isRecipientTyping}
-      ></MessagePanel>
-    </ConversationChannelPageStyle>
+    <>
+      <ConversationChannelPageStyle>
+        <MessagePanel
+          sendTypingStatus={sendTypingStatus}
+          isRecipientTyping={isRecipientTyping}
+        ></MessagePanel>
+      </ConversationChannelPageStyle>
+      <GroupRecipientsSidebar />
+    </>
   );
 };

@@ -568,3 +568,42 @@ export const ConversationCreateButton = styled.div`
   padding: 10px;
   box-sizing: border-box;
 `;
+
+export const GroupRecipientsSidebarStyle = styled.aside`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 400px;
+  background-color: #141414;
+  border-left: 1px solid #22222256;
+`;
+
+export const GroupRecipientsSidebarHeader = styled.div`
+  height: 90px;
+  padding: 10px 32px;
+  box-sizing: border-box;
+  width: 100%;
+  flex-shrink: 0;
+  border-bottom: 1px solid #22222256;
+  box-shadow: 5px 0 5px 1px #000;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  & span {
+    font-size: 20px;
+    font-weight: 500;
+  }
+`;
+
+export const GroupRecipientSidebarItemContainer = styled.div`
+  padding: 10px 0 0 20px;
+`;
+
+export const GroupRecipientSidebarItem = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 10px 0;
+`;
