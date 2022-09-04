@@ -597,6 +597,12 @@ export const GroupRecipientsSidebarHeader = styled.div`
 
 export const GroupRecipientSidebarItemContainer = styled.div`
   padding: 10px 0 0 20px;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const GroupRecipientSidebarItem = styled.div`
