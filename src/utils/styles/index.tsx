@@ -166,6 +166,7 @@ export const MessagePanelHeaderStyle = styled.header`
   box-shadow: 5px 0 5px 1px #000;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const MessagePanelBody = styled.div`
