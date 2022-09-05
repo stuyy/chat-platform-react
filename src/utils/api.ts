@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import {
+  AddGroupRecipientParams,
   Conversation,
   CreateConversationParams,
   CreateGroupParams,
@@ -93,3 +94,6 @@ export const editGroupMessage = ({
     { content },
     config
   );
+
+export const addGroupRecipient = ({ id, email }: AddGroupRecipientParams) =>
+  axiosClient.post(`/groups/${id}/recipients`, { email }, config);
