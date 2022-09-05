@@ -5,7 +5,7 @@ export interface GroupRecipientSidebarState {
 }
 
 const initialState: GroupRecipientSidebarState = {
-  showSidebar: false,
+  showSidebar: true,
 };
 
 export const groupRecipientSidebarSlice = createSlice({

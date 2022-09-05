@@ -32,6 +32,7 @@ export const GroupRecipientsSidebar = () => {
     socket.on('onlineGroupUsersReceived', (payload) => {
       console.log('received payload for online users');
       console.log(payload);
+      console.log(group?.users);
       setOnlineUsers(payload.onlineUsers);
       setOfflineUsers(payload.offlineUsers);
     });
@@ -40,7 +41,7 @@ export const GroupRecipientsSidebar = () => {
       clearInterval(interval);
       socket.off('onlineGroupUsersReceived');
     };
-  }, [groupId]);
+  }, [group, groupId]);
 
   return (
     <GroupRecipientsSidebarStyle>
@@ -56,12 +57,17 @@ export const GroupRecipientsSidebar = () => {
           </GroupRecipientSidebarItem>
         ))}
         <span>Offline Users</span>
-        {offlineUsers.map((user) => (
-          <GroupRecipientSidebarItem>
-            <MessageItemAvatar />
-            <span>{user.firstName}</span>
-          </GroupRecipientSidebarItem>
-        ))}
+        {group?.users
+          .filter(
+            (user) =>
+              !onlineUsers.find((onlineUser) => onlineUser.id === user.id)
+          )
+          .map((user) => (
+            <GroupRecipientSidebarItem>
+              <MessageItemAvatar />
+              <span>{user.firstName}</span>
+            </GroupRecipientSidebarItem>
+          ))}
       </GroupRecipientSidebarItemContainer>
     </GroupRecipientsSidebarStyle>
   );
