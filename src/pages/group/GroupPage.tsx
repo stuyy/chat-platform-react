@@ -5,7 +5,11 @@ import { ConversationPanel } from '../../components/conversations/ConversationPa
 import { ConversationSidebar } from '../../components/sidebars/ConversationSidebar';
 import { AppDispatch } from '../../store';
 import { addGroupMessage } from '../../store/groupMessageSlice';
-import { addGroup, fetchGroupsThunk } from '../../store/groupSlice';
+import {
+  addGroup,
+  fetchGroupsThunk,
+  updateGroup,
+} from '../../store/groupSlice';
 import { updateType } from '../../store/selectedSlice';
 import { SocketContext } from '../../utils/context/SocketContext';
 import {
@@ -37,16 +41,33 @@ export const GroupPage = () => {
       dispatch(addGroup(payload));
     });
 
+    /**
+     * Adds the group for the user being added
+     * to the group.
+     */
     socket.on('onGroupUserAdd', (payload: AddGroupUserMessagePayload) => {
       console.log('onGroupUserAdd');
       console.log(payload);
       dispatch(addGroup(payload.group));
     });
 
+    /**
+     * Update all other clients in the room
+     * so that they can also see the participant
+     */
+    socket.on(
+      'onGroupReceivedNewUser',
+      (payload: AddGroupUserMessagePayload) => {
+        console.log('Received onGroupReceivedNewUser');
+        dispatch(updateGroup(payload.group));
+      }
+    );
+
     return () => {
       socket.off('onGroupMessage');
       socket.off('onGroupCreate');
       socket.off('onGroupUserAdd');
+      socket.off('onGroupReceivedNewUser');
     };
   }, [id]);
 

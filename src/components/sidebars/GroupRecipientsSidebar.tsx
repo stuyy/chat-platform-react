@@ -44,13 +44,9 @@ export const GroupRecipientsSidebar = () => {
   useEffect(() => {
     socket.emit('getOnlineGroupUsers', { groupId });
     const interval = setInterval(() => {
-      console.log(`Pinging Group ${groupId}`);
       socket.emit('getOnlineGroupUsers', { groupId });
-    }, 10000);
+    }, 120000);
     socket.on('onlineGroupUsersReceived', (payload) => {
-      console.log('received payload for online users');
-      console.log(payload);
-      console.log(group?.users);
       setOnlineUsers(payload.onlineUsers);
     });
     return () => {
