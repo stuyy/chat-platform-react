@@ -141,6 +141,11 @@ export type AddGroupRecipientParams = {
   email: string;
 };
 
+export type RemoveGroupRecipientParams = {
+  id: number;
+  userId: number;
+};
+
 export type Points = {
   x: number;
   y: number;

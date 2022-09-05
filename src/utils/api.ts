@@ -16,6 +16,7 @@ import {
   Group,
   GroupMessageType,
   MessageType,
+  RemoveGroupRecipientParams,
   User,
   UserCredentialsParams,
 } from './types';
@@ -97,3 +98,9 @@ export const editGroupMessage = ({
 
 export const addGroupRecipient = ({ id, email }: AddGroupRecipientParams) =>
   axiosClient.post(`/groups/${id}/recipients`, { email }, config);
+
+export const removeGroupRecipient = ({
+  id,
+  userId,
+}: RemoveGroupRecipientParams) =>
+  axiosClient.delete<Group>(`/groups/${id}/recipients/${userId}`, config);

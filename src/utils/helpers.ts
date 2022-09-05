@@ -22,10 +22,5 @@ export const getUserContextMenuIcon = (type: UserContextMenuActionType) => {
   }
 };
 
-export const getUserContextMenuActions = (user?: User, group?: Group) => {
-  if (!user || !group) return [];
-  if (user.id === group.creator.id) return userContextMenuItems;
-  return user.id === group.creator.id
-    ? userContextMenuItems
-    : userContextMenuItems.filter((item) => !item.ownerOnly);
-};
+export const isGroupOwner = (user?: User, group?: Group) =>
+  user?.id === group?.creator.id;

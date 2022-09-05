@@ -8,8 +8,14 @@ import { RootState } from '.';
 import {
   fetchGroups as fetchGroupsAPI,
   createGroup as createGroupAPI,
+  removeGroupRecipient as removeGroupRecipientAPI,
 } from '../utils/api';
-import { CreateGroupParams, Group, User } from '../utils/types';
+import {
+  CreateGroupParams,
+  Group,
+  RemoveGroupRecipientParams,
+  User,
+} from '../utils/types';
 
 export interface GroupState {
   groups: Group[];
@@ -28,6 +34,11 @@ export const createGroupThunk = createAsyncThunk(
   (params: CreateGroupParams) => createGroupAPI(params)
 );
 
+export const removeGroupRecipientThunk = createAsyncThunk(
+  'groups/recipients/delete',
+  (params: RemoveGroupRecipientParams) => removeGroupRecipientAPI(params)
+);
+
 export const groupsSlice = createSlice({
   name: 'groups',
   initialState,
@@ -39,10 +50,6 @@ export const groupsSlice = createSlice({
     updateGroup: (state, action: PayloadAction<Group>) => {
       const updatedGroup = action.payload;
       const existingGroup = state.groups.find((g) => g.id === updatedGroup.id);
-      console.log('Original Group.users');
-      console.log(existingGroup?.users);
-      console.log('Updated Group.users');
-      console.log(updatedGroup.users);
       const index = state.groups.findIndex((g) => g.id === updatedGroup.id);
       if (existingGroup) {
         state.groups[index] = updatedGroup;
@@ -51,11 +58,24 @@ export const groupsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchGroupsThunk.fulfilled, (state, action) => {
-      console.log(action.payload.data);
-      state.groups = action.payload.data;
-      console.log(state.groups);
-    });
+    builder
+      .addCase(fetchGroupsThunk.fulfilled, (state, action) => {
+        console.log(action.payload.data);
+        state.groups = action.payload.data;
+        console.log(state.groups);
+      })
+      .addCase(removeGroupRecipientThunk.fulfilled, (state, action) => {
+        const { data: updatedGroup } = action.payload;
+        console.log('removeGroupRecipientThunk.fulfilled');
+        const existingGroup = state.groups.find(
+          (g) => g.id === updatedGroup.id
+        );
+        const index = state.groups.findIndex((g) => g.id === updatedGroup.id);
+        if (existingGroup) {
+          state.groups[index] = updatedGroup;
+          console.log('Updating Group....');
+        }
+      });
   },
 });
 
