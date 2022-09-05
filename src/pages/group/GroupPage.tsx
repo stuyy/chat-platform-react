@@ -8,7 +8,11 @@ import { addGroupMessage } from '../../store/groupMessageSlice';
 import { addGroup, fetchGroupsThunk } from '../../store/groupSlice';
 import { updateType } from '../../store/selectedSlice';
 import { SocketContext } from '../../utils/context/SocketContext';
-import { Group, GroupMessageEventPayload } from '../../utils/types';
+import {
+  AddGroupUserMessagePayload,
+  Group,
+  GroupMessageEventPayload,
+} from '../../utils/types';
 
 export const GroupPage = () => {
   const { id } = useParams();
@@ -33,9 +37,16 @@ export const GroupPage = () => {
       dispatch(addGroup(payload));
     });
 
+    socket.on('onGroupUserAdd', (payload: AddGroupUserMessagePayload) => {
+      console.log('onGroupUserAdd');
+      console.log(payload);
+      dispatch(addGroup(payload.group));
+    });
+
     return () => {
       socket.off('onGroupMessage');
       socket.off('onGroupCreate');
+      socket.off('onGroupUserAdd');
     };
   }, [id]);
 
