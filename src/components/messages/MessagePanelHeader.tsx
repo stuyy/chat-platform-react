@@ -41,7 +41,7 @@ export const MessagePanelHeader = () => {
         <div>
           <span>{headerTitle}</span>
         </div>
-        {type === 'group' && (
+        {type === 'group' && user?.id === group?.creator?.id && (
           <PersonAdd size={30} onClick={() => setShowModal(true)} />
         )}
       </MessagePanelHeaderStyle>
