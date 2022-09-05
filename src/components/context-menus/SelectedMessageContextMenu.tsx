@@ -10,7 +10,7 @@ import {
 import { deleteMessageThunk } from '../../store/messageSlice';
 import { selectType } from '../../store/selectedSlice';
 import { AuthContext } from '../../utils/context/AuthContext';
-import { ContextMenuStyle } from '../../utils/styles';
+import { ContextMenu, ContextMenuItem } from '../../utils/styles';
 
 type Props = {
   points: { x: number; y: number };
@@ -41,13 +41,13 @@ export const SelectedMessageContextMenu: FC<Props> = ({ points }) => {
   };
 
   return (
-    <ContextMenuStyle top={points.y} left={points.x}>
-      <ul>
-        {message?.author.id === user?.id && (
-          <li onClick={deleteMessage}>Delete</li>
-        )}
-        {message?.author.id === user?.id && <li onClick={editMessage}>Edit</li>}
-      </ul>
-    </ContextMenuStyle>
+    <ContextMenu top={points.y} left={points.x}>
+      {message?.author.id === user?.id && (
+        <ContextMenuItem onClick={deleteMessage}>Delete</ContextMenuItem>
+      )}
+      {message?.author.id === user?.id && (
+        <ContextMenuItem onClick={editMessage}>Edit</ContextMenuItem>
+      )}
+    </ContextMenu>
   );
 };

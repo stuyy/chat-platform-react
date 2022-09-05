@@ -140,3 +140,15 @@ export type AddGroupRecipientParams = {
   id: number;
   email: string;
 };
+
+export type Points = {
+  x: number;
+  y: number;
+};
+
+export type UserContextMenuActionType = 'kick' | 'transfer_owner';
+export type ContextMenuItemType = {
+  label: string;
+  action: UserContextMenuActionType;
+  color: string;
+};
