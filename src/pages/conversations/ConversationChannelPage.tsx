@@ -29,17 +29,14 @@ export const ConversationChannelPage = () => {
     socket.on('userLeave', () => {
       console.log('userLeave');
     });
-
     socket.on('onTypingStart', () => {
       console.log('onTypingStart: User has started typing...');
       setIsRecipientTyping(true);
     });
-
     socket.on('onTypingStop', () => {
       console.log('onTypingStop: User has stopped typing...');
       setIsRecipientTyping(false);
     });
-
     socket.on('onMessageUpdate', (message) => {
       console.log('onMessageUpdate received');
       console.log(message);

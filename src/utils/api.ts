@@ -37,6 +37,9 @@ export const getAuthUser = () => axiosClient.get<User>(`/auth/status`, config);
 export const getConversations = () =>
   axiosClient.get<Conversation[]>(`/conversations`, config);
 
+export const getConversationById = (id: number) =>
+  axiosClient.get<Conversation>(`/conversations/${id}`, config);
+
 export const getConversationMessages = (conversationId: number) =>
   axiosClient.get<FetchMessagePayload>(
     `/conversations/${conversationId}/messages`,
