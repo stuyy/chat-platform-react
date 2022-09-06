@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import {
   MessageItemContainer,
-  MessageItemAvatar,
   MessageItemDetails,
   MessageItemHeader,
   MessageItemContent,
 } from '../../utils/styles';
 import { User, MessageType, GroupMessageType } from '../../utils/types';
 import { EditMessageContainer } from './EditMessageContainer';
+import { ItemAvatarContainer } from './MessageItemAvatar';
 
 type FormattedMessageProps = {
   user?: User;
@@ -18,6 +18,8 @@ type FormattedMessageProps = {
   onContextMenu: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onEditMessageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
+
 
 export const FormattedMessage: React.FC<FormattedMessageProps> = ({
   user,
@@ -30,13 +32,13 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
   );
   return (
     <MessageItemContainer onContextMenu={onContextMenu}>
-      <MessageItemAvatar />
+      <ItemAvatarContainer user={message.author} />
       <MessageItemDetails>
         <MessageItemHeader>
           <span
             className="authorName"
             style={{
-              color: user?.id === message.author.id ? '#989898' : '#5E8BFF',
+              color: user?.id === message.author.id ? '#5E8BFF' : '#989898',
             }}
           >
             {message.author.firstName} {message.author.lastName}
