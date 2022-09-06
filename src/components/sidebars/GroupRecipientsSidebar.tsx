@@ -45,8 +45,9 @@ export const GroupRecipientsSidebar = () => {
     socket.emit('getOnlineGroupUsers', { groupId });
     const interval = setInterval(() => {
       socket.emit('getOnlineGroupUsers', { groupId });
-    }, 120000);
+    }, 5000);
     socket.on('onlineGroupUsersReceived', (payload) => {
+      console.log('received onlineGroupUsersReceived event');
       setOnlineUsers(payload.onlineUsers);
     });
     return () => {

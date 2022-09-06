@@ -73,9 +73,6 @@ export const messagesSlice = createSlice({
       const messageIndex = conversationMessages.messages.findIndex(
         (m) => m.id === payload.messageId
       );
-      console.log(conversationMessages);
-      console.log(messageIndex);
-      console.log(payload);
       conversationMessages.messages.splice(messageIndex, 1);
     },
     editMessage: (state, action: PayloadAction<MessageType>) => {
