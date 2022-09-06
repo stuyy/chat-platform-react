@@ -67,6 +67,9 @@ export const editMessage = ({ content, id, messageId }: EditMessagePayload) =>
 
 export const fetchGroups = () => axiosClient.get<Group[]>(`/groups`, config);
 
+export const fetchGroupById = (id: number) =>
+  axiosClient.get<Group>(`/groups/${id}`, config);
+
 export const fetchGroupMessages = (id: number) =>
   axiosClient.get<FetchGroupMessagePayload>(`/groups/${id}/messages`, config);
 

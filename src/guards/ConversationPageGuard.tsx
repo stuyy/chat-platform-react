@@ -7,9 +7,7 @@ export const ConversationPageGuard: FC<React.PropsWithChildren> = ({
 }) => {
   const location = useLocation();
   const { loading, error } = useConversationGuard();
-
-  if (loading) return <div>loading</div>;
-
+  if (loading) return <div>loading conversation</div>;
   return error ? (
     <Navigate to="/conversations" state={{ from: location }} replace />
   ) : (
