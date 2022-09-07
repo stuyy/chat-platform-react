@@ -89,13 +89,13 @@ export const GroupPage = () => {
       }
     });
 
+    socket.on('onGroupOwnerUpdate', (payload: Group) => {
+      console.log('received onGroupOwnerUpdate');
+      dispatch(updateGroup(payload));
+    });
+
     return () => {
       socket.removeAllListeners();
-      // socket.off('onGroupMessage');
-      // socket.off('onGroupCreate');
-      // socket.off('onGroupUserAdd');
-      // socket.off('onGroupReceivedNewUser');
-      // socket.off('onGroupRemovedUser');
     };
   }, [id]);
 
