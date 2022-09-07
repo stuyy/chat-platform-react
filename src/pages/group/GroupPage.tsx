@@ -81,8 +81,12 @@ export const GroupPage = () => {
       console.log('onGroupRemoved');
       console.log('user is logged in was removed from the group');
       console.log('navigating...');
-      navigate('/groups');
+      console.log('id:', id);
       dispatch(removeGroup(payload.group));
+      if (id && parseInt(id) === payload.group.id) {
+        console.log('Navigating User to /groups');
+        navigate('/groups');
+      }
     });
 
     return () => {
