@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from '../../store';
 import {
   removeGroupRecipientThunk,
   selectGroupById,
+  updateGroupOwnerThunk,
 } from '../../store/groupSlice';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { getUserContextMenuIcon, isGroupOwner } from '../../utils/helpers';
@@ -49,6 +50,14 @@ export const SelectedParticipantContextMenu: FC<Props> = ({ points }) => {
     );
   };
 
+  const transferGroupOwner = () => {
+    console.log(`Transfering Group Owner to ${selectedUser?.id}`);
+    if (!selectedUser) return;
+    dispatch(
+      updateGroupOwnerThunk({ id: parseInt(id!), newOwnerId: selectedUser.id })
+    );
+  };
+
   const isOwner = isGroupOwner(user, group);
 
   return (
@@ -63,7 +72,7 @@ export const SelectedParticipantContextMenu: FC<Props> = ({ points }) => {
             <PersonCross size={20} color="#ff0000" />
             <span style={{ color: '#ff0000' }}>Kick User</span>
           </ContextMenuItem>
-          <ContextMenuItem>
+          <ContextMenuItem onClick={transferGroupOwner}>
             <Crown size={20} color="#FFB800" />
             <span style={{ color: '#FFB800' }}>Transfer Owner</span>
           </ContextMenuItem>

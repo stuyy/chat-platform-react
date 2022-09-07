@@ -169,3 +169,8 @@ export type RemoveGroupUserMessagePayload = {
   group: Group;
   user: User;
 };
+
+export type UpdateGroupOwnerParams = {
+  id: number;
+  newOwnerId: number;
+};
