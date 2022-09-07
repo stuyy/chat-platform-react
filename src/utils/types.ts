@@ -174,3 +174,5 @@ export type UpdateGroupOwnerParams = {
   id: number;
   newOwnerId: number;
 };
+
+export type ContextMenuEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;

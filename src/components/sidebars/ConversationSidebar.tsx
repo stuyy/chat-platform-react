@@ -1,8 +1,13 @@
 import { ChatAdd } from 'akar-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineUsergroupAdd } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
+import {
+  setContextMenuLocation,
+  setSelectedGroup,
+  toggleContextMenu,
+} from '../../store/groupSlice';
 import { SidebarContainerStyle } from '../../utils/styles';
 import {
   ConversationSearchbar,
@@ -10,6 +15,8 @@ import {
   ConversationSidebarStyle,
   ConversationsScrollableContainer,
 } from '../../utils/styles';
+import { ContextMenuEvent, Group } from '../../utils/types';
+import { GroupSidebarContextMenu } from '../context-menus/GroupSidebarContextMenu';
 import { ConversationSidebarItem } from '../conversations/ConversationSidebarItem';
 import { ConversationTab } from '../conversations/ConversationTab';
 import { GroupSidebarItem } from '../groups/GroupSidebarItem';
@@ -17,14 +24,33 @@ import { CreateConversationModal } from '../modals/CreateConversationModal';
 import { CreateGroupModal } from '../modals/CreateGroupModal';
 
 export const ConversationSidebar = () => {
+  const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
   const conversations = useSelector(
     (state: RootState) => state.conversation.conversations
+  );
+  const showGroupContextMenu = useSelector(
+    (state: RootState) => state.groups.showGroupContextMenu
   );
   const groups = useSelector((state: RootState) => state.groups.groups);
   const conversationType = useSelector(
     (state: RootState) => state.selectedConversationType.type
   );
-  const [showModal, setShowModal] = useState(false);
+
+  const onGroupContextMenu = (event: ContextMenuEvent, group: Group) => {
+    event.preventDefault();
+    console.log('Group Context Menu');
+    dispatch(toggleContextMenu(true));
+    dispatch(setContextMenuLocation({ x: event.pageX, y: event.pageY }));
+    dispatch(setSelectedGroup(group));
+  };
+
+  useEffect(() => {
+    const handleResize = (e: UIEvent) => dispatch(toggleContextMenu(false));
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       {showModal && conversationType === 'private' && (
@@ -61,8 +87,13 @@ export const ConversationSidebar = () => {
                   />
                 ))
               : groups.map((group) => (
-                  <GroupSidebarItem key={group.id} group={group} />
+                  <GroupSidebarItem
+                    key={group.id}
+                    group={group}
+                    onContextMenu={onGroupContextMenu}
+                  />
                 ))}
+            {showGroupContextMenu && <GroupSidebarContextMenu />}
           </SidebarContainerStyle>
         </ConversationsScrollableContainer>
         <footer></footer>
