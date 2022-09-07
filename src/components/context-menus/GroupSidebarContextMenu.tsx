@@ -2,7 +2,11 @@ import { FC, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../store';
-import { leaveGroupThunk, selectGroupById } from '../../store/groupSlice';
+import {
+  leaveGroupThunk,
+  selectGroupById,
+  toggleContextMenu,
+} from '../../store/groupSlice';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { isGroupOwner } from '../../utils/helpers';
 import { ContextMenu, ContextMenuItem } from '../../utils/styles';
@@ -21,7 +25,9 @@ export const GroupSidebarContextMenu: FC = () => {
   const isOwner = isGroupOwner(user, group);
 
   const leaveGroup = () => {
-    dispatch(leaveGroupThunk(parseInt(id!)));
+    dispatch(leaveGroupThunk(parseInt(id!))).finally(() =>
+      dispatch(toggleContextMenu(false))
+    );
   };
 
   return (
