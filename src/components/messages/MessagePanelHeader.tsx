@@ -30,6 +30,7 @@ export const MessagePanelHeader = () => {
   const groupName = group?.title || 'Group';
   const headerTitle = type === 'group' ? groupName : displayName;
 
+  console.log(`Group: `, group);
   return (
     <>
       {showModal && (
@@ -43,7 +44,7 @@ export const MessagePanelHeader = () => {
           <span>{headerTitle}</span>
         </div>
         <GroupHeaderIcons>
-          {type === 'group' && user?.id === group?.creator?.id && (
+          {type === 'group' && user?.id === group?.owner?.id && (
             <PersonAdd
               cursor="pointer"
               size={30}
