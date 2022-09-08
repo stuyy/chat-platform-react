@@ -15,6 +15,7 @@
     "akar-icons": "^1.9.20",
     "axios": "^0.27.2",
     "date-fns": "^2.29.2",
+    "emoji-mart": "3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.34.2",
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/emoji-mart": "^3.0.9",
     "@types/styled-components": "^5.1.26"
   }
 }

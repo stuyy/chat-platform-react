@@ -8,6 +8,8 @@ type Props = {
   setIsMultiLine: Dispatch<SetStateAction<boolean>>;
   sendTypingStatus: () => void;
   sendMessage: () => void;
+  setCaretStartPosition: Dispatch<SetStateAction<number>>;
+  setCaretEndPosition: Dispatch<SetStateAction<number>>;
 };
 
 export const MessageTextField: FC<Props> = ({
@@ -17,6 +19,8 @@ export const MessageTextField: FC<Props> = ({
   setIsMultiLine,
   sendTypingStatus,
   sendMessage,
+  setCaretStartPosition,
+  setCaretEndPosition,
 }) => {
   const DEFAULT_TEXTAREA_HEIGHT = 21;
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -45,6 +49,13 @@ export const MessageTextField: FC<Props> = ({
       setIsMultiLine(false);
       if (ref.current) ref.current.style.height = '21px';
     }
+    const target = e.target as HTMLTextAreaElement;
+    setCaretStartPosition(target.selectionStart);
+    setCaretEndPosition(target.selectionEnd);
+    console.log(target.selectionStart); // 0 indexed
+    console.log(target.selectionEnd);
+    console.log(target.selectionDirection);
+    console.log(message);
   };
 
   return (
