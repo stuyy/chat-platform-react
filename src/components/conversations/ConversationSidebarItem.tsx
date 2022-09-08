@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { getRecipientFromConversation } from '../../utils/helpers';
 import { ConversationSidebarItemStyle } from '../../utils/styles';
@@ -13,6 +13,7 @@ type Props = {
 
 export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
   const MESSAGE_LENGTH_MAX = 50;
+  const { id } = useParams();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const recipient = getRecipientFromConversation(conversation, user);
@@ -29,6 +30,7 @@ export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
     <>
       <ConversationSidebarItemStyle
         onClick={() => navigate(`/conversations/${conversation.id}`)}
+        selected={parseInt(id!) === conversation.id}
       >
         <div className={styles.conversationAvatar}></div>
         <div className={styles.contentContainer}>
@@ -40,7 +42,6 @@ export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
           </span>
         </div>
       </ConversationSidebarItemStyle>
-      <hr className={styles.hr} />
     </>
   );
 };

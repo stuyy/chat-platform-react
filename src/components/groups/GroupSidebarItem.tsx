@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ConversationSidebarItemStyle } from '../../utils/styles';
 import { ContextMenuEvent, Group } from '../../utils/types';
 
@@ -10,6 +10,7 @@ type Props = {
 };
 
 export const GroupSidebarItem: React.FC<Props> = ({ group, onContextMenu }) => {
+  const { id } = useParams();
   const MAX_TITLE_LENGTH = 20;
   const MAX_MESSAGE_LENGTH = 50;
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export const GroupSidebarItem: React.FC<Props> = ({ group, onContextMenu }) => {
     <ConversationSidebarItemStyle
       onClick={() => navigate(`/groups/${group.id}`)}
       onContextMenu={(e) => onContextMenu(e, group)}
+      selected={parseInt(id!) === group.id}
     >
       <div className={styles.groupAvatar}></div>
       <div>

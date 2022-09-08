@@ -4,6 +4,7 @@ import {
   CharacterLimitProps,
   ContextMenuProps,
   ConversationSelectedProps,
+  ConversationSidebarItemProps,
   InputContainerProps,
   MessageInputContainerProps,
   MessageItemContentProps,
@@ -92,13 +93,19 @@ export const ConversationSidebarContainer = styled.div`
   margin-top: 100px;
 `;
 
-export const ConversationSidebarItemStyle = styled.div`
+export const ConversationSidebarItemStyle = styled.div<ConversationSidebarItemProps>`
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 10px 32px;
+  padding: 20px 32px;
   box-sizing: border-box;
   width: 100%;
+  background-color: ${({ selected }) => selected && '#1a1a1a'};
+  cursor: pointer;
+  transition: 150ms background-color ease;
+  &:hover {
+    background-color: #222222;
+  }
 `;
 
 export const OverlayStyle = styled.div`
