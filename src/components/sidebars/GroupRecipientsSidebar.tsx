@@ -20,6 +20,7 @@ import {
   toggleContextMenu,
 } from '../../store/groupRecipientsSidebarSlice';
 import { SelectedParticipantContextMenu } from '../context-menus/SelectedParticipantContextMenu';
+import { ItemAvatarContainer } from '../messages/MessageItemAvatar';
 
 export const GroupRecipientsSidebar = () => {
   const { id: groupId } = useParams();
@@ -84,7 +85,9 @@ export const GroupRecipientsSidebar = () => {
           <GroupRecipientSidebarItem
             onContextMenu={(e) => onUserContextMenu(e, user)}
           >
-            <MessageItemAvatar />
+            <ItemAvatarContainer
+              user={user}
+            />
             <span>{user.firstName}</span>
           </GroupRecipientSidebarItem>
         ))}
@@ -98,7 +101,9 @@ export const GroupRecipientsSidebar = () => {
             <GroupRecipientSidebarItem
               onContextMenu={(e) => onUserContextMenu(e, user)}
             >
-              <MessageItemAvatar />
+              <ItemAvatarContainer
+              user={user}
+              />
               <span>{user.firstName}</span>
             </GroupRecipientSidebarItem>
           ))}
