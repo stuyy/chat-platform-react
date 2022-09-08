@@ -41,9 +41,11 @@ export const MessagePanel: FC<Props> = ({
   );
   const recipient = getRecipientFromConversation(conversation, user);
   const sendMessage = async () => {
-    if (!routeId || !content) return;
+    const trimmedContent = content.trim();
+    if (!routeId || !trimmedContent) return;
     const id = parseInt(routeId);
-    const params = { id, content };
+    const params = { id, content: trimmedContent };
+
     if (selectedType === 'private')
       return postNewMessage(params)
         .then(() => setContent(''))
