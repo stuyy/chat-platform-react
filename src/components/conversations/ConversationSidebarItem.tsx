@@ -4,6 +4,7 @@ import { AuthContext } from '../../utils/context/AuthContext';
 import { getRecipientFromConversation } from '../../utils/helpers';
 import { ConversationSidebarItemStyle } from '../../utils/styles';
 import { Conversation } from '../../utils/types';
+import { ItemAvatarContainer } from '../messages/AvatarContainer';
 
 import styles from './index.module.scss';
 
@@ -30,7 +31,10 @@ export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
       <ConversationSidebarItemStyle
         onClick={() => navigate(`/conversations/${conversation.id}`)}
       >
-        <div className={styles.conversationAvatar}></div>
+        <ItemAvatarContainer 
+          user={recipient}
+          size={50}
+        />
         <div className={styles.contentContainer}>
           <span className={styles.conversationName}>
             {`${recipient?.firstName} ${recipient?.lastName}`}

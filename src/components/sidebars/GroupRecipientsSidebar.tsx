@@ -20,7 +20,7 @@ import {
   toggleContextMenu,
 } from '../../store/groupRecipientsSidebarSlice';
 import { SelectedParticipantContextMenu } from '../context-menus/SelectedParticipantContextMenu';
-import { ItemAvatarContainer } from '../messages/MessageItemAvatar';
+import { ItemAvatarContainer } from '../messages/AvatarContainer';
 
 export const GroupRecipientsSidebar = () => {
   const { id: groupId } = useParams();
@@ -85,9 +85,13 @@ export const GroupRecipientsSidebar = () => {
           <GroupRecipientSidebarItem
             onContextMenu={(e) => onUserContextMenu(e, user)}
           >
-            <ItemAvatarContainer
-              user={user}
-            />
+            <div className="left">
+                <ItemAvatarContainer
+                user={user}
+                size={38}
+                />
+                {user.id === group?.owner.id && <Crown color="#ffbf00" />}
+              </div>
             <span>{user.firstName}</span>
           </GroupRecipientSidebarItem>
         ))}
@@ -101,9 +105,13 @@ export const GroupRecipientsSidebar = () => {
             <GroupRecipientSidebarItem
               onContextMenu={(e) => onUserContextMenu(e, user)}
             >
-              <ItemAvatarContainer
-              user={user}
-              />
+              <div className="left">
+                <ItemAvatarContainer
+                user={user}
+                size={38}
+                />
+                {user.id === group?.owner.id && <Crown color="#ffbf00" />}
+              </div>
               <span>{user.firstName}</span>
             </GroupRecipientSidebarItem>
           ))}

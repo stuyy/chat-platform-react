@@ -9,7 +9,7 @@ import {
 } from '../../utils/styles';
 import { User, MessageType, GroupMessageType } from '../../utils/types';
 import { EditMessageContainer } from './EditMessageContainer';
-import { ItemAvatarContainer } from './MessageItemAvatar';
+import { ItemAvatarContainer } from './AvatarContainer';
 
 type FormattedMessageProps = {
   user?: User;
@@ -32,7 +32,10 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
   );
   return (
     <MessageItemContainer onContextMenu={onContextMenu}>
-      <ItemAvatarContainer user={message.author} />
+      <ItemAvatarContainer 
+      user={message.author} 
+      size={50}
+      />
       <MessageItemDetails>
         <MessageItemHeader>
           <span
