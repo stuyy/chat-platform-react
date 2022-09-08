@@ -233,7 +233,7 @@ export const MessageItemContainer = styled.div`
   gap: 20px;
   align-items: center;
   padding: 5px 0;
-  word-break: break-all;
+  word-break: break-word;
 `;
 
 export const MessageItemAvatar = styled.div`

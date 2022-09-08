@@ -40,6 +40,7 @@ export const ConversationSidebar = () => {
   const onGroupContextMenu = (event: ContextMenuEvent, group: Group) => {
     event.preventDefault();
     console.log('Group Context Menu');
+    console.log(group);
     dispatch(toggleContextMenu(true));
     dispatch(setContextMenuLocation({ x: event.pageX, y: event.pageY }));
     dispatch(setSelectedGroup(group));

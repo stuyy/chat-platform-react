@@ -22,10 +22,16 @@ export const GroupSidebarContextMenu: FC = () => {
     selectGroupById(state, parseInt(id!))
   );
 
+  const contextMenuGroup = useSelector(
+    (state: RootState) => state.groups.selectedGroupContextMenu
+  );
+
   const isOwner = isGroupOwner(user, group);
 
   const leaveGroup = () => {
-    dispatch(leaveGroupThunk(parseInt(id!))).finally(() =>
+    if (!contextMenuGroup) return;
+    console.log(contextMenuGroup);
+    dispatch(leaveGroupThunk(contextMenuGroup.id)).finally(() =>
       dispatch(toggleContextMenu(false))
     );
   };

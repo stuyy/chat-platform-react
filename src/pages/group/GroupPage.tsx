@@ -95,6 +95,7 @@ export const GroupPage = () => {
       dispatch(updateGroup(payload.group));
       if (payload.userId === user?.id) {
         console.log('payload.userId matches user.id...');
+        dispatch(removeGroup(payload.group));
         navigate('/groups');
       }
     });
