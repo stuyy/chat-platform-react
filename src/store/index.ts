@@ -6,12 +6,14 @@ import groupsReducer from './groupSlice';
 import groupMessagesReducer from './groupMessageSlice';
 import messageContainerReducer from './messageContainerSlice';
 import groupSidebarReducer from './groupRecipientsSidebarSlice';
+import friendsReducer from './friends/friendsSlice';
 
 export const store = configureStore({
   reducer: {
     conversation: conversationReducer,
     messages: messageReducer,
     selectedConversationType: selectedTypeReducer,
+    friends: friendsReducer,
     groups: groupsReducer,
     groupMessages: groupMessagesReducer,
     messageContainer: messageContainerReducer,

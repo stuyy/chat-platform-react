@@ -13,6 +13,7 @@ import {
   EditMessagePayload,
   FetchGroupMessagePayload,
   FetchMessagePayload,
+  Friend,
   Group,
   GroupMessageType,
   MessageType,
@@ -117,3 +118,5 @@ export const updateGroupOwner = ({ id, newOwnerId }: UpdateGroupOwnerParams) =>
 
 export const leaveGroup = (id: number) =>
   axiosClient.delete(`/groups/${id}/recipients/leave`, config);
+
+export const fetchFriends = () => axiosClient.get<Friend[]>(`/friends`, config);
