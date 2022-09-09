@@ -124,3 +124,6 @@ export const fetchFriends = () => axiosClient.get<Friend[]>('/friends', config);
 
 export const fetchFriendRequests = () =>
   axiosClient.get<FriendRequest[]>('/friends/requests', config);
+
+export const createFriendRequest = (email: string) =>
+  axiosClient.post<FriendRequest>('/friends/requests', { email }, config);
