@@ -674,3 +674,4 @@ export const CharacterLimit = styled.span<CharacterLimitProps>`
   color: ${({ atMaxLength }) =>
     atMaxLength ? '#ff0000' : 'rgb(129, 129, 129)'};
 `;
+

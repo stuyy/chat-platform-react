@@ -31,3 +31,21 @@ export const userContextMenuItems: ContextMenuItemType[] = [
     ownerOnly: false,
   },
 ];
+
+export const friendsNavbarItems = [
+  {
+    id: 'friends',
+    label: 'Friends',
+    pathname: '/friends',
+  },
+  {
+    id: 'requests',
+    label: 'Requests',
+    pathname: '/friends/requests',
+  },
+  {
+    id: 'blocked',
+    label: 'Blocked',
+    pathname: '/friends/blocked',
+  },
+];

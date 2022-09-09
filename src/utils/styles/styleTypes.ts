@@ -36,3 +36,7 @@ export type MessageInputContainerProps = {
 export type ConversationSidebarItemProps = {
   selected: boolean;
 };
+
+export type FriendsNavbarItemProps = {
+  active: boolean;
+};
