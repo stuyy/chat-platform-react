@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Friend, FriendRequest } from '../../utils/types';
 import {
@@ -20,7 +20,11 @@ const initialState: FriendsState = {
 export const friendsSlice = createSlice({
   name: 'friends',
   initialState,
-  reducers: {},
+  reducers: {
+    addFriendRequest: (state, action: PayloadAction<FriendRequest>) => {
+      state.friendRequests.push(action.payload);
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(fetchFriendsThunk.fulfilled, (state, action) => {
@@ -38,5 +42,5 @@ export const friendsSlice = createSlice({
       }),
 });
 
-export const {} = friendsSlice.actions;
+export const { addFriendRequest } = friendsSlice.actions;
 export default friendsSlice.reducer;
