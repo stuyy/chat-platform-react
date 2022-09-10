@@ -52,6 +52,12 @@ export const ConversationSidebar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    const handleClick = () => dispatch(toggleContextMenu(false));
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  }, []);
+
   return (
     <>
       {showModal && conversationType === 'private' && (
