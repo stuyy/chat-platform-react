@@ -149,3 +149,6 @@ export const rejectFriendRequest = (id: number) =>
     {},
     config
   );
+
+export const removeFriend = (id: number) =>
+  axiosClient.delete<Friend>(`/friends/${id}/delete`, config);

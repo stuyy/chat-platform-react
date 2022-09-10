@@ -12,7 +12,7 @@ import {
 } from '../../store/friends/friendsSlice';
 
 export const FriendList = () => {
-  const { showContextMenu, onlineFriends, offlineFriends } = useSelector(
+  const { showContextMenu, friends, onlineFriends } = useSelector(
     (state: RootState) => state.friends
   );
   const dispatch = useDispatch<AppDispatch>();
@@ -35,7 +35,20 @@ export const FriendList = () => {
           onContextMenu={onContextMenu}
         />
       ))}
-      {offlineFriends.length > 0 && (
+      <span>Offline</span>
+      {friends
+        .filter(
+          (friend) =>
+            !onlineFriends.find((onlineFriend) => onlineFriend.id === friend.id)
+        )
+        .map((friend) => (
+          <FriendListItem
+            key={friend.id}
+            friend={friend}
+            onContextMenu={onContextMenu}
+          />
+        ))}
+      {/* {offlineFriends.length > 0 && (
         <span>Offline ({offlineFriends.length})</span>
       )}
       {offlineFriends.map((friend) => (
@@ -44,7 +57,7 @@ export const FriendList = () => {
           friend={friend}
           onContextMenu={onContextMenu}
         />
-      ))}
+      ))} */}
       {showContextMenu && <FriendContextMenu />}
     </FriendListContainer>
   );

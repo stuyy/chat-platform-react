@@ -7,6 +7,7 @@ import {
   fetchFriendRequestThunk,
   fetchFriendsThunk,
   rejectFriendRequestThunk,
+  removeFriendThunk,
 } from './friendsThunk';
 
 export interface FriendsState {
@@ -100,6 +101,12 @@ export const friendsSlice = createSlice({
         const { id } = action.payload.data;
         state.friendRequests = state.friendRequests.filter(
           (friendRequest) => friendRequest.id !== id
+        );
+      })
+      .addCase(removeFriendThunk.fulfilled, (state, action) => {
+        console.log('rejectFriendRequestThunk.fulfilled');
+        state.friends = state.friends.filter(
+          (friend) => friend.id !== action.payload.data.id
         );
       }),
 });
