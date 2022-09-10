@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Friend, FriendRequest } from '../../utils/types';
 import {
+  CancelFriendRequestResponse,
+  Friend,
+  FriendRequest,
+} from '../../utils/types';
+import {
+  cancelFriendRequestThunk,
   createFriendRequestThunk,
   fetchFriendRequestThunk,
   fetchFriendsThunk,
@@ -39,6 +44,12 @@ export const friendsSlice = createSlice({
       .addCase(createFriendRequestThunk.fulfilled, (state, action) => {
         console.log('createFriendRequestThunk.fulfilled');
         state.friendRequests.push(action.payload.data);
+      })
+      .addCase(cancelFriendRequestThunk.fulfilled, (state, action) => {
+        const { id } = action.payload.data;
+        state.friendRequests = state.friendRequests.filter(
+          (friendRequest) => friendRequest.id !== id
+        );
       }),
 });
 

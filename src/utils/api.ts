@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import {
   AddGroupRecipientParams,
+  CancelFriendRequestResponse,
   Conversation,
   CreateConversationParams,
   CreateGroupParams,
@@ -129,4 +130,7 @@ export const createFriendRequest = (email: string) =>
   axiosClient.post<FriendRequest>('/friends/requests', { email }, config);
 
 export const cancelFriendRequest = (id: number) =>
-  axiosClient.delete(`/friends/requests/${id}/cancel`, config);
+  axiosClient.delete<CancelFriendRequestResponse>(
+    `/friends/requests/${id}/cancel`,
+    config
+  );
