@@ -21,6 +21,7 @@ import { ConversationPageGuard } from './guards/ConversationPageGuard';
 import { GroupPageGuard } from './guards/GroupPageGuard';
 import { FriendsLayoutPage } from './pages/friends/FriendsLayoutPage';
 import { FriendRequestPage } from './pages/friends/FriendRequestPage';
+import { OnboardingPage } from './pages/onboarding/OnboardingPage';
 
 enableMapSet();
 
@@ -54,6 +55,10 @@ function App() {
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/onboarding"
+          element={<AuthenticatedRoute children={<OnboardingPage />} />}
+        />
         <Route element={<AuthenticatedRoute children={<AppPage />} />}>
           <Route path="conversations" element={<ConversationPage />}>
             <Route

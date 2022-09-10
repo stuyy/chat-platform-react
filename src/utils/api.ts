@@ -155,3 +155,10 @@ export const removeFriend = (id: number) =>
 
 export const checkConversationOrCreate = (recipientId: number) =>
   axiosClient.get<Conversation>(`/exists/conversations/${recipientId}`, config);
+
+export const completeUserProfile = (data: FormData) =>
+  axiosClient.post('/users/profiles', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
