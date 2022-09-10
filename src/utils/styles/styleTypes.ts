@@ -40,3 +40,13 @@ export type ConversationSidebarItemProps = {
 export type FriendsNavbarItemProps = {
   active: boolean;
 };
+
+export type FlexProps = Partial<{
+  justifyContent: string;
+  alignItems: string;
+  flexDirection: string;
+}>;
+
+export type FriendRequestItemIconProps = Partial<{
+  isAccept: boolean;
+}>;
