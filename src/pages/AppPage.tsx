@@ -12,6 +12,7 @@ import { useToast } from '../utils/hooks/useToast';
 import { LayoutPage } from '../utils/styles';
 import { AcceptFriendRequestResponse, FriendRequest } from '../utils/types';
 import { IoMdPersonAdd } from 'react-icons/io';
+import { BsFillPersonCheckFill } from 'react-icons/bs';
 
 export const AppPage = () => {
   const socket = useContext(SocketContext);
@@ -22,12 +23,12 @@ export const AppPage = () => {
     socket.on('onFriendRequestReceived', (payload: FriendRequest) => {
       console.log('onFriendRequestReceived');
       console.log(payload);
+      dispatch(addFriendRequest(payload));
       info(`Incoming Friend Request from ${payload.sender.firstName}`, {
         position: 'bottom-left',
         icon: IoMdPersonAdd,
         onClick: () => navigate('/friends/requests'),
       });
-      dispatch(addFriendRequest(payload));
     });
 
     socket.on('onFriendRequestCancelled', (payload: FriendRequest) => {
@@ -41,6 +42,14 @@ export const AppPage = () => {
       (payload: AcceptFriendRequestResponse) => {
         console.log('onFriendRequestAccepted');
         dispatch(removeFriendRequest(payload.friendRequest));
+        info(
+          `${payload.friendRequest.receiver.firstName} accepted your friend request`,
+          {
+            position: 'bottom-left',
+            icon: BsFillPersonCheckFill,
+            onClick: () => navigate('/friends'),
+          }
+        );
       }
     );
 
