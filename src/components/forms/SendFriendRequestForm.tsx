@@ -24,11 +24,14 @@ export const SendFriendRequestForm: FC<Props> = ({ setShowModal }) => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(createFriendRequestThunk(email))
+      .unwrap()
       .then(() => {
+        console.log('Success Friend Request');
         setShowModal(false);
         success('Friend Request Sent!');
       })
       .catch((err) => {
+        console.log(err);
         error('Error sending friend request');
       });
   };

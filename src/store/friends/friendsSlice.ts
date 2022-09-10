@@ -87,6 +87,9 @@ export const friendsSlice = createSlice({
         console.log('createFriendRequestThunk.fulfilled');
         state.friendRequests.push(action.payload.data);
       })
+      .addCase(createFriendRequestThunk.rejected, (state, action) => {
+        console.log('createFriendRequestThunk.rejected');
+      })
       .addCase(cancelFriendRequestThunk.fulfilled, (state, action) => {
         const { id } = action.payload.data;
         state.friendRequests = state.friendRequests.filter(
