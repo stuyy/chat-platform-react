@@ -12,7 +12,7 @@ import { useParams } from 'react-router-dom';
 import { SelectedMessageContextMenu } from '../context-menus/SelectedMessageContextMenu';
 import { FormattedMessage } from './FormattedMessage';
 import { EditMessageContainer } from './EditMessageContainer';
-import { selectConversationMessage } from '../../store/messageSlice';
+import { selectConversationMessage } from '../../store/messages/messageSlice';
 import { selectGroupMessage } from '../../store/groupMessageSlice';
 import { selectType } from '../../store/selectedSlice';
 import {

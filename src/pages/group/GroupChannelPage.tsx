@@ -5,12 +5,11 @@ import { MessagePanel } from '../../components/messages/MessagePanel';
 import { SocketContext } from '../../utils/context/SocketContext';
 import { ConversationChannelPageStyle } from '../../utils/styles';
 import { AppDispatch, RootState } from '../../store';
-import { editMessage, fetchMessagesThunk } from '../../store/messageSlice';
 import {
   editGroupMessage,
   fetchGroupMessagesThunk,
 } from '../../store/groupMessageSlice';
-import { GroupMessage, GroupMessageType } from '../../utils/types';
+import { GroupMessageType } from '../../utils/types';
 import { GroupRecipientsSidebar } from '../../components/sidebars/GroupRecipientsSidebar';
 
 export const GroupChannelPage = () => {

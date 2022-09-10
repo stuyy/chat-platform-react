@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useState, useRef } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { CharacterLimit, MessageInputContainer } from '../../utils/styles';
 import { MessageTextField } from '../inputs/MessageTextField';
 import { CirclePlusFill, FaceVeryHappy } from 'akar-icons';
