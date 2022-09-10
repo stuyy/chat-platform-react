@@ -35,6 +35,11 @@ export const AppPage = () => {
       }
     );
 
+    socket.on('onFriendRequestRejected', (payload: FriendRequest) => {
+      console.log('onFriendRequestRejected');
+      dispatch(removeFriendRequest(payload));
+    });
+
     return () => {
       socket.removeAllListeners();
     };
