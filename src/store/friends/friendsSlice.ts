@@ -6,6 +6,7 @@ import {
   FriendRequest,
 } from '../../utils/types';
 import {
+  acceptFriendRequestThunk,
   cancelFriendRequestThunk,
   createFriendRequestThunk,
   fetchFriendRequestThunk,
@@ -53,6 +54,16 @@ export const friendsSlice = createSlice({
       })
       .addCase(cancelFriendRequestThunk.fulfilled, (state, action) => {
         const { id } = action.payload.data;
+        state.friendRequests = state.friendRequests.filter(
+          (friendRequest) => friendRequest.id !== id
+        );
+      })
+      .addCase(acceptFriendRequestThunk.fulfilled, (state, action) => {
+        console.log('acceptFriendRequestThunk.fulfilled');
+        const {
+          friend,
+          friendRequest: { id },
+        } = action.payload.data;
         state.friendRequests = state.friendRequests.filter(
           (friendRequest) => friendRequest.id !== id
         );

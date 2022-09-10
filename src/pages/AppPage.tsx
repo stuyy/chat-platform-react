@@ -9,7 +9,7 @@ import {
 } from '../store/friends/friendsSlice';
 import { SocketContext } from '../utils/context/SocketContext';
 import { LayoutPage } from '../utils/styles';
-import { FriendRequest } from '../utils/types';
+import { AcceptFriendRequestResponse, FriendRequest } from '../utils/types';
 
 export const AppPage = () => {
   const socket = useContext(SocketContext);
@@ -26,6 +26,14 @@ export const AppPage = () => {
       console.log(payload);
       dispatch(removeFriendRequest(payload));
     });
+
+    socket.on(
+      'onFriendRequestAccepted',
+      (payload: AcceptFriendRequestResponse) => {
+        console.log('onFriendRequestAccepted');
+        dispatch(removeFriendRequest(payload.friendRequest));
+      }
+    );
 
     return () => {
       socket.removeAllListeners();
