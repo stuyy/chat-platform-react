@@ -38,11 +38,16 @@ export const FriendRequestItem: FC<Props> = ({ friendRequest }) => {
       <div className="user">
         <div className="avatar"></div>
         <div className="name">
-          <span>{`${friendRequest.receiver.firstName} ${friendRequest.receiver.lastName}`}</span>
           {isIncomingRequest() ? (
-            <span className="status">Incoming Friend Request</span>
+            <>
+              <span>{`${friendRequest.sender.firstName} ${friendRequest.sender.lastName}`}</span>
+              <span className="status">Incoming Friend Request</span>
+            </>
           ) : (
-            <span className="status">Outgoing Friend Request</span>
+            <>
+              <span>{`${friendRequest.receiver.firstName} ${friendRequest.receiver.lastName}`}</span>
+              <span className="status">Outgoing Friend Request</span>
+            </>
           )}
         </div>
       </div>
