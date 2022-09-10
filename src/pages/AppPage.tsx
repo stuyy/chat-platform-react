@@ -44,6 +44,7 @@ export const AppPage = () => {
       (payload: AcceptFriendRequestResponse) => {
         console.log('onFriendRequestAccepted');
         dispatch(removeFriendRequest(payload.friendRequest));
+        socket.emit('getOnlineFriends');
         info(
           `${payload.friendRequest.receiver.firstName} accepted your friend request`,
           {
