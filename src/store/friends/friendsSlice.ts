@@ -12,11 +12,15 @@ import {
 export interface FriendsState {
   friends: Friend[];
   friendRequests: FriendRequest[];
+  onlineFriends: Friend[];
+  offlineFriends: Friend[];
 }
 
 const initialState: FriendsState = {
   friends: [],
   friendRequests: [],
+  onlineFriends: [],
+  offlineFriends: [],
 };
 
 export const friendsSlice = createSlice({
@@ -30,6 +34,20 @@ export const friendsSlice = createSlice({
       const { id } = action.payload;
       state.friendRequests = state.friendRequests.filter(
         (friendRequest) => friendRequest.id !== id
+      );
+    },
+    setOnlineFriends: (state, action: PayloadAction<Friend[]>) => {
+      console.log('setFriends Reducer');
+      state.onlineFriends = action.payload;
+    },
+    setOfflineFriends: (state) => {
+      console.log('setOfflineFriends Reducer');
+      console.log(state.onlineFriends);
+      state.offlineFriends = state.friends.filter(
+        (friend) =>
+          !state.onlineFriends.find(
+            (onlineFriend) => onlineFriend.id === friend.id
+          )
       );
     },
   },
@@ -72,5 +90,10 @@ export const friendsSlice = createSlice({
       }),
 });
 
-export const { addFriendRequest, removeFriendRequest } = friendsSlice.actions;
+export const {
+  addFriendRequest,
+  removeFriendRequest,
+  setOnlineFriends,
+  setOfflineFriends,
+} = friendsSlice.actions;
 export default friendsSlice.reducer;
