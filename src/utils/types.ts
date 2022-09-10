@@ -192,3 +192,5 @@ export type FriendRequest = {
   createdAt: number;
   status: FriendRequestStatus;
 };
+
+export type HandleFriendRequestAction = 'accept' | 'reject' | 'cancel';
