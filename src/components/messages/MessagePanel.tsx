@@ -1,10 +1,11 @@
 import React, { FC, useContext, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { RootState } from '../../store';
+import { AppDispatch, RootState } from '../../store';
 import { selectConversationById } from '../../store/conversationSlice';
 import { selectGroupById } from '../../store/groupSlice';
-import { postGroupMessage, postNewMessage } from '../../utils/api';
+import { createMessageThunk } from '../../store/messages/messageThunk';
+import { postGroupMessage } from '../../utils/api';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { getRecipientFromConversation } from '../../utils/helpers';
 import {
@@ -29,6 +30,7 @@ export const MessagePanel: FC<Props> = ({
 
   const { id: routeId } = useParams();
   const { user } = useContext(AuthContext);
+  const dispatch = useDispatch<AppDispatch>();
 
   const conversation = useSelector((state: RootState) =>
     selectConversationById(state, parseInt(routeId!))
@@ -46,14 +48,16 @@ export const MessagePanel: FC<Props> = ({
     const id = parseInt(routeId);
     const params = { id, content: trimmedContent };
 
-    if (selectedType === 'private')
-      return postNewMessage(params)
-        .then(() => setContent(''))
-        .catch((err) => console.log(err));
-    else
-      return postGroupMessage(params)
-        .then(() => setContent(''))
-        .catch((err) => console.log(err));
+    switch (selectedType) {
+      case 'private':
+        return dispatch(createMessageThunk(params))
+          .then(() => setContent(''))
+          .catch((err) => console.log(err));
+      case 'group':
+        return postGroupMessage(params)
+          .then(() => setContent(''))
+          .catch((err) => console.log(err));
+    }
   };
   return (
     <>

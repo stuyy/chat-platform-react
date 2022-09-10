@@ -51,7 +51,7 @@ export const getConversationMessages = (conversationId: number) =>
     config
   );
 
-export const postNewMessage = ({ id, content }: CreateMessageParams) =>
+export const createMessage = ({ id, content }: CreateMessageParams) =>
   axiosClient.post(`/conversations/${id}/messages`, { content }, config);
 
 export const postNewConversation = (data: CreateConversationParams) =>
