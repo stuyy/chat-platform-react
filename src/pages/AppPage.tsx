@@ -20,6 +20,7 @@ export const AppPage = () => {
   const navigate = useNavigate();
   const { info } = useToast({ theme: 'dark' });
   useEffect(() => {
+    console.log('Registering all events for AppPage');
     socket.on('onFriendRequestReceived', (payload: FriendRequest) => {
       console.log('onFriendRequestReceived');
       console.log(payload);
@@ -59,9 +60,13 @@ export const AppPage = () => {
     });
 
     return () => {
-      socket.removeAllListeners();
+      console.log('Removing all event listeners');
+      socket.off('onFriendRequestCancelled');
+      socket.off('onFriendRequestRejected');
+      socket.off('onFriendRequestReceived');
+      socket.off('onFriendRequestAccepted');
     };
-  }, []);
+  }, [socket]);
 
   return (
     <LayoutPage>
