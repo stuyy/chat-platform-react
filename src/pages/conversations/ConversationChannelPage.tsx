@@ -56,7 +56,6 @@ export const ConversationChannelPage = () => {
 
   const sendTypingStatus = () => {
     if (isTyping) {
-      console.log('isTyping = true');
       clearTimeout(timer);
       setTimer(
         setTimeout(() => {
@@ -66,7 +65,6 @@ export const ConversationChannelPage = () => {
         }, 2000)
       );
     } else {
-      console.log('isTyping = false');
       setIsTyping(true);
       socket.emit('onTypingStart', { conversationId: id });
     }

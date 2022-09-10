@@ -29,8 +29,6 @@ export const MessagePanelHeader = () => {
       : `${conversation?.creator.firstName} ${conversation?.creator.lastName}`;
   const groupName = group?.title || 'Group';
   const headerTitle = type === 'group' ? groupName : displayName;
-
-  console.log(`Group: `, group);
   return (
     <>
       {showModal && (
