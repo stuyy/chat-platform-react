@@ -23,6 +23,11 @@ export const SettingsProfilePage = () => {
 
   const isChanged = () => editedAbout !== about || source !== sourceCopy;
 
+  const reset = () => {
+    setEditedAbout(about);
+    setSourceCopy(source);
+  };
+
   return (
     <Page>
       <UserBanner
@@ -58,7 +63,7 @@ export const SettingsProfilePage = () => {
             <span>You have unsaved changes</span>
           </div>
           <div className="buttons">
-            <Button size="md" variant="outline">
+            <Button size="md" variant="outline" onClick={reset}>
               Reset
             </Button>
             <Button size="md">Save</Button>
