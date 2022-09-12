@@ -1,10 +1,41 @@
+import { FC, useRef, Dispatch, SetStateAction } from 'react';
 import { FileInput } from '../../../utils/styles/inputs/Textarea';
 import { SettingsProfileBanner } from '../../../utils/styles/settings';
+import { DivMouseEvent, InputChangeEvent } from '../../../utils/types';
 
-export const UserBanner = () => {
+type Props = {
+  source: string;
+  sourceCopy: string;
+  setSourceCopy: Dispatch<SetStateAction<string>>;
+};
+
+export const UserBanner: FC<Props> = ({
+  source,
+  sourceCopy,
+  setSourceCopy,
+}) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const bannerRef = useRef<HTMLDivElement>(null);
+
+  const onBannerClick = (e: DivMouseEvent) => fileInputRef.current?.click();
+  const onFileChange = (e: InputChangeEvent) => {
+    const file = e.target.files?.item(0);
+    setSourceCopy(file ? URL.createObjectURL(file) : source);
+  };
+
   return (
     <>
-      <SettingsProfileBanner backgroundUrl="https://images.unsplash.com/photo-1465056836041-7f43ac27dcb5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80" />
+      <SettingsProfileBanner
+        ref={bannerRef}
+        onClick={onBannerClick}
+        backgroundUrl={sourceCopy}
+      />
+      <FileInput
+        type="file"
+        ref={fileInputRef}
+        accept="image/*"
+        onChange={onFileChange}
+      />
     </>
   );
 };

@@ -175,6 +175,9 @@ export type UpdateGroupOwnerParams = {
 };
 
 export type ContextMenuEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
+export type DivMouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
+export type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
 export type FriendRequestStatus = 'accepted' | 'pending' | 'rejected';
 
 export type Friend = {
