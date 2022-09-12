@@ -26,6 +26,8 @@ export const SettingsProfilePage = () => {
   const reset = () => {
     setEditedAbout(about);
     setSourceCopy(source);
+    setIsEditing(false);
+    URL.revokeObjectURL(sourceCopy);
   };
 
   return (
@@ -44,6 +46,7 @@ export const SettingsProfilePage = () => {
           <ProfileAboutSectionHeader>
             <label htmlFor="about">About Me</label>
             <Edit
+              cursor="pointer"
               strokeWidth={2}
               size={28}
               onClick={() => setIsEditing(!isEditing)}
@@ -63,7 +66,7 @@ export const SettingsProfilePage = () => {
             <span>You have unsaved changes</span>
           </div>
           <div className="buttons">
-            <Button size="md" variant="outline" onClick={reset}>
+            <Button size="md" variant="secondary" onClick={reset}>
               Reset
             </Button>
             <Button size="md">Save</Button>
