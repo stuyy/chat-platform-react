@@ -4,15 +4,17 @@ import { SettingsProfileBanner } from '../../../utils/styles/settings';
 import { DivMouseEvent, InputChangeEvent } from '../../../utils/types';
 
 type Props = {
-  source: string;
-  sourceCopy: string;
-  setSourceCopy: Dispatch<SetStateAction<string>>;
+  bannerSource: string;
+  bannerSourceCopy: string;
+  setBannerSourceCopy: Dispatch<SetStateAction<string>>;
+  setBannerFile: Dispatch<SetStateAction<File | undefined>>;
 };
 
 export const UserBanner: FC<Props> = ({
-  source,
-  sourceCopy,
-  setSourceCopy,
+  bannerSource,
+  bannerSourceCopy,
+  setBannerSourceCopy,
+  setBannerFile,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const bannerRef = useRef<HTMLDivElement>(null);
@@ -20,7 +22,8 @@ export const UserBanner: FC<Props> = ({
   const onBannerClick = (e: DivMouseEvent) => fileInputRef.current?.click();
   const onFileChange = (e: InputChangeEvent) => {
     const file = e.target.files?.item(0);
-    setSourceCopy(file ? URL.createObjectURL(file) : source);
+    setBannerSourceCopy(file ? URL.createObjectURL(file) : bannerSource);
+    setBannerFile(file || undefined);
   };
 
   return (
@@ -28,7 +31,7 @@ export const UserBanner: FC<Props> = ({
       <SettingsProfileBanner
         ref={bannerRef}
         onClick={onBannerClick}
-        backgroundUrl={sourceCopy}
+        backgroundUrl={bannerSourceCopy}
       />
       <FileInput
         type="file"

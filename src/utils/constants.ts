@@ -101,3 +101,5 @@ export const settingsItems: SettingsItemType[] = [
     pathname: '/settings/appearance',
   },
 ];
+
+export const CDN_URL = 'https://chuachat.ams3.digitaloceanspaces.com/';

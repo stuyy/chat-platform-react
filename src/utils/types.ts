@@ -10,12 +10,20 @@ export type UserCredentialsParams = {
   password: string;
 };
 
+export type Profile = {
+  id: number;
+  about?: string;
+  avatar?: string;
+  banner?: string;
+};
+
 export type User = {
   id: number;
   username: string;
   email: string;
   firstName: string;
   lastName: string;
+  profile?: Profile;
 };
 
 export type Conversation = {
@@ -236,3 +244,9 @@ export type UpdateRateLimitPayload = {
   type: RateLimitType;
   status: boolean;
 };
+
+export type UpdateProfileParams = Partial<{
+  about: string;
+  avatar: File;
+  banner: File;
+}>;
