@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { slideDown, slideUp } from '../keyframes';
 import { SettingsSidebarItemProps, UserBannerProps } from '../styleTypes';
 
 export const SettingsSidebarStyle = styled.aside`
@@ -132,3 +133,38 @@ export const ProfileDescriptionField = styled.textarea`
     color: #484848;
   }
 `;
+
+export const ProfileEditActionBar = styled.div`
+  background-color: #0e0e0e;
+  width: 750px;
+  display: flex;
+  padding: 14px 24px;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  position: fixed;
+  overflow: hidden;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  animation: 500ms ${slideUp} ease;
+  animation-fill-mode: forwards;
+  border-radius: 8px;
+  & .buttons {
+    display: flex;
+    gap: 10px;
+  }
+`;
+
+/**
+ * ${({ animate }) =>
+    animate
+      ? css`
+          animation: 0s ${slideUp} ease !important;
+          animation-fill-mode: forwards;
+        `
+      : css`
+          animation: 500ms ${slideDown} ease;
+          animation-fill-mode: forwards;
+        `}
+ */
