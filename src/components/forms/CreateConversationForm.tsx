@@ -47,7 +47,7 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal }) => {
     e.preventDefault();
     if (!message || !selectedUser) return;
     return dispatch(
-      createConversationThunk({ email: selectedUser.email, message })
+      createConversationThunk({ username: selectedUser.username, message })
     )
       .unwrap()
       .then(({ data }) => {

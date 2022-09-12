@@ -12,16 +12,16 @@ import styles from './index.module.scss';
 
 export const GroupRecipientAddForm = () => {
   const { id: groupId } = useParams();
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const { success, error } = useToast({ theme: 'dark' });
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addGroupRecipient({ id: parseInt(groupId!), email })
+    addGroupRecipient({ id: parseInt(groupId!), username })
       .then(({ data }) => {
         console.log(data);
         success('Recipient Added to Group');
-        setEmail('');
+        setUsername('');
       })
       .catch((err) => {
         console.log(err);
@@ -33,9 +33,12 @@ export const GroupRecipientAddForm = () => {
     <form className={styles.createConversationForm} onSubmit={onSubmit}>
       <InputContainer backgroundColor="#161616">
         <InputLabel>Recipient</InputLabel>
-        <InputField value={email} onChange={(e) => setEmail(e.target.value)} />
+        <InputField
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </InputContainer>
-      <Button style={{ margin: '10px 0' }} disabled={!email}>
+      <Button style={{ margin: '10px 0' }} disabled={!username}>
         Add Recipient
       </Button>
     </form>

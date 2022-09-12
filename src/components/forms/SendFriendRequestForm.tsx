@@ -16,14 +16,14 @@ type Props = {
 };
 
 export const SendFriendRequestForm: FC<Props> = ({ setShowModal }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const { success, error } = useToast({ theme: 'dark' });
 
   const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(createFriendRequestThunk(email))
+    dispatch(createFriendRequestThunk(username))
       .unwrap()
       .then(() => {
         console.log('Success Friend Request');
@@ -40,9 +40,12 @@ export const SendFriendRequestForm: FC<Props> = ({ setShowModal }) => {
     <form className={styles.createConversationForm} onSubmit={onSubmit}>
       <InputContainer backgroundColor="#161616">
         <InputLabel>Recipient</InputLabel>
-        <InputField value={email} onChange={(e) => setEmail(e.target.value)} />
+        <InputField
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </InputContainer>
-      <Button style={{ margin: '10px 0' }} disabled={!email}>
+      <Button style={{ margin: '10px 0' }} disabled={!username}>
         Send
       </Button>
     </form>

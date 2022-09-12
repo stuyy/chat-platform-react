@@ -50,7 +50,7 @@ export const CreateGroupForm: FC<Props> = ({ setShowModal }) => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (selectedRecipients.length === 0 || !message || !title) return;
-    const users = selectedRecipients.map((user) => user.email);
+    const users = selectedRecipients.map((user) => user.username);
     return dispatch(createGroupThunk({ title, users }))
       .unwrap()
       .then(({ data }) => {

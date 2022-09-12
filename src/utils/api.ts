@@ -107,8 +107,8 @@ export const editGroupMessage = ({
     config
   );
 
-export const addGroupRecipient = ({ id, email }: AddGroupRecipientParams) =>
-  axiosClient.post(`/groups/${id}/recipients`, { email }, config);
+export const addGroupRecipient = ({ id, username }: AddGroupRecipientParams) =>
+  axiosClient.post(`/groups/${id}/recipients`, { username }, config);
 
 export const removeGroupRecipient = ({
   id,
@@ -127,8 +127,8 @@ export const fetchFriends = () => axiosClient.get<Friend[]>('/friends', config);
 export const fetchFriendRequests = () =>
   axiosClient.get<FriendRequest[]>('/friends/requests', config);
 
-export const createFriendRequest = (email: string) =>
-  axiosClient.post<FriendRequest>('/friends/requests', { email }, config);
+export const createFriendRequest = (username: string) =>
+  axiosClient.post<FriendRequest>('/friends/requests', { username }, config);
 
 export const cancelFriendRequest = (id: number) =>
   axiosClient.delete<CancelFriendRequestResponse>(

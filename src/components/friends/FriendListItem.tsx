@@ -15,8 +15,8 @@ export const FriendListItem: FC<Props> = ({ friend, onContextMenu }) => {
       <div className="avatar"></div>
       <div>
         {user?.id === friend.sender.id
-          ? friend.receiver.email
-          : friend.sender.email}
+          ? friend.receiver.username
+          : friend.sender.username}
       </div>
     </FriendListItemContainer>
   );
