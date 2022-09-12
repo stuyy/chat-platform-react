@@ -1,6 +1,6 @@
 import { toast, ToastOptions } from 'react-toastify';
 
-export function useToast(defaultOptions?: ToastOptions<{}>) {
+export function useToast(defaultOptions: ToastOptions<{}> = { theme: 'dark' }) {
   const success = (data: string) =>
     toast(data, { ...defaultOptions, type: 'success' });
 

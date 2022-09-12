@@ -54,3 +54,8 @@ export type FriendRequestItemIconProps = Partial<{
 export type SettingsSidebarItemProps = {
   isActive: boolean;
 };
+
+export type UserBannerProps = Partial<{
+  backgroundUrl: string;
+  backgroundColor: string;
+}>;
