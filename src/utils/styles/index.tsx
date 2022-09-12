@@ -43,12 +43,24 @@ export const RecipientChipContainer = styled.div`
   gap: 4px 10px;
 `;
 
+export const InputContainerHeader = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`
+
 export const InputLabel = styled.label`
   display: block;
   color: #8f8f8f;
   font-size: 14px;
   margin: 4px 0;
 `;
+
+export const InputError = styled.span`
+  color: #ff0000;
+  text-transform: uppercase;
+  font-size: 11px;
+`
 
 export const Button = styled.button`
   width: 100%;

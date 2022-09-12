@@ -162,3 +162,6 @@ export const completeUserProfile = (data: FormData) =>
       'Content-Type': 'multipart/form-data',
     },
   });
+
+export const checkUsernameExists = (username: string) =>
+  axiosClient.get(`/users/check?username=${username}`, config);
