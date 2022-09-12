@@ -17,7 +17,7 @@ export const PasswordField: FC<RegisterFormFieldProps> = ({
     <InputContainer>
       <InputContainerHeader>
         <InputLabel htmlFor="password">Password</InputLabel>
-        <InputError>{errors.password?.message}</InputError>
+        {errors.password && <InputError>{errors.password.message}</InputError>}
       </InputContainerHeader>
       <InputField
         type="password"
@@ -32,7 +32,6 @@ export const PasswordField: FC<RegisterFormFieldProps> = ({
             value: 32,
             message: 'Max characters is 32',
           },
-          
         })}
       />
     </InputContainer>

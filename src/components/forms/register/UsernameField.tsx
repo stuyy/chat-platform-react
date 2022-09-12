@@ -19,7 +19,7 @@ export const UsernameField: FC<RegisterFormFieldProps> = ({
     <InputContainer>
       <InputContainerHeader>
         <InputLabel htmlFor="username">Username</InputLabel>
-        <InputError>{errors.username?.message}</InputError>
+        {errors.username && <InputError>{errors.username.message}</InputError>}
       </InputContainerHeader>
       <InputField
         type="text"
