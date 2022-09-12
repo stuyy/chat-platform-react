@@ -203,10 +203,27 @@ export type AcceptFriendRequestResponse = {
   friendRequest: FriendRequest;
 };
 
-export type UserSidebarRouteType = 'conversations' | 'friends' | 'connections';
+export type UserSidebarRouteType =
+  | 'conversations'
+  | 'friends'
+  | 'connections'
+  | 'settings';
 
 export type UserSidebarItemType = {
   id: UserSidebarRouteType;
+  pathname: string;
+};
+
+export type SettingsSidebarRouteType =
+  | 'profile'
+  | 'security'
+  | 'notifications'
+  | 'integrations'
+  | 'appearance';
+
+export type SettingsItemType = {
+  id: SettingsSidebarRouteType;
+  label: string;
   pathname: string;
 };
 

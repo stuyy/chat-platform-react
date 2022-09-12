@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { RootState } from '../../../store';
-import { getIcon } from '../../../utils/helpers';
+import { getUserSidebarIcon } from '../../../utils/helpers';
 import { IconBadge, UserSidebarItemStyle } from '../../../utils/styles';
 import { UserSidebarItemType } from '../../../utils/types';
 
@@ -16,7 +16,7 @@ export const UserSidebarItem: FC<Props> = ({ item }) => {
   const friendRequests = useSelector(
     (state: RootState) => state.friends.friendRequests
   );
-  const Icon = getIcon(item.id);
+  const Icon = getUserSidebarIcon(item.id);
   const ICON_SIZE = 30;
   const STROKE_WIDTH = 2;
 

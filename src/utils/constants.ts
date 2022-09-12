@@ -1,6 +1,7 @@
 import {
   ContextMenuItemType,
   ConversationTypeData,
+  SettingsItemType,
   UserSidebarItemType,
 } from './types';
 
@@ -66,5 +67,37 @@ export const userSidebarItems: UserSidebarItemType[] = [
   {
     id: 'connections',
     pathname: '/connections',
+  },
+  {
+    id: 'settings',
+    pathname: '/settings',
+  },
+];
+
+export const settingsItems: SettingsItemType[] = [
+  {
+    id: 'profile',
+    label: 'Profile',
+    pathname: '/settings/profile',
+  },
+  {
+    id: 'security',
+    label: 'Security',
+    pathname: '/settings/security',
+  },
+  {
+    id: 'notifications',
+    label: 'Notifications',
+    pathname: '/settings/notifications',
+  },
+  {
+    id: 'integrations',
+    label: 'Integrations',
+    pathname: '/settings/integrations',
+  },
+  {
+    id: 'appearance',
+    label: 'Appearance',
+    pathname: '/settings/appearance',
   },
 ];

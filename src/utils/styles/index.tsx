@@ -47,7 +47,7 @@ export const InputContainerHeader = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-`
+`;
 
 export const InputLabel = styled.label`
   display: block;
@@ -60,7 +60,7 @@ export const InputError = styled.span`
   color: #ff0000;
   text-transform: uppercase;
   font-size: 11px;
-`
+`;
 
 export const Button = styled.button`
   width: 100%;
@@ -550,6 +550,10 @@ export const UserSidebarStyle = styled.div`
   flex: 0 0 80px;
   align-items: center;
   flex-direction: column;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ConversationSidebarStyle = styled.div`

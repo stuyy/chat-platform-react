@@ -5,10 +5,19 @@ import {
   Minus,
   Person,
   PersonCross,
+  Gear,
 } from 'akar-icons';
+import {
+  IoIosPerson,
+  IoIosNotifications,
+  IoIosLock,
+  IoMdInfinite,
+  IoMdColorPalette,
+} from 'react-icons/io';
 import {
   Conversation,
   Group,
+  SettingsSidebarRouteType,
   User,
   UserContextMenuActionType,
   UserSidebarRouteType,
@@ -37,7 +46,7 @@ export const getUserContextMenuIcon = (type: UserContextMenuActionType) => {
 export const isGroupOwner = (user?: User, group?: Group) =>
   user?.id === group?.owner.id;
 
-export const getIcon = (id: UserSidebarRouteType) => {
+export const getUserSidebarIcon = (id: UserSidebarRouteType) => {
   switch (id) {
     case 'conversations':
       return ChatDots;
@@ -45,7 +54,24 @@ export const getIcon = (id: UserSidebarRouteType) => {
       return Person;
     case 'connections':
       return ArrowCycle;
+    case 'settings':
+      return Gear;
     default:
       return ChatDots;
+  }
+};
+
+export const getSettingSidebarIcon = (id: SettingsSidebarRouteType) => {
+  switch (id) {
+    case 'profile':
+      return IoIosPerson;
+    case 'security':
+      return IoIosLock;
+    case 'notifications':
+      return IoIosNotifications;
+    case 'integrations':
+      return IoMdInfinite;
+    case 'appearance':
+      return IoMdColorPalette;
   }
 };
