@@ -43,7 +43,7 @@ export const SettingsSidebarItemStyle = styled.div<SettingsSidebarItemProps>`
 export const SettingsProfileBanner = styled.div<UserBannerProps>`
   width: 100%;
   height: 300px;
-
+  cursor: pointer;
   ${({ backgroundUrl }) =>
     backgroundUrl
       ? css`
@@ -51,7 +51,7 @@ export const SettingsProfileBanner = styled.div<UserBannerProps>`
           background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
             url('${backgroundUrl}') no-repeat center;
           opacity: 70%;
-          transition: 200ms opacity ease;
+          transition: 300ms opacity ease;
           background-size: cover;
           &:hover {
             opacity: 100%;
@@ -60,8 +60,23 @@ export const SettingsProfileBanner = styled.div<UserBannerProps>`
       : css`
           background-color: #404040;
         `}
-
-  cursor: pointer;
+  &::before {
+    background-color: none;
+    content: 'Change Banner';
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #b5b5b5;
+    font-size: 20px;
+    font-weight: 500;
+    opacity: 0;
+    transition: 300ms opacity ease;
+  }
+  &:hover:before {
+    opacity: 1;
+  }
 `;
 
 export const SettingsProfileUserDetails = styled.div`
