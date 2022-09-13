@@ -7526,6 +7526,11 @@ react-scripts@5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-spinners@^0.13.4:
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.13.4.tgz#20f7435e5cb3a2bde23110efa8b7dfbe485373e9"
+  integrity sha512-V6IURjYOwomhdngMfuVxBp4utCF6v21sjQ6r4K2JoKl8fwXZp1UeHMBLf+2SU+cts8hAVj9rHOJ8kdT5UqqaJw==
+
 react-toastify@^9.0.8:
   version "9.0.8"
   resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-9.0.8.tgz#3876c89fc6211a29027b3075010b5ec39ebe4f7e"

@@ -167,7 +167,7 @@ export const checkUsernameExists = (username: string) =>
   axiosClient.get(`/users/check?username=${username}`, config);
 
 export const updateUserProfile = (data: FormData) =>
-  axiosClient.patch('/users/profiles', data, {
+  axiosClient.patch<User>('/users/profiles', data, {
     ...config,
     headers: {
       'Content-Type': 'multipart/form-data',
