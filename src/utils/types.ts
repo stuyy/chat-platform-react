@@ -250,3 +250,8 @@ export type UpdateProfileParams = Partial<{
   avatar: File;
   banner: File;
 }>;
+
+export type Attachment = {
+  id: number;
+  file: File;
+};

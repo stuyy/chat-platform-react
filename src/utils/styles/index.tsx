@@ -101,6 +101,7 @@ export const Page = styled.div<PageProps>`
 export const ConversationChannelPageStyle = styled.div`
   height: 100%;
   width: 100%;
+  overflow: hidden;
 `;
 
 export const ConversationSidebarContainer = styled.div`
@@ -706,4 +707,36 @@ export const CharacterLimit = styled.span<CharacterLimitProps>`
   font-weight: 500;
   color: ${({ atMaxLength }) =>
     atMaxLength ? '#ff0000' : 'rgb(129, 129, 129)'};
+`;
+
+export const MessageAttachmentContainerStyle = styled.div`
+  display: flex;
+  overflow-x: scroll;
+  gap: 10px;
+  margin: 10px 0;
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #101010;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #1c1c1c;
+    border-radius: 5px;
+  }
+`;
+
+export const MessageAttachmentStyle = styled.div`
+  box-sizing: border-box;
+  padding: 50px 0 0 0;
+  position: relative;
+  max-height: 300px;
+  height: 300px;
+  background-color: #161616;
+  margin: 10px 0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
 `;

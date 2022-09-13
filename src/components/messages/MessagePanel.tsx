@@ -17,6 +17,7 @@ import {
   MessagePanelStyle,
   MessageTypingStatus,
 } from '../../utils/styles';
+import { MessageAttachmentContainer } from './attachments/MessageAttachmentContainer';
 import { MessageContainer } from './MessageContainer';
 import { MessageInputField } from './MessageInputField';
 import { MessagePanelHeader } from './MessagePanelHeader';
@@ -34,8 +35,7 @@ export const MessagePanel: FC<Props> = ({
   const { id: routeId } = useParams();
   const { user } = useContext(AuthContext);
   const { error } = useToast({ theme: 'dark' });
-  const dispatch = useDispatch<AppDispatch>();
-
+  const { attachments } = useSelector((state: RootState) => state.messagePanel);
   const conversation = useSelector((state: RootState) =>
     selectConversationById(state, parseInt(routeId!))
   );
@@ -69,6 +69,7 @@ export const MessagePanel: FC<Props> = ({
           <MessageContainer />
         </MessagePanelBody>
         <MessagePanelFooter>
+          {attachments.length > 0 && <MessageAttachmentContainer />}
           <MessageInputField
             content={content}
             setContent={setContent}
