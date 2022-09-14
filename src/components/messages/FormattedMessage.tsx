@@ -1,7 +1,7 @@
 import { formatRelative } from 'date-fns';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { CDN_URL } from '../../utils/constants';
+import { CDN_URL, CDN_URL_PREVIEW } from '../../utils/constants';
 import {
   MessageItemContainer,
   MessageItemAvatar,
@@ -57,7 +57,7 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
               {message.attachments?.map((attachment) => (
                 <img
                   key={attachment.key}
-                  src={CDN_URL.concat(attachment.key)}
+                  src={CDN_URL_PREVIEW.concat(attachment.key)}
                   width={300}
                   alt={attachment.key}
                 />

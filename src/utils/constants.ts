@@ -102,4 +102,6 @@ export const settingsItems: SettingsItemType[] = [
   },
 ];
 
-export const CDN_URL = 'https://chuachat.ams3.digitaloceanspaces.com/';
+export const CDN_URL = 'https://chuachat.ams3.cdn.digitaloceanspaces.com/';
+export const CDN_URL_PREVIEW =
+  'https://chuachat.ams3.digitaloceanspaces.com/preview/';

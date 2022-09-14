@@ -26,14 +26,16 @@ export const MessageAttachmentActionIcon = () => {
   };
 
   const onChange = (e: InputChangeEvent) => {
-    const file = e.target.files?.item(0);
-    if (attachments.length >= 5)
-      return error('Maximum 5 Attachments Allowed', { position: 'top-center' });
-    if (file && file.size > 1000000)
-      return error('File exceeds limit: 1 MB', { position: 'top-center' });
-    if (file) {
-      console.log(file);
-      dispatch(addAttachment({ id: attachmentCounter, file }));
+    const { files } = e.target;
+    if (!files) return;
+    const maxFilesDropped = 5 - attachments.length;
+    if (maxFilesDropped === 0) return error('Max files reached');
+    const filesArray = Array.from(files);
+    let localCounter = attachmentCounter;
+    for (let i = 0; i < filesArray.length; i++) {
+      console.log(filesArray[i]);
+      if (i === maxFilesDropped) break;
+      dispatch(addAttachment({ id: localCounter++, file: filesArray[i] }));
       dispatch(incrementAttachmentCounter());
     }
   };
@@ -42,6 +44,7 @@ export const MessageAttachmentActionIcon = () => {
     <div ref={attachmentIconRef} onClick={onClick}>
       <CirclePlusFill size={36} className={styles.icon} cursor="pointer" />
       <FileInput
+        multiple
         ref={fileInputRef}
         type="file"
         accept="image/*"
