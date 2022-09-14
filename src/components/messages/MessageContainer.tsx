@@ -101,7 +101,15 @@ export const MessageContainer = () => {
   };
 
   return (
-    <MessageContainerStyle>
+    <MessageContainerStyle
+      onScroll={(e) => {
+        const node = e.target as HTMLDivElement;
+        const scrollTopMax = node.scrollHeight - node.clientHeight;
+        if (-scrollTopMax === node.scrollTop) {
+          console.log('')
+        }
+      }}
+    >
       <>
         {selectedType === 'private'
           ? conversationMessages?.messages.map(mapMessages)
