@@ -75,3 +75,4 @@ export const getSettingSidebarIcon = (id: SettingsSidebarRouteType) => {
       return IoMdColorPalette;
   }
 };
+

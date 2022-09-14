@@ -276,7 +276,7 @@ export const MessageItemDetails = styled.div`
   flex: 1;
 `;
 
-export const MessageItemHeader = styled.div`
+export const MessageItemHeaderContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
