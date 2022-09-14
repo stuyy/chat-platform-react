@@ -30,7 +30,7 @@ export const MessageItemAttachmentContainer: FC<Props> = ({ message }) => {
             className={styles.closeIcon}
             onClick={() => setShowOverlay(false)}
           />
-          <img src={imageUrl} alt="overlay" />
+          <img src={imageUrl} alt="overlay" style={{ maxHeight: '90%' }} />
         </OverlayStyle>
       )}
       <div>
