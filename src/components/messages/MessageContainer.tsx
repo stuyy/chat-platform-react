@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
   MessageContainerStyle,
-  MessageItemAvatar,
   MessageItemContainer,
   MessageItemDetails,
 } from '../../utils/styles';
@@ -24,6 +23,7 @@ import {
 import { MessageItemHeader } from './MessageItemHeader';
 import { MessageItemContainerBody } from './MessageItemContainerBody';
 import { useHandleClick, useKeydown } from '../../utils/hooks';
+import { MessageItemAvatar } from './MessageItemAvatar';
 
 export const MessageContainer = () => {
   const { id } = useParams();
@@ -79,7 +79,7 @@ export const MessageContainer = () => {
         key={message.id}
         onContextMenu={(e) => onContextMenu(e, message)}
       >
-        {showMessageHeader && <MessageItemAvatar />}
+        {showMessageHeader && <MessageItemAvatar message={message} />}
         {showMessageHeader ? (
           <MessageItemDetails>
             <MessageItemHeader message={message} />

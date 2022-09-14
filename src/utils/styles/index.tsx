@@ -265,11 +265,10 @@ export const MessageItemContainer = styled.div`
   word-break: break-word;
 `;
 
-export const MessageItemAvatar = styled.div`
+export const MessageItemAvatarStyle = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #0094fd;
 `;
 
 export const MessageItemDetails = styled.div`
