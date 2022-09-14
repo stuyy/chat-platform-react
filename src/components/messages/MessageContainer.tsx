@@ -21,6 +21,7 @@ import {
   setIsEditing,
   setSelectedMessage,
 } from '../../store/messageContainerSlice';
+import { CDN_URL } from '../../utils/constants';
 
 export const MessageContainer = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -109,6 +110,16 @@ export const MessageContainer = () => {
           ) : (
             <MessageItemContent padding="0 0 0 70px">
               {m.content}
+              <div>
+                {m.attachments?.map((attachment) => (
+                  <img
+                    key={attachment.key}
+                    src={CDN_URL.concat(attachment.key)}
+                    width={300}
+                    alt={attachment.key}
+                  />
+                ))}
+              </div>
             </MessageItemContent>
           )}
         </MessageItemContainer>

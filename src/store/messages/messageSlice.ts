@@ -7,7 +7,6 @@ import {
   MessageType,
 } from '../../utils/types';
 import {
-  createMessageThunk,
   deleteMessageThunk,
   editMessageThunk,
   fetchMessagesThunk,

@@ -26,10 +26,17 @@ export const messagePanelSlice = createSlice({
     incrementAttachmentCounter: (state) => {
       state.attachmentCounter++;
     },
+    removeAllAttachments: (state) => {
+      state.attachments = [];
+    },
   },
 });
 
-export const { addAttachment, removeAttachment, incrementAttachmentCounter } =
-  messagePanelSlice.actions;
+export const {
+  addAttachment,
+  removeAttachment,
+  incrementAttachmentCounter,
+  removeAllAttachments,
+} = messagePanelSlice.actions;
 
 export default messagePanelSlice.reducer;

@@ -51,8 +51,13 @@ export const getConversationMessages = (conversationId: number) =>
     config
   );
 
-export const createMessage = ({ id, content }: CreateMessageParams) =>
-  axiosClient.post(`/conversations/${id}/messages`, { content }, config);
+export const createMessage = (id: string, data: FormData) =>
+  axiosClient.post(`/conversations/${id}/messages`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    ...config,
+  });
 
 export const postNewConversation = (data: CreateConversationParams) =>
   axiosClient.post<Conversation>(`/conversations`, data, config);
