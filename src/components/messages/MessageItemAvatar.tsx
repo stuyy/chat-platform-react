@@ -13,7 +13,7 @@ export const MessageItemAvatar: FC<Props> = ({ message }) => {
     const { profile } = message.author;
     console.log(message);
     return profile && profile.avatar
-      ? CDN_URL.concat(profile.avatar)
+      ? CDN_URL.BASE.concat(profile.avatar)
       : defaultAvatar;
   };
 

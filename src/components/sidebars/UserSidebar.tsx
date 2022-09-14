@@ -18,7 +18,7 @@ export const UserSidebar = () => {
         <UserAvatar
           src={
             user?.profile?.avatar
-              ? CDN_URL.concat(user?.profile.avatar)
+              ? CDN_URL.BASE.concat(user?.profile.avatar)
               : avatar
           }
           alt="avatar"

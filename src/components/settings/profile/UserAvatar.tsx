@@ -1,5 +1,4 @@
 import { Dispatch, FC, SetStateAction, useContext, useRef } from 'react';
-import { CDN_URL } from '../../../utils/constants';
 import { AuthContext } from '../../../utils/context/AuthContext';
 import { FileInput } from '../../../utils/styles/inputs/Textarea';
 import { UserAvatarContainer } from '../../../utils/styles/settings';
@@ -18,8 +17,6 @@ export const UserAvatar: FC<Props> = ({
   setAvatarSourceCopy,
   setAvatarFile,
 }) => {
-  const { user } = useContext(AuthContext);
-
   const fileInputRef = useRef<HTMLInputElement>(null);
   const onAvatarClick = (e: DivMouseEvent) => fileInputRef.current?.click();
   const onFileChange = (e: InputChangeEvent) => {

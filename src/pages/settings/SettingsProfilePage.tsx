@@ -22,12 +22,12 @@ export const SettingsProfilePage = () => {
 
   const [avatarFile, setAvatarFile] = useState<File>();
   const [avatarSource, setAvatarSource] = useState(
-    CDN_URL.concat(user?.profile?.avatar || '')
+    CDN_URL.BASE.concat(user?.profile?.avatar || '')
   );
   const [avatarSourceCopy, setAvatarSourceCopy] = useState(avatarSource);
 
   const [bannerSource, setBannerSource] = useState(
-    CDN_URL.concat(user?.profile?.banner || '')
+    CDN_URL.BASE.concat(user?.profile?.banner || '')
   );
   const [bannerFile, setBannerFile] = useState<File>();
   const [bannerSourceCopy, setBannerSourceCopy] = useState(bannerSource);
@@ -44,8 +44,8 @@ export const SettingsProfilePage = () => {
   useEffect(() => {
     console.log('Updating Banner URL');
     console.log(user?.profile?.banner);
-    setBannerSource(CDN_URL.concat(user?.profile?.banner || ''));
-    setBannerSourceCopy(CDN_URL.concat(user?.profile?.banner || ''));
+    setBannerSource(CDN_URL.BASE.concat(user?.profile?.banner || ''));
+    setBannerSourceCopy(CDN_URL.BASE.concat(user?.profile?.banner || ''));
   }, [user?.profile?.banner]);
 
   const isChanged = () => aboutCopy !== about || bannerFile || avatarFile;

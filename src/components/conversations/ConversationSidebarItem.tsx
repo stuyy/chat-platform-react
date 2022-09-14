@@ -39,7 +39,7 @@ export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
         <img
           src={
             hasProfilePicture()
-              ? CDN_URL.concat(recipient?.profile?.avatar!)
+              ? CDN_URL.BASE.concat(recipient?.profile?.avatar!)
               : defaultAvatar
           }
           alt="avatar"
