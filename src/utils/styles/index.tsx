@@ -222,7 +222,16 @@ export const MessageContainerStyle = styled.div`
   flex-direction: column-reverse;
   overflow-y: scroll;
   &::-webkit-scrollbar {
-    display: none;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #0e0e0e;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #161616;
+    width: 5px;
+    border-radius: 5px;
   }
 `;
 
