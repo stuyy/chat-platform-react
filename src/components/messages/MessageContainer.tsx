@@ -109,7 +109,7 @@ export const MessageContainer = () => {
             </MessageItemContent>
           ) : (
             <MessageItemContent padding="0 0 0 70px">
-              {m.content}
+              {m.content || null}
               <div>
                 {m.attachments?.map((attachment) => (
                   <img

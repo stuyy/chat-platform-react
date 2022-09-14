@@ -45,7 +45,7 @@ export type MessageAttachment = {
 
 export type MessageType = {
   id: number;
-  content: string;
+  content?: string;
   createdAt: string;
   author: User;
   conversation: Conversation;
@@ -54,7 +54,7 @@ export type MessageType = {
 
 export type GroupMessageType = {
   id: number;
-  content: string;
+  content?: string;
   createdAt: string;
   author: User;
   group: Group;
@@ -191,6 +191,8 @@ export type UpdateGroupOwnerParams = {
 export type ContextMenuEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
 export type DivMouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
 export type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
+export type DragEvent = React.DragEvent<HTMLTextAreaElement>;
+export type ClipboardEvent = React.ClipboardEvent<HTMLTextAreaElement>;
 
 export type FriendRequestStatus = 'accepted' | 'pending' | 'rejected';
 

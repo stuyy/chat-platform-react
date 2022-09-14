@@ -1,5 +1,13 @@
 import { MessageTextarea } from '../../utils/styles/inputs/Textarea';
 import { FC, Dispatch, SetStateAction, useRef } from 'react';
+import { ClipboardEvent, DragEvent } from '../../utils/types';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addAttachment,
+  incrementAttachmentCounter,
+} from '../../store/message-panel/messagePanelSlice';
+import { RootState } from '../../store';
+import { useToast } from '../../utils/hooks/useToast';
 
 type Props = {
   message: string;
@@ -20,6 +28,11 @@ export const MessageTextField: FC<Props> = ({
 }) => {
   const DEFAULT_TEXTAREA_HEIGHT = 21;
   const ref = useRef<HTMLTextAreaElement>(null);
+  const dispatch = useDispatch();
+  const { error } = useToast({ theme: 'dark' });
+  const { attachments, attachmentCounter } = useSelector(
+    (state: RootState) => state.messagePanel
+  );
 
   const onMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
@@ -45,6 +58,33 @@ export const MessageTextField: FC<Props> = ({
     }
   };
 
+  const handleFileAdd = (files: FileList) => {
+    const maxFilesDropped = 5 - attachments.length;
+    if (maxFilesDropped === 0) return error('Max files reached');
+    const filesArray = Array.from(files);
+    let localCounter = attachmentCounter;
+    for (let i = 0; i < filesArray.length; i++) {
+      console.log(filesArray[i]);
+      if (i === maxFilesDropped) break;
+      dispatch(addAttachment({ id: localCounter++, file: filesArray[i] }));
+      dispatch(incrementAttachmentCounter());
+    }
+  };
+
+  const onDrop = (e: DragEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const { files } = e.dataTransfer;
+    handleFileAdd(files);
+  };
+
+  const onPaste = (e: ClipboardEvent) => {
+    const { files } = e.clipboardData;
+    console.log('pasting...');
+    console.log(files);
+    handleFileAdd(files);
+  };
+
   return (
     <MessageTextarea
       ref={ref}
@@ -53,6 +93,8 @@ export const MessageTextField: FC<Props> = ({
       placeholder="Send a Message"
       maxLength={maxLength}
       onKeyDown={onKeyDown}
+      onDrop={onDrop}
+      onPaste={onPaste}
     ></MessageTextarea>
   );
 };
