@@ -52,10 +52,7 @@ export const MessagePanel: FC<Props> = ({
     console.log('sendMessage');
     if (!routeId) return;
     if (!trimmedContent && !attachments.length) return;
-
-    const params = { id: parseInt(routeId), content: trimmedContent };
     const formData = new FormData();
-
     formData.append('id', routeId);
     trimmedContent && formData.append('content', trimmedContent);
     attachments.forEach((attachment) =>
@@ -63,9 +60,7 @@ export const MessagePanel: FC<Props> = ({
     );
 
     try {
-      selectedType === 'private'
-        ? await createMessage(routeId, formData)
-        : await postGroupMessage(params);
+      await createMessage(routeId, selectedType, formData);
       setContent('');
       dispatch(removeAllAttachments());
     } catch (err) {
