@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { CDN_URL } from '../../utils/constants';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { getRecipientFromConversation } from '../../utils/helpers';
 import { ConversationSidebarItemStyle } from '../../utils/styles';
 import { Conversation } from '../../utils/types';
+import defaultAvatar from '../../__assets__/default_avatar.jpg';
 
 import styles from './index.module.scss';
 
@@ -26,13 +28,23 @@ export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
     return null;
   };
 
+  const hasProfilePicture = () => recipient?.profile?.avatar;
+
   return (
     <>
       <ConversationSidebarItemStyle
         onClick={() => navigate(`/conversations/${conversation.id}`)}
         selected={parseInt(id!) === conversation.id}
       >
-        <div className={styles.conversationAvatar}></div>
+        <img
+          src={
+            hasProfilePicture()
+              ? CDN_URL.concat(recipient?.profile?.avatar!)
+              : defaultAvatar
+          }
+          alt="avatar"
+          className={styles.conversationAvatar}
+        />
         <div className={styles.contentContainer}>
           <span className={styles.conversationName}>
             {`${recipient?.firstName} ${recipient?.lastName}`}
