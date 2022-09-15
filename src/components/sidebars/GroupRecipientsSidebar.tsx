@@ -3,10 +3,8 @@ import {
   GroupRecipientSidebarItemContainer,
   GroupRecipientsSidebarHeader,
   GroupRecipientsSidebarStyle,
-  MessageItemAvatarStyle,
-  TestContextMenu,
 } from '../../utils/styles';
-import { Crown, PeopleGroup } from 'akar-icons';
+import { Crown } from 'akar-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { selectGroupById } from '../../store/groupSlice';
@@ -20,6 +18,7 @@ import {
   toggleContextMenu,
 } from '../../store/groupRecipientsSidebarSlice';
 import { SelectedParticipantContextMenu } from '../context-menus/SelectedParticipantContextMenu';
+import { UserAvatar } from '../users/UserAvatar';
 
 export const GroupRecipientsSidebar = () => {
   const { id: groupId } = useParams();
@@ -48,6 +47,7 @@ export const GroupRecipientsSidebar = () => {
     }, 5000);
     socket.on('onlineGroupUsersReceived', (payload) => {
       console.log('received onlineGroupUsersReceived event');
+      console.log(payload);
       setOnlineUsers(payload.onlineUsers);
     });
     return () => {
@@ -85,7 +85,7 @@ export const GroupRecipientsSidebar = () => {
             onContextMenu={(e) => onUserContextMenu(e, user)}
           >
             <div className="left">
-              <MessageItemAvatarStyle />
+              <UserAvatar user={user} />
               <span>{user.firstName}</span>
             </div>
             {user.id === group?.owner.id && <Crown color="#ffbf00" />}
@@ -102,7 +102,7 @@ export const GroupRecipientsSidebar = () => {
               onContextMenu={(e) => onUserContextMenu(e, user)}
             >
               <div className="left">
-                <MessageItemAvatarStyle />
+                <UserAvatar user={user} />
                 <span>{user.firstName}</span>
               </div>
               {user.id === group?.owner.id && <Crown color="#ffbf00" />}

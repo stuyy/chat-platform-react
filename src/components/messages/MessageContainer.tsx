@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {
-  MessageContainerStyle,
-  MessageItemContainer,
-  MessageItemDetails,
-} from '../../utils/styles';
 import { AppDispatch, RootState } from '../../store';
 import { GroupMessageType, MessageType } from '../../utils/types';
 import { SelectedMessageContextMenu } from '../context-menus/SelectedMessageContextMenu';
 import { selectConversationMessage } from '../../store/messages/messageSlice';
 import { selectGroupMessage } from '../../store/groupMessageSlice';
 import { selectType } from '../../store/selectedSlice';
+import { MessageItemHeader } from './MessageItemHeader';
+import { MessageItemContainerBody } from './MessageItemContainerBody';
+import { useHandleClick, useKeydown } from '../../utils/hooks';
+import { UserAvatar } from '../users/UserAvatar';
+import {
+  MessageContainerStyle,
+  MessageItemContainer,
+  MessageItemDetails,
+} from '../../utils/styles';
 import {
   editMessageContent,
   resetMessageContainer,
@@ -20,10 +24,6 @@ import {
   setSelectedMessage,
   toggleContextMenu,
 } from '../../store/messageContainerSlice';
-import { MessageItemHeader } from './MessageItemHeader';
-import { MessageItemContainerBody } from './MessageItemContainerBody';
-import { useHandleClick, useKeydown } from '../../utils/hooks';
-import { MessageItemAvatar } from './MessageItemAvatar';
 
 export const MessageContainer = () => {
   const { id } = useParams();
@@ -79,7 +79,7 @@ export const MessageContainer = () => {
         key={message.id}
         onContextMenu={(e) => onContextMenu(e, message)}
       >
-        {showMessageHeader && <MessageItemAvatar message={message} />}
+        {showMessageHeader && <UserAvatar user={message.author} />}
         {showMessageHeader ? (
           <MessageItemDetails>
             <MessageItemHeader message={message} />
@@ -106,7 +106,7 @@ export const MessageContainer = () => {
         const node = e.target as HTMLDivElement;
         const scrollTopMax = node.scrollHeight - node.clientHeight;
         if (-scrollTopMax === node.scrollTop) {
-          console.log('')
+          console.log('');
         }
       }}
     >
