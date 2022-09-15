@@ -24,6 +24,8 @@ import {
   setSelectedMessage,
   toggleContextMenu,
 } from '../../store/messageContainerSlice';
+import { SystemMessage } from './system/SystemMessage';
+import { SystemMessageList } from './system/SystemMessageList';
 
 export const MessageContainer = () => {
   const { id } = useParams();
@@ -31,15 +33,10 @@ export const MessageContainer = () => {
   const conversationMessages = useSelector((state: RootState) =>
     selectConversationMessage(state, parseInt(id!))
   );
-  const groupMessages = useSelector((state: RootState) =>
-    selectGroupMessage(state, parseInt(id!))
-  );
+  const groupMessages = useSelector((state: RootState) => selectGroupMessage(state, parseInt(id!)));
   const selectedType = useSelector((state: RootState) => selectType(state));
-  const { showContextMenu } = useSelector(
-    (state: RootState) => state.messageContainer
-  );
-  const handleKeydown = (e: KeyboardEvent) =>
-    e.key === 'Escape' && dispatch(setIsEditing(false));
+  const { showContextMenu } = useSelector((state: RootState) => state.messageContainer);
+  const handleKeydown = (e: KeyboardEvent) => e.key === 'Escape' && dispatch(setIsEditing(false));
   const handleClick = () => dispatch(toggleContextMenu(false));
 
   useKeydown(handleKeydown, [id]);
@@ -72,13 +69,9 @@ export const MessageContainer = () => {
     const currentMessage = messages[index];
     const nextMessage = messages[index + 1];
     const showMessageHeader =
-      messages.length === index + 1 ||
-      currentMessage.author.id !== nextMessage.author.id;
+      messages.length === index + 1 || currentMessage.author.id !== nextMessage.author.id;
     return (
-      <MessageItemContainer
-        key={message.id}
-        onContextMenu={(e) => onContextMenu(e, message)}
-      >
+      <MessageItemContainer key={message.id} onContextMenu={(e) => onContextMenu(e, message)}>
         {showMessageHeader && <UserAvatar user={message.author} />}
         {showMessageHeader ? (
           <MessageItemDetails>
@@ -111,6 +104,7 @@ export const MessageContainer = () => {
       }}
     >
       <>
+        <SystemMessageList />
         {selectedType === 'private'
           ? conversationMessages?.messages.map(mapMessages)
           : groupMessages?.messages.map(mapMessages)}

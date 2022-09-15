@@ -29,8 +29,7 @@ export const messageContainerSlice = createSlice({
       state.isEditingMessage = action.payload;
     },
     editMessageContent: (state, action) => {
-      if (state.messageBeingEdited)
-        state.messageBeingEdited.content = action.payload;
+      if (state.messageBeingEdited) state.messageBeingEdited.content = action.payload;
     },
     resetMessageContainer: (state) => {
       state.isEditingMessage = false;

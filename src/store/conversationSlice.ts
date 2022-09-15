@@ -1,8 +1,4 @@
-import {
-  createAsyncThunk,
-  createSelector,
-  createSlice,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { Conversation, CreateConversationParams } from '../utils/types';
 import { getConversations, postNewConversation } from '../utils/api';
@@ -18,12 +14,9 @@ const initialState: ConversationsState = {
   loading: false,
 };
 
-export const fetchConversationsThunk = createAsyncThunk(
-  'conversations/fetch',
-  async () => {
-    return getConversations();
-  }
-);
+export const fetchConversationsThunk = createAsyncThunk('conversations/fetch', async () => {
+  return getConversations();
+});
 
 export const createConversationThunk = createAsyncThunk(
   'conversations/create',
@@ -43,9 +36,7 @@ export const conversationsSlice = createSlice({
     updateConversation: (state, action: PayloadAction<Conversation>) => {
       console.log('Inside updateConversation');
       const conversation = action.payload;
-      const index = state.conversations.findIndex(
-        (c) => c.id === conversation.id
-      );
+      const index = state.conversations.findIndex((c) => c.id === conversation.id);
       state.conversations.splice(index, 1);
       state.conversations.unshift(conversation);
     },
@@ -67,18 +58,15 @@ export const conversationsSlice = createSlice({
   },
 });
 
-const selectConversations = (state: RootState) =>
-  state.conversation.conversations;
+const selectConversations = (state: RootState) => state.conversation.conversations;
 const selectConversationId = (state: RootState, id: number) => id;
 
 export const selectConversationById = createSelector(
   [selectConversations, selectConversationId],
-  (conversations, conversationId) =>
-    conversations.find((c) => c.id === conversationId)
+  (conversations, conversationId) => conversations.find((c) => c.id === conversationId)
 );
 
 // Action creators are generated for each case reducer function
-export const { addConversation, updateConversation } =
-  conversationsSlice.actions;
+export const { addConversation, updateConversation } = conversationsSlice.actions;
 
 export default conversationsSlice.reducer;
