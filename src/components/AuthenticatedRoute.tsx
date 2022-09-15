@@ -8,7 +8,6 @@ export const AuthenticatedRoute: FC<React.PropsWithChildren> = ({
 }) => {
   const location = useLocation()
   const { loading, user } = useAuth()
-
   if (loading) {
     return <CircleLoading />
   }

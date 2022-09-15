@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { fadeInUpwards } from './keyframes';
+import styled, { css } from 'styled-components'
+import { fadeInUpwards } from './keyframes'
 import {
   CharacterLimitProps,
   ContextMenuProps,
@@ -9,10 +9,10 @@ import {
   MessageInputContainerProps,
   MessageItemContentProps,
   PageProps,
-  SidebarItemProps,
-} from './styleTypes';
+  SidebarItemProps
+} from './styleTypes'
 
-export const SIDEBAR_WIDTH = 400;
+export const SIDEBAR_WIDTH = 400
 
 export const InputField = styled.input`
   font-family: 'Inter';
@@ -25,7 +25,7 @@ export const InputField = styled.input`
   box-sizing: border-box;
   padding: 0;
   margin: 4px 0;
-`;
+`
 
 export const InputContainer = styled.div<InputContainerProps>`
   background-color: ${(prop) => prop.backgroundColor || '#131313'};
@@ -33,7 +33,7 @@ export const InputContainer = styled.div<InputContainerProps>`
   border-radius: 10px;
   width: 100%;
   box-sizing: border-box;
-`;
+`
 
 export const RecipientChipContainer = styled.div`
   display: flex;
@@ -41,26 +41,26 @@ export const RecipientChipContainer = styled.div`
   margin-bottom: 10px;
   border-radius: 10px;
   gap: 4px 10px;
-`;
+`
 
 export const InputContainerHeader = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-`;
+`
 
 export const InputLabel = styled.label`
   display: block;
   color: #8f8f8f;
   font-size: 14px;
   margin: 4px 0;
-`;
+`
 
 export const InputError = styled.span`
   color: #ff0000;
   text-transform: uppercase;
   font-size: 11px;
-`;
+`
 
 export const Button = styled.button`
   width: 100%;
@@ -86,7 +86,7 @@ export const Button = styled.button`
     color: #878787a2;
     cursor: not-allowed;
   }
-`;
+`
 
 export const Page = styled.div<PageProps>`
   background-color: #1a1a1a;
@@ -96,17 +96,17 @@ export const Page = styled.div<PageProps>`
   justify-content: ${(props) => props.justifyContent};
   align-items: ${(props) => props.alignItems};
   overflow: hidden;
-`;
+`
 
 export const ConversationChannelPageStyle = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
-`;
+`
 
 export const ConversationSidebarContainer = styled.div`
   margin-top: 100px;
-`;
+`
 
 export const ConversationSidebarItemStyle = styled.div<ConversationSidebarItemProps>`
   display: flex;
@@ -121,7 +121,7 @@ export const ConversationSidebarItemStyle = styled.div<ConversationSidebarItemPr
   &:hover {
     background-color: #222222;
   }
-`;
+`
 
 export const OverlayStyle = styled.div`
   height: 100%;
@@ -134,11 +134,11 @@ export const OverlayStyle = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 9999;
-`;
+`
 
 type ModalProps = Partial<{
-  showModal: boolean;
-}>;
+  showModal: boolean
+}>
 
 export const ModalContainerStyle = styled.div<ModalProps>`
   position: relative;
@@ -147,7 +147,7 @@ export const ModalContainerStyle = styled.div<ModalProps>`
   box-sizing: border-box;
   border-radius: 10px;
   animation: ${fadeInUpwards} 500ms ease;
-`;
+`
 
 export const ModalHeaderStyle = styled.header`
   width: 100%;
@@ -161,12 +161,12 @@ export const ModalHeaderStyle = styled.header`
     font-weight: 500;
     margin: 0;
   }
-`;
+`
 
 export const ModalContentBodyStyle = styled.div`
   padding: 24px;
   position: relative;
-`;
+`
 
 export const TextField = styled.textarea`
   font-family: 'Inter';
@@ -183,7 +183,7 @@ export const TextField = styled.textarea`
   ::-webkit-scrollbar {
     display: none;
   }
-`;
+`
 
 export const MessagePanelStyle = styled.div`
   display: flex;
@@ -191,7 +191,7 @@ export const MessagePanelStyle = styled.div`
   height: 100%;
   width: 100%;
   background-color: #141414;
-`;
+`
 
 export const MessagePanelHeaderStyle = styled.header`
   height: 90px;
@@ -203,7 +203,7 @@ export const MessagePanelHeaderStyle = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
+`
 
 export const MessagePanelBody = styled.div`
   padding: 32px 32px 0 32px;
@@ -212,7 +212,7 @@ export const MessagePanelBody = styled.div`
   flex: 1 1 auto;
   overflow-y: auto;
   min-height: 0;
-`;
+`
 
 export const MessageContainerStyle = styled.div`
   height: 100%;
@@ -233,7 +233,7 @@ export const MessageContainerStyle = styled.div`
     width: 5px;
     border-radius: 5px;
   }
-`;
+`
 
 export const MessageInputContainer = styled.div<MessageInputContainerProps>`
   box-sizing: border-box;
@@ -245,12 +245,12 @@ export const MessageInputContainer = styled.div<MessageInputContainerProps>`
   gap: 20px;
   align-items: ${({ isMultiLine }) => (isMultiLine ? 'top' : 'center')};
   position: relative;
-`;
+`
 
 export const MessagePanelFooter = styled.footer`
   padding: 0 32px 10px 32px;
   margin-top: 0;
-`;
+`
 
 export const MessageInput = styled.input`
   background-color: inherit;
@@ -264,7 +264,7 @@ export const MessageInput = styled.input`
   padding: 0;
   margin: 4px 0;
   resize: none;
-`;
+`
 
 export const MessageItemContainer = styled.div`
   display: flex;
@@ -272,17 +272,17 @@ export const MessageItemContainer = styled.div`
   align-items: center;
   padding: 5px 0;
   word-break: break-word;
-`;
+`
 
 export const UserAvatarContainer = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-`;
+`
 
 export const MessageItemDetails = styled.div`
   flex: 1;
-`;
+`
 
 export const MessageItemHeaderContainer = styled.div`
   display: flex;
@@ -290,20 +290,20 @@ export const MessageItemHeaderContainer = styled.div`
   gap: 12px;
   .time {
     color: #6d6d6d;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: lite;
   }
   .authorName {
     font-weight: 600;
     font-size: 16px;
   }
-`;
+`
 
 export const MessageItemContent = styled.div<MessageItemContentProps>`
   padding: ${({ padding }) => padding};
   width: 100%;
   white-space: pre-wrap;
-`;
+`
 
 export const ContextMenu = styled.ul<ContextMenuProps>`
   border-radius: 8px;
@@ -319,7 +319,7 @@ export const ContextMenu = styled.ul<ContextMenuProps>`
   margin: 0;
   padding: 10px;
   z-index: 99;
-`;
+`
 
 export const ContextMenuItem = styled.li`
   display: flex;
@@ -334,7 +334,7 @@ export const ContextMenuItem = styled.li`
     cursor: pointer;
     background-color: #1f1f1f;
   }
-`;
+`
 
 export const MessageTypingStatus = styled.div`
   width: 100%;
@@ -343,7 +343,7 @@ export const MessageTypingStatus = styled.div`
   box-sizing: border-box;
   margin-top: 10px;
   height: 20px;
-`;
+`
 
 export const EditMessageInputField = styled.input`
   outline: none;
@@ -357,14 +357,14 @@ export const EditMessageInputField = styled.input`
   border-radius: 5px;
   margin: 4px 0;
   width: 100%;
-`;
+`
 
 export const EditMessageActionsContainer = styled.div`
   font-size: 12px;
   & span {
     color: #1d77ff;
   }
-`;
+`
 
 export const ConversationSelectedStyle = styled.div`
   width: 100%;
@@ -374,7 +374,7 @@ export const ConversationSelectedStyle = styled.div`
   background-color: #0f0f0f;
   border-bottom: 1px solid #4343435f;
   box-sizing: border-box;
-`;
+`
 
 export const ConversationSelectedItem = styled.div<ConversationSelectedProps>`
   padding: 12px 28px;
@@ -388,13 +388,13 @@ export const ConversationSelectedItem = styled.div<ConversationSelectedProps>`
     css`
       background-color: #444444;
     `};
-`;
+`
 export const UserAvatar = styled.img`
   width: 55px;
   height: 55px;
   border-radius: 55px;
   margin: 10px 0;
-`;
+`
 export const UserSidebarTop = styled.div`
   display: flex;
   align-items: center;
@@ -402,7 +402,7 @@ export const UserSidebarTop = styled.div`
   flex-direction: column;
   box-sizing: border-box;
   margin: 20px 0;
-`;
+`
 
 export const UserSidebarTopIcons = styled.div`
   display: flex;
@@ -410,13 +410,13 @@ export const UserSidebarTopIcons = styled.div`
   align-items: center;
   margin-top: 18px;
   gap: 40px;
-`;
+`
 
 export const UserSidebarBottom = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
+`
 
 export const ConversationSidebarStyles = styled.div`
   position: absolute;
@@ -433,7 +433,7 @@ export const ConversationSidebarStyles = styled.div`
     /* width: 10px;
     height: 5px; */
   }
-`;
+`
 export const ConversationSidebarHeaderStyle = styled.header`
   padding: 24px 32px;
   box-sizing: border-box;
@@ -443,13 +443,13 @@ export const ConversationSidebarHeaderStyle = styled.header`
   left: 90px;
   z-index: 9;
   background-color: inherit;
-`;
+`
 
 export const ConversationTabStyle = styled.section`
   display: flex;
   gap: 20px;
   margin: 14px 18px;
-`;
+`
 
 export const ConversationTabItemStyle = styled.section<ConversationSelectedProps>`
   cursor: pointer;
@@ -465,9 +465,9 @@ export const ConversationTabItemStyle = styled.section<ConversationSelectedProps
     css`
       background-color: #383838;
     `};
-`;
+`
 
-export const SidebarContainerStyle = styled.div``;
+export const SidebarContainerStyle = styled.div``
 
 export const SidebarContainerItem = styled.div`
   display: flex;
@@ -475,7 +475,7 @@ export const SidebarContainerItem = styled.div`
   gap: 20px;
   padding: 8px 32px;
   margin: 18px 0;
-`;
+`
 
 export const SidebarContainerItemContent = styled.div`
   & .name {
@@ -489,7 +489,7 @@ export const SidebarContainerItemContent = styled.div`
     color: #797979;
     font-weight: 500;
   }
-`;
+`
 
 export const RecipientResultContainerStyle = styled.div`
   position: absolute;
@@ -497,7 +497,7 @@ export const RecipientResultContainerStyle = styled.div`
   right: 0;
   left: 0;
   margin: 4px 24px;
-`;
+`
 
 export const RecipientScrollableItemContainer = styled.div`
   max-height: 200px;
@@ -505,7 +505,7 @@ export const RecipientScrollableItemContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
+`
 
 export const RecipientBottomSection = styled.div`
   border-top: 1px solid #fff;
@@ -514,7 +514,7 @@ export const RecipientBottomSection = styled.div`
   justify-content: flex-end;
   gap: 10px;
   padding: 10px 0;
-`;
+`
 
 export const RecipientResultItem = styled.div`
   padding: 20px 28px;
@@ -524,7 +524,7 @@ export const RecipientResultItem = styled.div`
     cursor: pointer;
     background-color: #0c0c0c;
   }
-`;
+`
 
 export const SelectedRecipientPillStyle = styled.div`
   border: 2px solid #323232b0;
@@ -547,12 +547,12 @@ export const SelectedRecipientPillStyle = styled.div`
       color: #c62d2d;
     }
   }
-`;
+`
 
 export const LayoutPage = styled.div`
   height: 100%;
   display: flex;
-`;
+`
 
 export const UserSidebarStyle = styled.div`
   height: 100%;
@@ -565,7 +565,7 @@ export const UserSidebarStyle = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
+`
 
 export const ConversationSidebarStyle = styled.div`
   display: flex;
@@ -574,7 +574,7 @@ export const ConversationSidebarStyle = styled.div`
   width: 400px;
   background-color: #111111;
   flex: 0 0 auto;
-`;
+`
 
 export const ConversationSidebarHeader = styled.header`
   height: 90px;
@@ -585,7 +585,7 @@ export const ConversationSidebarHeader = styled.header`
   display: flex;
   align-items: center;
   gap: 20px;
-`;
+`
 
 export const ConversationsScrollableContainer = styled.div`
   flex: 1 1 auto;
@@ -594,7 +594,7 @@ export const ConversationsScrollableContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
+`
 
 export const ConversationSearchbar = styled.input`
   background-color: #1a1a1a;
@@ -607,9 +607,9 @@ export const ConversationSearchbar = styled.input`
   font-family: 'Inter';
   border-radius: 5px;
   box-sizing: border-box;
-`;
+`
 
-export const ConversationTabContainer = styled.div``;
+export const ConversationTabContainer = styled.div``
 
 export const UserSidebarItemStyle = styled.div<SidebarItemProps>`
   width: 100%;
@@ -620,7 +620,7 @@ export const UserSidebarItemStyle = styled.div<SidebarItemProps>`
   box-sizing: border-box;
   background-color: ${({ active }) => active && '#1e1e1e'};
   position: relative;
-`;
+`
 
 export const IconBadge = styled.div`
   background-color: #ff3535;
@@ -634,13 +634,13 @@ export const IconBadge = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 
 export const ConversationCreateButton = styled.div`
   background-color: #1a1a1a;
   padding: 10px;
   box-sizing: border-box;
-`;
+`
 
 export const GroupRecipientsSidebarStyle = styled.aside`
   display: flex;
@@ -649,7 +649,7 @@ export const GroupRecipientsSidebarStyle = styled.aside`
   width: 350px;
   background-color: #111111;
   flex: 0 0 auto;
-`;
+`
 
 export const GroupRecipientsSidebarHeader = styled.div`
   height: 90px;
@@ -665,7 +665,7 @@ export const GroupRecipientsSidebarHeader = styled.div`
     font-size: 20px;
     font-weight: 500;
   }
-`;
+`
 
 export const GroupRecipientSidebarItemContainer = styled.div`
   padding: 30px 0 0 30px;
@@ -675,11 +675,11 @@ export const GroupRecipientSidebarItemContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
+`
 
 type GroupRecipientSidebarItemProps = {
-  online: boolean;
-};
+  online: boolean
+}
 
 export const GroupRecipientSidebarItem = styled.div<GroupRecipientSidebarItemProps>`
   display: flex;
@@ -703,13 +703,13 @@ export const GroupRecipientSidebarItem = styled.div<GroupRecipientSidebarItemPro
     color: #929292;
   }
   opacity: ${({ online }) => !online && 0.2};
-`;
+`
 
 export const GroupHeaderIcons = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
-`;
+`
 
 export const TestContextMenu = styled.div<ContextMenuProps>`
   ${({ top, left }) => css`
@@ -719,7 +719,7 @@ export const TestContextMenu = styled.div<ContextMenuProps>`
 
   width: 200px;
   background-color: #000;
-`;
+`
 
 export const CharacterLimit = styled.span<CharacterLimitProps>`
   position: absolute;
@@ -729,7 +729,7 @@ export const CharacterLimit = styled.span<CharacterLimitProps>`
   font-weight: 500;
   color: ${({ atMaxLength }) =>
     atMaxLength ? '#ff0000' : 'rgb(129, 129, 129)'};
-`;
+`
 
 export const MessageAttachmentContainerStyle = styled.div`
   display: flex;
@@ -746,7 +746,7 @@ export const MessageAttachmentContainerStyle = styled.div`
     background-color: #1c1c1c;
     border-radius: 5px;
   }
-`;
+`
 
 export const MessageAttachmentStyle = styled.div`
   box-sizing: border-box;
@@ -761,7 +761,7 @@ export const MessageAttachmentStyle = styled.div`
   flex-direction: column;
   gap: 20px;
   text-align: center;
-`;
+`
 
 export const SystemMessageContainer = styled.div`
   width: 80%;
@@ -790,4 +790,4 @@ export const SystemMessageContainer = styled.div`
     padding-left: 28px;
     color: #656565;
   }
-`;
+`
