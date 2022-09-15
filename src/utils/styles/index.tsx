@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Theme } from '../types';
 import { fadeInUpwards } from './keyframes';
 import {
   CharacterLimitProps,
@@ -115,11 +116,35 @@ export const ConversationSidebarItemStyle = styled.div<ConversationSidebarItemPr
   padding: 20px 32px;
   box-sizing: border-box;
   width: 100%;
-  background-color: ${({ selected }) => selected && '#1a1a1a'};
+  background-color: ${({ selected, theme }) =>
+    selected && theme.conversationSidebar.conversationItem.selected};
   cursor: pointer;
   transition: 150ms background-color ease;
   &:hover {
-    background-color: #222222;
+    background-color: ${({ theme }) =>
+      theme.conversationSidebar.conversationItem.hover.backgroundColor};
+  }
+`;
+
+export const ConversationSidebarItemDetails = styled.div`
+  word-break: break-all;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  & .conversationName {
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+    color: ${({ theme }) =>
+      theme.conversationSidebar.conversationItem.title.color};
+  }
+  & .conversationLastMessage {
+    font-size: 15px;
+    font-weight: 500;
+    color: #868686;
+    color: ${({ theme }) =>
+      theme.conversationSidebar.conversationItem.title.lastMessageColor};
   }
 `;
 
@@ -190,7 +215,7 @@ export const MessagePanelStyle = styled.div`
   flex-direction: column;
   height: 100%;
   width: 100%;
-  background-color: #141414;
+  background-color: ${({ theme }) => theme.messagePanel.backgroundColor};
 `;
 
 export const MessagePanelHeaderStyle = styled.header`
@@ -203,6 +228,7 @@ export const MessagePanelHeaderStyle = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: ${({ theme }) => theme.messagePanel.header.title};
 `;
 
 export const MessagePanelBody = styled.div`
@@ -237,7 +263,8 @@ export const MessageContainerStyle = styled.div`
 
 export const MessageInputContainer = styled.div<MessageInputContainerProps>`
   box-sizing: border-box;
-  background-color: #101010;
+  background-color: ${({ theme }) =>
+    theme.messagePanel.inputContainer.backgroundColor};
   border-radius: 5px;
   width: 100%;
   padding: 18px 32px;
@@ -303,6 +330,7 @@ export const MessageItemContent = styled.div<MessageItemContentProps>`
   padding: ${({ padding }) => padding};
   width: 100%;
   white-space: pre-wrap;
+  color: ${({ theme }) => theme.messagePanel.body.content.color};
 `;
 
 export const ContextMenu = styled.ul<ContextMenuProps>`
@@ -556,7 +584,8 @@ export const LayoutPage = styled.div`
 
 export const UserSidebarStyle = styled.div`
   height: 100%;
-  background-color: #0b0b0b;
+  background-color: ${({ theme }: { theme: Theme }) =>
+    theme.userSidebar.backgroundColor};
   display: flex;
   flex: 0 0 80px;
   align-items: center;
@@ -572,7 +601,8 @@ export const ConversationSidebarStyle = styled.div`
   flex-direction: column;
   height: 100%;
   width: 400px;
-  background-color: #111111;
+  background-color: ${({ theme }: { theme: Theme }) =>
+    theme.conversationSidebar.backgroundColor};
   flex: 0 0 auto;
   @media (max-width: 800px) {
     width: calc(100% - 80px);

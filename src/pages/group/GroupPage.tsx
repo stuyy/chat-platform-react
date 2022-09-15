@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { ConversationPanel } from '../../components/conversations/ConversationPanel';
@@ -24,6 +24,7 @@ import {
 export const GroupPage = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
+  const [showSidebar, setShowSidebar] = useState(window.innerWidth > 800);
   const dispatch = useDispatch<AppDispatch>();
   const socket = useContext(SocketContext);
   const navigate = useNavigate();
@@ -31,6 +32,14 @@ export const GroupPage = () => {
   useEffect(() => {
     dispatch(updateType('group'));
     dispatch(fetchGroupsThunk());
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setShowSidebar(window.innerWidth > 800);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -119,8 +128,9 @@ export const GroupPage = () => {
 
   return (
     <>
-      <ConversationSidebar />
-      {!id && <ConversationPanel />}
+      {showSidebar && <ConversationSidebar />}
+      {!id && !showSidebar && <ConversationSidebar />}
+      {!id && showSidebar && <ConversationPanel />}
       <Outlet />
     </>
   );

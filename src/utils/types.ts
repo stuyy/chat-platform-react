@@ -288,3 +288,49 @@ export type SystemMessageType = {
 export type UpdateStatusParams = {
   statusMessage: string;
 };
+
+export type SelectableTheme = 'dark' | 'light';
+
+export type Theme = {
+  userSidebar: {
+    backgroundColor: string;
+    color: string;
+  };
+  conversationSidebar: {
+    backgroundColor: string;
+    color: string;
+    conversationItem: {
+      selected: string;
+      hover: {
+        backgroundColor: string;
+      };
+      title: {
+        color: string;
+        lastMessageColor: string;
+      };
+    };
+  };
+  messagePanel: {
+    backgroundColor: string;
+    color: string;
+    header: {
+      title: string;
+    };
+    body: {
+      content: {
+        color: string;
+      };
+    };
+    inputContainer: {
+      backgroundColor: string;
+      color: string;
+    };
+  };
+  participantSidebar: {
+    backgroundColor: string;
+    color: string;
+  };
+  page: {
+    backgroundColor: string;
+  };
+};

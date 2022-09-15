@@ -3,7 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CDN_URL } from '../../utils/constants';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { getRecipientFromConversation } from '../../utils/helpers';
-import { ConversationSidebarItemStyle } from '../../utils/styles';
+import {
+  ConversationSidebarItemDetails,
+  ConversationSidebarItemStyle,
+} from '../../utils/styles';
 import { Conversation } from '../../utils/types';
 import defaultAvatar from '../../__assets__/default_avatar.jpg';
 
@@ -45,14 +48,14 @@ export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
           alt="avatar"
           className={styles.conversationAvatar}
         />
-        <div className={styles.contentContainer}>
-          <span className={styles.conversationName}>
+        <ConversationSidebarItemDetails>
+          <span className="conversationName">
             {`${recipient?.firstName} ${recipient?.lastName}`}
           </span>
-          <span className={styles.conversationLastMessage}>
+          <span className="conversationLastMessage">
             {lastMessageContent()}
           </span>
-        </div>
+        </ConversationSidebarItemDetails>
       </ConversationSidebarItemStyle>
     </>
   );
