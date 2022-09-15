@@ -17,6 +17,12 @@ export type Profile = {
   banner?: string;
 };
 
+export type UserPresence = {
+  id: number;
+  statusMessage?: string;
+  showOffline: boolean;
+};
+
 export type User = {
   id: number;
   username: string;
@@ -24,6 +30,7 @@ export type User = {
   firstName: string;
   lastName: string;
   profile?: Profile;
+  presence?: UserPresence;
 };
 
 export type Conversation = {
@@ -222,7 +229,11 @@ export type AcceptFriendRequestResponse = {
   friendRequest: FriendRequest;
 };
 
-export type UserSidebarRouteType = 'conversations' | 'friends' | 'connections' | 'settings';
+export type UserSidebarRouteType =
+  | 'conversations'
+  | 'friends'
+  | 'connections'
+  | 'settings';
 
 export type UserSidebarItemType = {
   id: UserSidebarRouteType;
