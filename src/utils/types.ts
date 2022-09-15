@@ -263,3 +263,10 @@ export type Attachment = {
   id: number;
   file: File;
 };
+
+export type FriendRequestDetailsType = {
+  status: string;
+  displayName: string;
+  user: User;
+  incoming: boolean;
+};

@@ -67,14 +67,7 @@ export const FriendRequestItemContainer = styled.div`
   border-bottom: 1px solid #1f1f1fbf;
   display: flex;
   justify-content: space-between;
-  & .avatar {
-    height: 50px;
-    width: 50px;
-    background-color: #227eff;
-    border-radius: 50%;
-  }
-
-  & .user {
+  & .details {
     display: flex;
     align-items: center;
     gap: 20px;
