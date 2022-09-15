@@ -16,6 +16,8 @@ import {
 } from 'react-icons/io';
 import {
   Conversation,
+  FriendRequest,
+  FriendRequestDetailsType,
   Group,
   SettingsSidebarRouteType,
   User,
@@ -76,3 +78,20 @@ export const getSettingSidebarIcon = (id: SettingsSidebarRouteType) => {
   }
 };
 
+export const getFriendRequestDetails = (
+  { receiver, sender }: FriendRequest,
+  user?: User
+): FriendRequestDetailsType =>
+  user?.id === receiver.id
+    ? {
+        status: 'Incoming Friend Request',
+        displayName: `${sender.firstName} ${sender.lastName}`,
+        user: sender,
+        incoming: true,
+      }
+    : {
+        status: 'Outgoing Friend Request',
+        displayName: `${receiver.firstName} ${receiver.lastName}`,
+        user: receiver,
+        incoming: false,
+      };
