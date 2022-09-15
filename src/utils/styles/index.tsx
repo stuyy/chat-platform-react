@@ -716,8 +716,7 @@ export const CharacterLimit = styled.span<CharacterLimitProps>`
   right: 36px;
   font-size: 14px;
   font-weight: 500;
-  color: ${({ atMaxLength }) =>
-    atMaxLength ? '#ff0000' : 'rgb(129, 129, 129)'};
+  color: ${({ atMaxLength }) => (atMaxLength ? '#ff0000' : 'rgb(129, 129, 129)')};
 `;
 
 export const MessageAttachmentContainerStyle = styled.div`
@@ -750,4 +749,33 @@ export const MessageAttachmentStyle = styled.div`
   flex-direction: column;
   gap: 20px;
   text-align: center;
+`;
+
+export const SystemMessageContainer = styled.div`
+  width: 80%;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: #1c1c1c;
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  & .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    & .icon {
+      font-size: 20px;
+    }
+    & span {
+      font-weight: bold;
+    }
+  }
+  & .content {
+    font-size: 14px;
+    font-style: italic;
+    padding-left: 28px;
+    color: #656565;
+  }
 `;

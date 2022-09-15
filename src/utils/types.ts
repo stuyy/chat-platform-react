@@ -222,11 +222,7 @@ export type AcceptFriendRequestResponse = {
   friendRequest: FriendRequest;
 };
 
-export type UserSidebarRouteType =
-  | 'conversations'
-  | 'friends'
-  | 'connections'
-  | 'settings';
+export type UserSidebarRouteType = 'conversations' | 'friends' | 'connections' | 'settings';
 
 export type UserSidebarItemType = {
   id: UserSidebarRouteType;
@@ -269,4 +265,11 @@ export type FriendRequestDetailsType = {
   displayName: string;
   user: User;
   incoming: boolean;
+};
+
+export type SystemMessageLevel = 'info' | 'warning' | 'error';
+export type SystemMessageType = {
+  id: number;
+  content: string;
+  level: SystemMessageLevel;
 };
