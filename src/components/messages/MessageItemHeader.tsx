@@ -10,7 +10,6 @@ type Props = {
 }
 
 export const MessageItemHeader: FC<Props> = ({ message }) => {
-
   // const { user } = useContext(AuthContext)
   const time = capitalizeFirstLetter(formatRelative(new Date(message.createdAt), new Date()))
   return (
