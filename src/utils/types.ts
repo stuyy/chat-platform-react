@@ -284,3 +284,7 @@ export type SystemMessageType = {
   content: string;
   level: SystemMessageLevel;
 };
+
+export type UpdateStatusParams = {
+  statusMessage: string;
+};

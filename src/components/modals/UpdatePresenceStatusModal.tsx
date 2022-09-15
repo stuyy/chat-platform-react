@@ -19,7 +19,7 @@ export const UpdatePresenceStatusModal: FC<Props> = ({ setShowModal }) => {
           <MdClose size={32} onClick={() => setShowModal(false)} />
         </ModalHeader>
         <ModalContentBody>
-          <UpdateUserStatusForm />
+          <UpdateUserStatusForm setShowModal={setShowModal} />
         </ModalContentBody>
       </ModalContainer>
     </OverlayStyle>

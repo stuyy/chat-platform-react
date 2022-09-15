@@ -23,6 +23,7 @@ import {
   MessageType,
   RemoveGroupRecipientParams,
   UpdateGroupOwnerParams,
+  UpdateStatusParams,
   User,
   UserCredentialsParams,
 } from './types';
@@ -182,7 +183,8 @@ export const checkUsernameExists = (username: string) =>
 export const updateUserProfile = (data: FormData) =>
   axiosClient.patch<User>('/users/profiles', data, {
     ...config,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+    headers: { 'Content-Type': 'multipart/form-data' },
   });
+
+export const updateStatusMessage = (data: UpdateStatusParams) =>
+  axiosClient.patch('/users/presence/status', data, config);
