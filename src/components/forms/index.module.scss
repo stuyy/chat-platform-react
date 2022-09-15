@@ -85,3 +85,12 @@ form {
   display: flex;
   align-items: center;
 }
+
+.updateUserStatusForm {
+  width: 100%;
+}
+.updateStatusFormButtons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
