@@ -39,6 +39,7 @@ export const FriendList = () => {
           key={friend.id}
           friend={friend}
           onContextMenu={onContextMenu}
+          online={true}
         />
       ))}
       <span>Offline</span>
@@ -52,18 +53,9 @@ export const FriendList = () => {
             key={friend.id}
             friend={friend}
             onContextMenu={onContextMenu}
+            online={false}
           />
         ))}
-      {/* {offlineFriends.length > 0 && (
-        <span>Offline ({offlineFriends.length})</span>
-      )}
-      {offlineFriends.map((friend) => (
-        <FriendListItem
-          key={friend.id}
-          friend={friend}
-          onContextMenu={onContextMenu}
-        />
-      ))} */}
       {showContextMenu && <FriendContextMenu />}
     </FriendListContainer>
   );
