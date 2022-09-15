@@ -1,12 +1,12 @@
-import { CircleX } from 'akar-icons';
-import { FC } from 'react';
-import { SelectedRecipientPillStyle } from '../../utils/styles';
-import { User } from '../../utils/types';
+import { CircleX } from "akar-icons"
+import { FC } from "react"
+import { SelectedRecipientPillStyle } from "../../utils/styles"
+import { User } from "../../utils/types"
 
 type Props = {
-  user: User;
-  removeUser: (user: User) => void;
-};
+  user: User
+  removeUser: (user: User) => void
+}
 
 export const SelectedGroupRecipientChip: FC<Props> = ({ user, removeUser }) => {
   return (
@@ -16,5 +16,5 @@ export const SelectedGroupRecipientChip: FC<Props> = ({ user, removeUser }) => {
         <CircleX className="icon" size={20} onClick={() => removeUser(user)} />
       </div>
     </SelectedRecipientPillStyle>
-  );
-};
+  )
+}

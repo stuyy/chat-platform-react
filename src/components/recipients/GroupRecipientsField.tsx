@@ -1,14 +1,9 @@
-import { Dispatch, FC, SetStateAction } from 'react';
-import {
-  InputContainer,
-  InputField,
-  InputLabel,
-  RecipientChipContainer,
-} from '../../utils/styles';
+import { Dispatch, FC, SetStateAction } from "react"
+import { InputContainer, InputField, InputLabel, RecipientChipContainer } from "../../utils/styles"
 
 type Props = {
-  setQuery: Dispatch<SetStateAction<string>>;
-};
+  setQuery: Dispatch<SetStateAction<string>>
+}
 
 export const GroupRecipientsField: FC<Props> = ({ setQuery }) => {
   return (
@@ -18,5 +13,5 @@ export const GroupRecipientsField: FC<Props> = ({ setQuery }) => {
         <InputField onChange={(e) => setQuery(e.target.value)} />
       </InputContainer>
     </section>
-  );
-};
+  )
+}

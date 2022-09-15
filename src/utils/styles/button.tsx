@@ -1,38 +1,38 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components"
 
-type Size = 'sm' | 'md' | 'lg';
-type ButtonVariant = 'primary' | 'secondary';
+type Size = "sm" | "md" | "lg"
+type ButtonVariant = "primary" | "secondary"
 
 type ButtonProps = Partial<{
-  size: Size;
-  variant: ButtonVariant;
-  flex: boolean;
-}>;
+  size: Size
+  variant: ButtonVariant
+  flex: boolean
+}>
 
 export const getButtonSizeStyle = (size?: Size) => {
   switch (size) {
-    case 'sm':
+    case "sm":
       return css`
         padding: 10px 20px;
         font-size: 14px;
-      `;
-    case 'md':
+      `
+    case "md":
       return css`
         padding: 12px 24px;
         font-size: 16px;
-      `;
-    case 'lg':
+      `
+    case "lg":
       return css`
         padding: 14px 26px;
         font-size: 18px;
-      `;
+      `
     default:
       return css`
         padding: 12px 24px;
         font-size: 16px;
-      `;
+      `
   }
-};
+}
 
 export const getButtonVariantStyle = (variant?: ButtonVariant) => {
   const primary = css`
@@ -50,7 +50,7 @@ export const getButtonVariantStyle = (variant?: ButtonVariant) => {
       color: #878787a2;
       cursor: not-allowed;
     }
-  `;
+  `
   const secondary = css`
     background-color: #212121;
     color: #fff;
@@ -58,21 +58,21 @@ export const getButtonVariantStyle = (variant?: ButtonVariant) => {
       cursor: pointer;
       background-color: #282828;
     }
-  `;
+  `
   switch (variant) {
-    case 'primary':
-      return primary;
-    case 'secondary':
-      return secondary;
+    case "primary":
+      return primary
+    case "secondary":
+      return secondary
     default:
-      return primary;
+      return primary
   }
-};
+}
 
 export const Button = styled.button<ButtonProps>`
   outline: none;
   border: none;
-  font-family: 'Inter';
+  font-family: "Inter";
   border-radius: 10px;
   font-weight: 500;
   transition: 250ms background-color ease;
@@ -85,4 +85,4 @@ export const Button = styled.button<ButtonProps>`
       align-items: center;
       gap: 10px;
     `}
-`;
+`

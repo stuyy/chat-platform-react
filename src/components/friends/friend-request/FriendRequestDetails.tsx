@@ -1,10 +1,10 @@
-import { FC } from 'react';
-import { FriendRequestDetailsType } from '../../../utils/types';
-import { UserAvatar } from '../../users/UserAvatar';
+import { FC } from "react"
+import { FriendRequestDetailsType } from "../../../utils/types"
+import { UserAvatar } from "../../users/UserAvatar"
 
 type Props = {
-  details: FriendRequestDetailsType;
-};
+  details: FriendRequestDetailsType
+}
 
 export const FriendRequestDetails: FC<Props> = ({ details }) => (
   <div className="details">
@@ -14,4 +14,4 @@ export const FriendRequestDetails: FC<Props> = ({ details }) => (
       <span className="status">{details.status}</span>
     </div>
   </div>
-);
+)

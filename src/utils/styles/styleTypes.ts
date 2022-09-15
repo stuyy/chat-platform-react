@@ -1,61 +1,61 @@
 export type PageProps = Partial<{
-  display: string;
-  justifyContent: string;
-  alignItems: string;
-}>;
+  display: string
+  justifyContent: string
+  alignItems: string
+}>
 
 export type InputContainerProps = Partial<{
-  backgroundColor: string;
-}>;
+  backgroundColor: string
+}>
 
 export type MessageItemContentProps = Partial<{
-  padding: string;
-}>;
+  padding: string
+}>
 
 export type ContextMenuProps = {
-  top: number;
-  left: number;
-};
+  top: number
+  left: number
+}
 
 export type ConversationSelectedProps = {
-  selected: boolean;
-};
+  selected: boolean
+}
 
 export type SidebarItemProps = Partial<{
-  active: boolean;
-}>;
+  active: boolean
+}>
 
 export type CharacterLimitProps = {
-  atMaxLength: boolean;
-};
+  atMaxLength: boolean
+}
 
 export type MessageInputContainerProps = {
-  isMultiLine: boolean;
-};
+  isMultiLine: boolean
+}
 
 export type ConversationSidebarItemProps = {
-  selected: boolean;
-};
+  selected: boolean
+}
 
 export type FriendsNavbarItemProps = {
-  active: boolean;
-};
+  active: boolean
+}
 
 export type FlexProps = Partial<{
-  justifyContent: string;
-  alignItems: string;
-  flexDirection: string;
-}>;
+  justifyContent: string
+  alignItems: string
+  flexDirection: string
+}>
 
 export type FriendRequestItemIconProps = Partial<{
-  isAccept: boolean;
-}>;
+  isAccept: boolean
+}>
 
 export type SettingsSidebarItemProps = {
-  isActive: boolean;
-};
+  isActive: boolean
+}
 
 export type UserBannerProps = Partial<{
-  backgroundUrl: string;
-  backgroundColor: string;
-}>;
+  backgroundUrl: string
+  backgroundColor: string
+}>

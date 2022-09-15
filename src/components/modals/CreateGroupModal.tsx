@@ -1,34 +1,31 @@
-import { createRef, Dispatch, FC, useEffect, useState } from 'react';
-import { ModalContainer, ModalContentBody, ModalHeader } from '.';
-import { OverlayStyle } from '../../utils/styles';
-import { MdClose } from 'react-icons/md';
-import { ConversationType } from '../../utils/types';
-import { CreateGroupForm } from '../forms/CreateGroupForm';
+import { createRef, Dispatch, FC, useEffect, useState } from "react"
+import { ModalContainer, ModalContentBody, ModalHeader } from "."
+import { OverlayStyle } from "../../utils/styles"
+import { MdClose } from "react-icons/md"
+import { ConversationType } from "../../utils/types"
+import { CreateGroupForm } from "../forms/CreateGroupForm"
 
 type Props = {
-  setShowModal: Dispatch<React.SetStateAction<boolean>>;
-};
+  setShowModal: Dispatch<React.SetStateAction<boolean>>
+}
 
 export const CreateGroupModal: FC<Props> = ({ setShowModal }) => {
-  const ref = createRef<HTMLDivElement>();
-  const [type, setType] = useState<ConversationType>('group');
+  const ref = createRef<HTMLDivElement>()
+  const [type, setType] = useState<ConversationType>("group")
 
   useEffect(() => {
-    const handleKeydown = (e: KeyboardEvent) =>
-      e.key === 'Escape' && setShowModal(false);
-    window.addEventListener('keydown', handleKeydown);
-    return () => window.removeEventListener('keydown', handleKeydown);
-  }, []);
+    const handleKeydown = (e: KeyboardEvent) => e.key === "Escape" && setShowModal(false)
+    window.addEventListener("keydown", handleKeydown)
+    return () => window.removeEventListener("keydown", handleKeydown)
+  }, [])
 
-  const handleOverlayClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    const { current } = ref;
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const { current } = ref
     if (current === e.target) {
-      console.log('Close Modal');
-      setShowModal(false);
+      console.log("Close Modal")
+      setShowModal(false)
     }
-  };
+  }
 
   return (
     <OverlayStyle ref={ref} onClick={handleOverlayClick}>
@@ -42,5 +39,5 @@ export const CreateGroupModal: FC<Props> = ({ setShowModal }) => {
         </ModalContentBody>
       </ModalContainer>
     </OverlayStyle>
-  );
-};
+  )
+}

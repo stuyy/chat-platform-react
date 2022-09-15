@@ -1,14 +1,11 @@
-import styled, { css } from 'styled-components';
-import {
-  FriendRequestItemIconProps,
-  FriendsNavbarItemProps,
-} from '../styleTypes';
+import styled, { css } from "styled-components"
+import { FriendRequestItemIconProps, FriendsNavbarItemProps } from "../styleTypes"
 
 export const FriendsPageStyle = styled.div`
   background-color: #101010;
   height: 100%;
   width: 100%;
-`;
+`
 
 export const FriendsNavbar = styled.nav`
   display: flex;
@@ -23,7 +20,7 @@ export const FriendsNavbar = styled.nav`
     align-items: center;
     gap: 80px;
   }
-`;
+`
 
 export const FriendsNavbarItem = styled.span<FriendsNavbarItemProps>`
   cursor: pointer;
@@ -33,7 +30,7 @@ export const FriendsNavbarItem = styled.span<FriendsNavbarItemProps>`
       text-decoration: underline;
       text-underline-offset: 14px;
     `}
-`;
+`
 
 export const FriendListContainer = styled.div`
   padding: 40px 60px;
@@ -43,14 +40,14 @@ export const FriendListContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
+`
 
 type FriendListItemContainerProps = {
-  online: boolean;
-};
+  online: boolean
+}
 
 export const FriendListItemContainer = styled.div<FriendListItemContainerProps>`
-  opacity: ${({ online }) => !online && '0.2'};
+  opacity: ${({ online }) => !online && "0.2"};
   display: flex;
   align-items: center;
   gap: 20px;
@@ -72,7 +69,7 @@ export const FriendListItemContainer = styled.div<FriendListItemContainerProps>`
       color: #00ff00;
     }
   }
-`;
+`
 
 export const FriendRequestItemContainer = styled.div`
   padding: 10px 0;
@@ -107,7 +104,7 @@ export const FriendRequestItemContainer = styled.div`
   :last-child {
     border-bottom: unset;
   }
-`;
+`
 
 export const FriendRequestItemIcon = styled.div<FriendRequestItemIconProps>`
   display: flex;
@@ -122,6 +119,6 @@ export const FriendRequestItemIcon = styled.div<FriendRequestItemIconProps>`
   font-size: 24px;
   &:hover {
     background-color: #161616;
-    color: ${({ isAccept }) => (isAccept ? '#00ff04' : '#ff3a3a')};
+    color: ${({ isAccept }) => (isAccept ? "#00ff04" : "#ff3a3a")};
   }
-`;
+`

@@ -1,290 +1,281 @@
 export type CreateUserParams = {
-  username: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-};
+  username: string
+  firstName: string
+  lastName: string
+  password: string
+}
 
 export type UserCredentialsParams = {
-  username: string;
-  password: string;
-};
+  username: string
+  password: string
+}
 
 export type Profile = {
-  id: number;
-  about?: string;
-  avatar?: string;
-  banner?: string;
-};
+  id: number
+  about?: string
+  avatar?: string
+  banner?: string
+}
 
 export type UserPresence = {
-  id: number;
-  statusMessage?: string;
-  showOffline: boolean;
-};
+  id: number
+  statusMessage?: string
+  showOffline: boolean
+}
 
 export type User = {
-  id: number;
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  profile?: Profile;
-  presence?: UserPresence;
-};
+  id: number
+  username: string
+  email: string
+  firstName: string
+  lastName: string
+  profile?: Profile
+  presence?: UserPresence
+}
 
 export type Conversation = {
-  id: number;
-  creator: User;
-  recipient: User;
-  createdAt: string;
-  lastMessageSent: MessageType;
-};
+  id: number
+  creator: User
+  recipient: User
+  createdAt: string
+  lastMessageSent: MessageType
+}
 
 export type CreateConversationParams = {
-  username: string;
-  message: string;
-};
+  username: string
+  message: string
+}
 
 export type MessageAttachment = {
-  key: string;
-};
+  key: string
+}
 
 export type MessageType = {
-  id: number;
-  content?: string;
-  createdAt: string;
-  author: User;
-  conversation: Conversation;
-  attachments?: MessageAttachment[];
-};
+  id: number
+  content?: string
+  createdAt: string
+  author: User
+  conversation: Conversation
+  attachments?: MessageAttachment[]
+}
 
 export type GroupMessageType = {
-  id: number;
-  content?: string;
-  createdAt: string;
-  author: User;
-  group: Group;
-  attachments?: MessageAttachment[];
-};
+  id: number
+  content?: string
+  createdAt: string
+  author: User
+  group: Group
+  attachments?: MessageAttachment[]
+}
 
 export type FetchMessagePayload = {
-  id: number;
-  messages: MessageType[];
-};
+  id: number
+  messages: MessageType[]
+}
 
 export type FetchGroupMessagePayload = {
-  id: number;
-  messages: GroupMessageType[];
-};
+  id: number
+  messages: GroupMessageType[]
+}
 
 export type MessageEventPayload = {
-  message: MessageType;
-  conversation: Conversation;
-};
+  message: MessageType
+  conversation: Conversation
+}
 
 export type CreateMessageParams = {
-  id: number;
-  content: string;
-};
+  id: number
+  content: string
+}
 
 export type ConversationMessage = {
-  id: number;
-  messages: MessageType[];
-};
+  id: number
+  messages: MessageType[]
+}
 
 export type GroupMessage = {
-  id: number;
-  messages: GroupMessageType[];
-};
+  id: number
+  messages: GroupMessageType[]
+}
 
 export type DeleteMessageParams = {
-  id: number;
-  messageId: number;
-};
+  id: number
+  messageId: number
+}
 
 export type DeleteGroupMessageParams = {
-  id: number;
-  messageId: number;
-};
+  id: number
+  messageId: number
+}
 
 export type DeleteMessageResponse = {
-  conversationId: number;
-  messageId: number;
-};
+  conversationId: number
+  messageId: number
+}
 
 export type DeleteGroupMessageResponse = {
-  groupId: number;
-  messageId: number;
-};
+  groupId: number
+  messageId: number
+}
 
 export type MessagePanelBodyProps = {
-  isTyping: boolean;
-};
+  isTyping: boolean
+}
 
 export type EditMessagePayload = {
-  id: number;
-  messageId: number;
-  content: string;
-};
+  id: number
+  messageId: number
+  content: string
+}
 
-export type ConversationType = 'group' | 'private';
+export type ConversationType = "group" | "private"
 
 export type ConversationTypeData = {
-  type: ConversationType;
-  label: string;
-};
+  type: ConversationType
+  label: string
+}
 
 export type Group = {
-  id: number;
-  title?: string;
-  users: User[];
-  creator: User;
-  owner: User;
-  messages: GroupMessageType[];
-  createdAt: number;
-  lastMessageSent: MessageType;
-  lastMessageSentAt: Date;
-};
+  id: number
+  title?: string
+  users: User[]
+  creator: User
+  owner: User
+  messages: GroupMessageType[]
+  createdAt: number
+  lastMessageSent: MessageType
+  lastMessageSentAt: Date
+}
 
 export type GroupMessageEventPayload = {
-  message: GroupMessageType;
-  group: Group;
-};
+  message: GroupMessageType
+  group: Group
+}
 
 export type CreateGroupParams = {
-  users: string[];
-  title: string;
-};
+  users: string[]
+  title: string
+}
 
 export type AddGroupRecipientParams = {
-  id: number;
-  username: string;
-};
+  id: number
+  username: string
+}
 
 export type RemoveGroupRecipientParams = {
-  id: number;
-  userId: number;
-};
+  id: number
+  userId: number
+}
 
 export type Points = {
-  x: number;
-  y: number;
-};
+  x: number
+  y: number
+}
 
-export type UserContextMenuActionType = 'kick' | 'transfer_owner' | 'profile';
+export type UserContextMenuActionType = "kick" | "transfer_owner" | "profile"
 export type ContextMenuItemType = {
-  label: string;
-  action: UserContextMenuActionType;
-  color: string;
-  ownerOnly: boolean;
-};
+  label: string
+  action: UserContextMenuActionType
+  color: string
+  ownerOnly: boolean
+}
 
 export type AddGroupUserMessagePayload = {
-  group: Group;
-  user: User;
-};
+  group: Group
+  user: User
+}
 
 export type RemoveGroupUserMessagePayload = {
-  group: Group;
-  user: User;
-};
+  group: Group
+  user: User
+}
 
 export type UpdateGroupOwnerParams = {
-  id: number;
-  newOwnerId: number;
-};
+  id: number
+  newOwnerId: number
+}
 
-export type ContextMenuEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
-export type DivMouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
-export type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
-export type DragEvent = React.DragEvent<HTMLTextAreaElement>;
-export type ClipboardEvent = React.ClipboardEvent<HTMLTextAreaElement>;
+export type ContextMenuEvent = React.MouseEvent<HTMLDivElement, MouseEvent>
+export type DivMouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>
+export type InputChangeEvent = React.ChangeEvent<HTMLInputElement>
+export type DragEvent = React.DragEvent<HTMLTextAreaElement>
+export type ClipboardEvent = React.ClipboardEvent<HTMLTextAreaElement>
 
-export type FriendRequestStatus = 'accepted' | 'pending' | 'rejected';
+export type FriendRequestStatus = "accepted" | "pending" | "rejected"
 
 export type Friend = {
-  id: number;
-  sender: User;
-  receiver: User;
-  createdAt: number;
-};
+  id: number
+  sender: User
+  receiver: User
+  createdAt: number
+}
 
 export type FriendRequest = {
-  id: number;
-  sender: User;
-  receiver: User;
-  createdAt: number;
-  status: FriendRequestStatus;
-};
+  id: number
+  sender: User
+  receiver: User
+  createdAt: number
+  status: FriendRequestStatus
+}
 
-export type HandleFriendRequestAction = 'accept' | 'reject' | 'cancel';
+export type HandleFriendRequestAction = "accept" | "reject" | "cancel"
 
 export type CancelFriendRequestResponse = {
-  id: number;
-};
+  id: number
+}
 
 export type AcceptFriendRequestResponse = {
-  friend: Friend;
-  friendRequest: FriendRequest;
-};
+  friend: Friend
+  friendRequest: FriendRequest
+}
 
-export type UserSidebarRouteType =
-  | 'conversations'
-  | 'friends'
-  | 'connections'
-  | 'settings';
+export type UserSidebarRouteType = "conversations" | "friends" | "connections" | "settings"
 
 export type UserSidebarItemType = {
-  id: UserSidebarRouteType;
-  pathname: string;
-};
+  id: UserSidebarRouteType
+  pathname: string
+}
 
-export type SettingsSidebarRouteType =
-  | 'profile'
-  | 'security'
-  | 'notifications'
-  | 'integrations'
-  | 'appearance';
+export type SettingsSidebarRouteType = "profile" | "security" | "notifications" | "integrations" | "appearance"
 
 export type SettingsItemType = {
-  id: SettingsSidebarRouteType;
-  label: string;
-  pathname: string;
-};
+  id: SettingsSidebarRouteType
+  label: string
+  pathname: string
+}
 
-export type RateLimitType = 'group' | 'private';
+export type RateLimitType = "group" | "private"
 
 export type UpdateRateLimitPayload = {
-  type: RateLimitType;
-  status: boolean;
-};
+  type: RateLimitType
+  status: boolean
+}
 
 export type UpdateProfileParams = Partial<{
-  about: string;
-  avatar: File;
-  banner: File;
-}>;
+  about: string
+  avatar: File
+  banner: File
+}>
 
 export type Attachment = {
-  id: number;
-  file: File;
-};
+  id: number
+  file: File
+}
 
 export type FriendRequestDetailsType = {
-  status: string;
-  displayName: string;
-  user: User;
-  incoming: boolean;
-};
+  status: string
+  displayName: string
+  user: User
+  incoming: boolean
+}
 
-export type SystemMessageLevel = 'info' | 'warning' | 'error';
+export type SystemMessageLevel = "info" | "warning" | "error"
 export type SystemMessageType = {
-  id: number;
-  content: string;
-  level: SystemMessageLevel;
-};
+  id: number
+  content: string
+  level: SystemMessageLevel
+}
 
 export type UpdateStatusParams = {
-  statusMessage: string;
-};
+  statusMessage: string
+}

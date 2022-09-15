@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components"
 
 export const MessageTextarea = styled.textarea`
   background-color: inherit;
   outline: none;
   border: none;
   color: #ffffff;
-  font-family: 'Inter';
+  font-family: "Inter";
   box-sizing: border-box;
   font-size: 18px;
   width: 100%;
@@ -18,7 +18,7 @@ export const MessageTextarea = styled.textarea`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
+`
 
 export const OnboardingInputField = styled.input`
   background-color: #101010;
@@ -26,7 +26,7 @@ export const OnboardingInputField = styled.input`
   outline: none;
   border: none;
   padding: 20px;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 16px;
   border-radius: 8px;
   width: 100%;
@@ -36,13 +36,13 @@ export const OnboardingInputField = styled.input`
     color: #353535;
     font-style: italic;
   }
-`;
+`
 
 export const OnboardingAboutField = styled.textarea`
   resize: none;
   background-color: #101010;
   color: #fff;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 16px;
   border-radius: 8px;
   outline: none;
@@ -59,15 +59,15 @@ export const OnboardingAboutField = styled.textarea`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
+`
 
 export const FileInput = styled.input`
   ${({ type }) =>
-    type === 'file' &&
+    type === "file" &&
     css`
       display: none;
     `}
-`;
+`
 
 export const UploadAvatarButton = styled.div`
   width: 100%;
@@ -82,7 +82,7 @@ export const UploadAvatarButton = styled.div`
   border-radius: 8px;
   height: 60px;
   cursor: pointer;
-`;
+`
 
 export const SubmitOnboardingFormButton = styled.button`
   width: 100%;
@@ -98,10 +98,10 @@ export const SubmitOnboardingFormButton = styled.button`
   outline: none;
   border: none;
   font-size: 16px;
-  font-family: 'Inter';
+  font-family: "Inter";
   cursor: pointer;
   margin: 10px 0;
-`;
+`
 
 export const UploadedAvatarContainer = styled.div`
   width: 100%;
@@ -123,10 +123,10 @@ export const UploadedAvatarContainer = styled.div`
       word-break: break-word;
     }
   }
-`;
+`
 
 export const UploadedAvatar = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 8px;
-`;
+`

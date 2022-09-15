@@ -1,13 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit"
 
 export interface ModalState {}
 
-export const initialState: ModalState = {};
+export const initialState: ModalState = {}
 export const modalSlice = createSlice({
-  name: 'modals',
+  name: "modals",
   initialState,
   reducers: {},
-});
+})
 
-export const {} = modalSlice.actions;
-export default modalSlice.reducer;
+export const {} = modalSlice.actions
+export default modalSlice.reducer

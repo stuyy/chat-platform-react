@@ -1,10 +1,6 @@
-import { settingsItems } from '../../../utils/constants';
-import {
-  SettingsSidebarHeader,
-  SettingsSidebarItemContainer,
-  SettingsSidebarStyle,
-} from '../../../utils/styles/settings';
-import { SettingsSidebarItem } from '../items/SettingsSidebarItem';
+import { settingsItems } from "../../../utils/constants"
+import { SettingsSidebarHeader, SettingsSidebarItemContainer, SettingsSidebarStyle } from "../../../utils/styles/settings"
+import { SettingsSidebarItem } from "../items/SettingsSidebarItem"
 
 export const SettingsSidebar = () => {
   return (
@@ -18,5 +14,5 @@ export const SettingsSidebar = () => {
         ))}
       </SettingsSidebarItemContainer>
     </SettingsSidebarStyle>
-  );
-};
+  )
+}

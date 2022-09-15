@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { fadeInUpwards } from './keyframes'
+import styled, { css } from "styled-components"
+import { fadeInUpwards } from "./keyframes"
 import {
   CharacterLimitProps,
   ContextMenuProps,
@@ -9,13 +9,13 @@ import {
   MessageInputContainerProps,
   MessageItemContentProps,
   PageProps,
-  SidebarItemProps
-} from './styleTypes'
+  SidebarItemProps,
+} from "./styleTypes"
 
 export const SIDEBAR_WIDTH = 400
 
 export const InputField = styled.input`
-  font-family: 'Inter';
+  font-family: "Inter";
   outline: none;
   border: none;
   background-color: inherit;
@@ -28,7 +28,7 @@ export const InputField = styled.input`
 `
 
 export const InputContainer = styled.div<InputContainerProps>`
-  background-color: ${(prop) => prop.backgroundColor || '#131313'};
+  background-color: ${(prop) => prop.backgroundColor || "#131313"};
   padding: 12px 16px;
   border-radius: 10px;
   width: 100%;
@@ -66,7 +66,7 @@ export const Button = styled.button`
   width: 100%;
   outline: none;
   border: none;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 16px;
   background-color: #2b09ff;
   color: #fff;
@@ -115,7 +115,7 @@ export const ConversationSidebarItemStyle = styled.div<ConversationSidebarItemPr
   padding: 20px 32px;
   box-sizing: border-box;
   width: 100%;
-  background-color: ${({ selected }) => selected && '#1a1a1a'};
+  background-color: ${({ selected }) => selected && "#1a1a1a"};
   cursor: pointer;
   transition: 150ms background-color ease;
   &:hover {
@@ -169,7 +169,7 @@ export const ModalContentBodyStyle = styled.div`
 `
 
 export const TextField = styled.textarea`
-  font-family: 'Inter';
+  font-family: "Inter";
   outline: none;
   border: none;
   background-color: inherit;
@@ -243,7 +243,7 @@ export const MessageInputContainer = styled.div<MessageInputContainerProps>`
   padding: 18px 32px;
   display: flex;
   gap: 20px;
-  align-items: ${({ isMultiLine }) => (isMultiLine ? 'top' : 'center')};
+  align-items: ${({ isMultiLine }) => (isMultiLine ? "top" : "center")};
   position: relative;
 `
 
@@ -257,7 +257,7 @@ export const MessageInput = styled.input`
   outline: none;
   border: none;
   color: #454545;
-  font-family: 'Inter';
+  font-family: "Inter";
   box-sizing: border-box;
   font-size: 18px;
   width: 100%;
@@ -350,7 +350,7 @@ export const EditMessageInputField = styled.input`
   border: none;
   background-color: #222;
   color: #bababa;
-  font-family: 'Inter';
+  font-family: "Inter";
   box-sizing: border-box;
   font-size: 15px;
   padding: 18px 22px;
@@ -604,7 +604,7 @@ export const ConversationSearchbar = styled.input`
   border: none;
   outline: none;
   font-size: 14px;
-  font-family: 'Inter';
+  font-family: "Inter";
   border-radius: 5px;
   box-sizing: border-box;
 `
@@ -618,7 +618,7 @@ export const UserSidebarItemStyle = styled.div<SidebarItemProps>`
   justify-content: center;
   padding: 20px 18px;
   box-sizing: border-box;
-  background-color: ${({ active }) => active && '#1e1e1e'};
+  background-color: ${({ active }) => active && "#1e1e1e"};
   position: relative;
 `
 
@@ -727,8 +727,7 @@ export const CharacterLimit = styled.span<CharacterLimitProps>`
   right: 36px;
   font-size: 14px;
   font-weight: 500;
-  color: ${({ atMaxLength }) =>
-    atMaxLength ? '#ff0000' : 'rgb(129, 129, 129)'};
+  color: ${({ atMaxLength }) => (atMaxLength ? "#ff0000" : "rgb(129, 129, 129)")};
 `
 
 export const MessageAttachmentContainerStyle = styled.div`

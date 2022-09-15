@@ -12,7 +12,6 @@ width: 28px;
 height: 28px;
 margin: -14px 0 0 -14px;`
 
-
 const MaskedCircle = style.div`
 width: 20px;
 height: 20px;
@@ -32,15 +31,14 @@ width: 26px;
 height: 26px;
 animation: ${Animation} 1s infinite linear;`
 
-
-
 export const CircleLoading = () => {
-    return <Loading>
-        <Spinner>
-            <Mask>
-                <MaskedCircle />
-            </Mask>
-        </Spinner>
+  return (
+    <Loading>
+      <Spinner>
+        <Mask>
+          <MaskedCircle />
+        </Mask>
+      </Spinner>
     </Loading>
-
+  )
 }

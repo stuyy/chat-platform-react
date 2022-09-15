@@ -1,27 +1,27 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getConversationById } from '../api';
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { getConversationById } from "../api"
 
 export function useConversationGuard() {
-  const { id } = useParams();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
-  const controller = new AbortController();
+  const { id } = useParams()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState()
+  const controller = new AbortController()
 
   useEffect(() => {
-    console.log('Fetching Conversation');
-    setLoading(true);
+    console.log("Fetching Conversation")
+    setLoading(true)
     getConversationById(parseInt(id!))
       .catch((err) => {
-        console.log(err);
-        setError(err);
+        console.log(err)
+        setError(err)
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoading(false))
 
     return () => {
-      controller.abort();
-    };
-  }, [id]);
+      controller.abort()
+    }
+  }, [id])
 
-  return { loading, error };
+  return { loading, error }
 }

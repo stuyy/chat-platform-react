@@ -1,15 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit';
-import conversationReducer from './conversationSlice';
-import messageReducer from './messages/messageSlice';
-import selectedTypeReducer from './selectedSlice';
-import groupsReducer from './groupSlice';
-import groupMessagesReducer from './groupMessageSlice';
-import messageContainerReducer from './messageContainerSlice';
-import groupSidebarReducer from './groupRecipientsSidebarSlice';
-import friendsReducer from './friends/friendsSlice';
-import rateLimitReducer from './rate-limit/rateLimitSlice';
-import messagePanelReducer from './message-panel/messagePanelSlice';
-import systemMessageReducer from './system-messages/systemMessagesSlice';
+import { configureStore } from "@reduxjs/toolkit"
+import conversationReducer from "./conversationSlice"
+import messageReducer from "./messages/messageSlice"
+import selectedTypeReducer from "./selectedSlice"
+import groupsReducer from "./groupSlice"
+import groupMessagesReducer from "./groupMessageSlice"
+import messageContainerReducer from "./messageContainerSlice"
+import groupSidebarReducer from "./groupRecipientsSidebarSlice"
+import friendsReducer from "./friends/friendsSlice"
+import rateLimitReducer from "./rate-limit/rateLimitSlice"
+import messagePanelReducer from "./message-panel/messagePanelSlice"
+import systemMessageReducer from "./system-messages/systemMessagesSlice"
 
 export const store = configureStore({
   reducer: {
@@ -27,9 +27,9 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
   devTools: true,
-});
+})
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch = typeof store.dispatch

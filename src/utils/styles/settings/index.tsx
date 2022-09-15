@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
-import { slideDown, slideUp } from '../keyframes';
-import { SettingsSidebarItemProps, UserBannerProps } from '../styleTypes';
+import styled, { css } from "styled-components"
+import { slideDown, slideUp } from "../keyframes"
+import { SettingsSidebarItemProps, UserBannerProps } from "../styleTypes"
 
 export const SettingsSidebarStyle = styled.aside`
   display: flex;
@@ -9,7 +9,7 @@ export const SettingsSidebarStyle = styled.aside`
   width: 300px;
   background-color: #111111;
   flex: 0 0 auto;
-`;
+`
 
 export const SettingsSidebarHeader = styled.header`
   width: 100%;
@@ -19,9 +19,9 @@ export const SettingsSidebarHeader = styled.header`
   & span {
     font-size: 20px;
   }
-`;
+`
 
-export const SettingsSidebarItemContainer = styled.div``;
+export const SettingsSidebarItemContainer = styled.div``
 
 export const SettingsSidebarItemStyle = styled.div<SettingsSidebarItemProps>`
   padding: 10px 24px;
@@ -33,12 +33,12 @@ export const SettingsSidebarItemStyle = styled.div<SettingsSidebarItemProps>`
     user-select: none;
     padding: 14px;
     border-radius: 8px;
-    background-color: ${({ isActive }) => isActive && '#070707'};
+    background-color: ${({ isActive }) => isActive && "#070707"};
     & span {
       font-weight: 500;
     }
   }
-`;
+`
 
 export const UserAvatarContainer = styled.div<{ url?: string }>`
   height: 150px;
@@ -49,8 +49,7 @@ export const UserAvatarContainer = styled.div<{ url?: string }>`
     url
       ? css`
           transition: 1s background ease;
-          background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-            url('${url}') no-repeat center;
+          background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("${url}") no-repeat center;
           opacity: 100%;
           transition: 300ms opacity ease;
           background-size: cover;
@@ -64,7 +63,7 @@ export const UserAvatarContainer = styled.div<{ url?: string }>`
   cursor: pointer;
   &::before {
     background-color: none;
-    content: 'Change Avatar';
+    content: "Change Avatar";
     width: 100%;
     height: 150px;
     display: flex;
@@ -79,7 +78,7 @@ export const UserAvatarContainer = styled.div<{ url?: string }>`
   &:hover:before {
     opacity: 1;
   }
-`;
+`
 
 export const SettingsProfileBanner = styled.div<UserBannerProps>`
   width: 100%;
@@ -89,8 +88,7 @@ export const SettingsProfileBanner = styled.div<UserBannerProps>`
     backgroundUrl
       ? css`
           transition: 1s background ease;
-          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-            url('${backgroundUrl}') no-repeat center;
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("${backgroundUrl}") no-repeat center;
           opacity: 70%;
           transition: 300ms opacity ease;
           background-size: cover;
@@ -103,7 +101,7 @@ export const SettingsProfileBanner = styled.div<UserBannerProps>`
         `}
   &::before {
     background-color: none;
-    content: 'Change Banner';
+    content: "Change Banner";
     width: 100%;
     height: 300px;
     display: flex;
@@ -118,7 +116,7 @@ export const SettingsProfileBanner = styled.div<UserBannerProps>`
   &:hover:before {
     opacity: 1;
   }
-`;
+`
 
 export const SettingsProfileUserDetails = styled.div`
   display: flex;
@@ -142,11 +140,11 @@ export const SettingsProfileUserDetails = styled.div`
     bottom: 20px;
     left: 190px;
   }
-`;
+`
 
 export const ProfileSection = styled.div`
   padding: 0 48px;
-`;
+`
 
 export const ProfileAboutSection = styled.div`
   background-color: #111111;
@@ -158,20 +156,20 @@ export const ProfileAboutSection = styled.div`
     font-size: 20px;
     font-weight: 500;
   }
-`;
+`
 
 export const ProfileAboutSectionHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
+`
 
 export const ProfileDescriptionField = styled.textarea`
   background-color: inherit;
   outline: none;
   border: none;
   color: #ffffff;
-  font-family: 'Inter';
+  font-family: "Inter";
   box-sizing: border-box;
   font-size: 15px;
   font-weight: 500;
@@ -188,7 +186,7 @@ export const ProfileDescriptionField = styled.textarea`
   &:disabled {
     color: #484848;
   }
-`;
+`
 
 export const ProfileEditActionBar = styled.div`
   background-color: #0e0e0e;
@@ -210,7 +208,7 @@ export const ProfileEditActionBar = styled.div`
     display: flex;
     gap: 10px;
   }
-`;
+`
 
 /**
  * ${({ animate }) =>

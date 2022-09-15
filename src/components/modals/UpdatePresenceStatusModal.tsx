@@ -1,15 +1,15 @@
-import { Dispatch, FC, SetStateAction, useRef } from 'react';
-import { MdClose } from 'react-icons/md';
-import { ModalContainer, ModalContentBody, ModalHeader } from '.';
-import { OverlayStyle } from '../../utils/styles';
-import { UpdateUserStatusForm } from '../forms/status';
+import { Dispatch, FC, SetStateAction, useRef } from "react"
+import { MdClose } from "react-icons/md"
+import { ModalContainer, ModalContentBody, ModalHeader } from "."
+import { OverlayStyle } from "../../utils/styles"
+import { UpdateUserStatusForm } from "../forms/status"
 
 type Props = {
-  setShowModal: Dispatch<SetStateAction<boolean>>;
-};
+  setShowModal: Dispatch<SetStateAction<boolean>>
+}
 
 export const UpdatePresenceStatusModal: FC<Props> = ({ setShowModal }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null)
 
   return (
     <OverlayStyle ref={ref}>
@@ -23,5 +23,5 @@ export const UpdatePresenceStatusModal: FC<Props> = ({ setShowModal }) => {
         </ModalContentBody>
       </ModalContainer>
     </OverlayStyle>
-  );
-};
+  )
+}
