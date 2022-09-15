@@ -63,6 +63,7 @@ export const MessagePanel: FC<Props> = ({ sendTypingStatus, isRecipientTyping })
       await createMessage(routeId, selectedType, formData);
       setContent('');
       dispatch(removeAllAttachments());
+      dispatch(clearAllMessages());
     } catch (err) {
       const axiosError = err as AxiosError;
       if (axiosError.response?.status === 429) {
