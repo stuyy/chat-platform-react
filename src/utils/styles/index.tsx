@@ -680,18 +680,32 @@ export const GroupRecipientSidebarItemContainer = styled.div`
   }
 `;
 
-export const GroupRecipientSidebarItem = styled.div`
+type GroupRecipientSidebarItemProps = {
+  online: boolean;
+};
+
+export const GroupRecipientSidebarItem = styled.div<GroupRecipientSidebarItemProps>`
   display: flex;
   gap: 10px;
   align-items: center;
   font-size: 18px;
   font-weight: 500;
   margin: 10px 0;
+  & .recipientDetails {
+    display: flex;
+    flex-direction: column;
+  }
   & .left {
     display: flex;
     align-items: center;
     gap: 14px;
   }
+  & .status {
+    font-size: 12px;
+    font-weight: 500;
+    color: #929292;
+  }
+  opacity: ${({ online }) => !online && 0.2};
 `;
 
 export const GroupHeaderIcons = styled.div`
@@ -716,7 +730,8 @@ export const CharacterLimit = styled.span<CharacterLimitProps>`
   right: 36px;
   font-size: 14px;
   font-weight: 500;
-  color: ${({ atMaxLength }) => (atMaxLength ? '#ff0000' : 'rgb(129, 129, 129)')};
+  color: ${({ atMaxLength }) =>
+    atMaxLength ? '#ff0000' : 'rgb(129, 129, 129)'};
 `;
 
 export const MessageAttachmentContainerStyle = styled.div`
