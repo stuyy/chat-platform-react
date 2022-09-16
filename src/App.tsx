@@ -23,8 +23,7 @@ import { FriendsLayoutPage } from './pages/friends/FriendsLayoutPage';
 import { FriendRequestPage } from './pages/friends/FriendRequestPage';
 import { SettingsPage } from './pages/settings/SettingsPage';
 import { SettingsProfilePage } from './pages/settings/SettingsProfilePage';
-import { ThemeProvider } from 'styled-components';
-import { DarkTheme, LightTheme } from './utils/themes';
+import { SettingsAppearancePage } from './pages/settings/SettingsAppearancePage';
 
 enableMapSet();
 
@@ -41,20 +40,17 @@ function AppWithProviders({
 }: PropsWithChildren & Props) {
   return (
     <ReduxProvider store={store}>
-      <ThemeProvider theme={DarkTheme}>
-        <AuthContext.Provider value={{ user, updateAuthUser: setUser }}>
-          <SocketContext.Provider value={socket}>
-            {children}
-          </SocketContext.Provider>
-        </AuthContext.Provider>
-      </ThemeProvider>
+      <AuthContext.Provider value={{ user, updateAuthUser: setUser }}>
+        <SocketContext.Provider value={socket}>
+          {children}
+        </SocketContext.Provider>
+      </AuthContext.Provider>
     </ReduxProvider>
   );
 }
 
 function App() {
   const [user, setUser] = useState<User>();
-
   return (
     <AppWithProviders user={user} setUser={setUser} socket={socket}>
       <Routes>
@@ -81,6 +77,7 @@ function App() {
           </Route>
           <Route path="settings" element={<SettingsPage />}>
             <Route path="profile" element={<SettingsProfilePage />} />
+            <Route path="appearance" element={<SettingsAppearancePage />} />
           </Route>
         </Route>
       </Routes>
