@@ -24,6 +24,7 @@ import { FriendRequestPage } from './pages/friends/FriendRequestPage';
 import { SettingsPage } from './pages/settings/SettingsPage';
 import { SettingsProfilePage } from './pages/settings/SettingsProfilePage';
 import { SettingsAppearancePage } from './pages/settings/SettingsAppearancePage';
+import { PeerPage } from './pages/webrtc/PeerPage';
 
 enableMapSet();
 
@@ -79,6 +80,7 @@ function App() {
             <Route path="profile" element={<SettingsProfilePage />} />
             <Route path="appearance" element={<SettingsAppearancePage />} />
           </Route>
+          <Route path="peer" element={<PeerPage />} />
         </Route>
       </Routes>
       <ToastContainer theme="dark" />
