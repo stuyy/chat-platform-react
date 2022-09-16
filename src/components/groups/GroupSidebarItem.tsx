@@ -37,7 +37,7 @@ export const GroupSidebarItem: React.FC<Props> = ({ group, onContextMenu }) => {
     >
       <div className={styles.groupAvatar}></div>
       <div>
-        <span className={styles.groupName}>{getTransformedTitle()}</span>
+        <span className="title">{getTransformedTitle()}</span>
         <span className={styles.groupLastMessage}>
           {group.lastMessageSent?.content}
         </span>

@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { AuthenticatedRoute } from './components/AuthenticatedRoute';
@@ -21,7 +21,6 @@ import { ConversationPageGuard } from './guards/ConversationPageGuard';
 import { GroupPageGuard } from './guards/GroupPageGuard';
 import { FriendsLayoutPage } from './pages/friends/FriendsLayoutPage';
 import { FriendRequestPage } from './pages/friends/FriendRequestPage';
-import { OnboardingPage } from './pages/onboarding/OnboardingPage';
 import { SettingsPage } from './pages/settings/SettingsPage';
 import { SettingsProfilePage } from './pages/settings/SettingsProfilePage';
 import { ThemeProvider } from 'styled-components';

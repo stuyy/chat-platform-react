@@ -29,10 +29,15 @@ type Props = {
   sendTypingStatus: () => void;
   isRecipientTyping: boolean;
 };
-export const MessagePanel: FC<Props> = ({ sendTypingStatus, isRecipientTyping }) => {
+export const MessagePanel: FC<Props> = ({
+  sendTypingStatus,
+  isRecipientTyping,
+}) => {
   const toastId = 'rateLimitToast';
   const dispatch = useDispatch();
-  const { messageCounter } = useSelector((state: RootState) => state.systemMessages);
+  const { messageCounter } = useSelector(
+    (state: RootState) => state.systemMessages
+  );
   const [content, setContent] = useState('');
   const { id: routeId } = useParams();
   const { user } = useContext(AuthContext);
@@ -41,8 +46,12 @@ export const MessagePanel: FC<Props> = ({ sendTypingStatus, isRecipientTyping })
   const conversation = useSelector((state: RootState) =>
     selectConversationById(state, parseInt(routeId!))
   );
-  const group = useSelector((state: RootState) => selectGroupById(state, parseInt(routeId!)));
-  const selectedType = useSelector((state: RootState) => state.selectedConversationType.type);
+  const group = useSelector((state: RootState) =>
+    selectGroupById(state, parseInt(routeId!))
+  );
+  const selectedType = useSelector(
+    (state: RootState) => state.selectedConversationType.type
+  );
   const recipient = getRecipientFromConversation(conversation, user);
 
   useEffect(() => {
@@ -58,7 +67,9 @@ export const MessagePanel: FC<Props> = ({ sendTypingStatus, isRecipientTyping })
     const formData = new FormData();
     formData.append('id', routeId);
     trimmedContent && formData.append('content', trimmedContent);
-    attachments.forEach((attachment) => formData.append('attachments', attachment.file));
+    attachments.forEach((attachment) =>
+      formData.append('attachments', attachment.file)
+    );
     try {
       await createMessage(routeId, selectedType, formData);
       setContent('');
@@ -80,7 +91,8 @@ export const MessagePanel: FC<Props> = ({ sendTypingStatus, isRecipientTyping })
           addSystemMessage({
             id: messageCounter,
             level: 'error',
-            content: 'The recipient is not in your friends list or they may have blocked you.',
+            content:
+              'The recipient is not in your friends list or they may have blocked you.',
           })
         );
       }
@@ -101,7 +113,9 @@ export const MessagePanel: FC<Props> = ({ sendTypingStatus, isRecipientTyping })
             sendMessage={sendMessage}
             sendTypingStatus={sendTypingStatus}
             placeholderName={
-              selectedType === 'group' ? group?.title || 'Group' : recipient?.firstName || 'user'
+              selectedType === 'group'
+                ? group?.title || 'Group'
+                : recipient?.firstName || 'user'
             }
           />
           <MessageTypingStatus>

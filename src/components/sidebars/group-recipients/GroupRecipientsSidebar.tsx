@@ -1,10 +1,8 @@
 import {
-  GroupRecipientSidebarItem,
   GroupRecipientSidebarItemContainer,
   GroupRecipientsSidebarHeader,
   GroupRecipientsSidebarStyle,
 } from '../../../utils/styles';
-import { Crown } from 'akar-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { selectGroupById } from '../../../store/groupSlice';
@@ -18,7 +16,6 @@ import {
   toggleContextMenu,
 } from '../../../store/groupRecipientsSidebarSlice';
 import { SelectedParticipantContextMenu } from '../../context-menus/SelectedParticipantContextMenu';
-import { UserAvatar } from '../../users/UserAvatar';
 import { OnlineGroupRecipients } from './OnlineGroupRecipients';
 import { OfflineGroupRecipients } from './OfflineGroupRecipients';
 
