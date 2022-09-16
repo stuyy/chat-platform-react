@@ -1,4 +1,5 @@
 import style, { keyframes } from "styled-components"
+import { Theme } from "../../utils/types"
 
 const Animation = keyframes`
 from {transform: rotate(0deg);}
@@ -16,7 +17,7 @@ const MaskedCircle = style.div`
 width: 20px;
 height: 20px;
 border-radius: 12px;
-border: 3px solid white;`
+border: 3px solid ${({ theme }: { theme: Theme }) => theme.conversationSidebar.color};`
 
 const Mask = style.div`
 width: 12px;
