@@ -6,19 +6,16 @@ import { MdCall, MdCallEnd } from 'react-icons/md';
 import { HandleCallType } from '../../utils/types';
 import { useContext } from 'react';
 import { SocketContext } from '../../utils/context/SocketContext';
-import { AuthContext } from '../../utils/context/AuthContext';
 
 export const CallReceiveDialog = () => {
   const { caller } = useSelector((state: RootState) => state.call);
   const socket = useContext(SocketContext);
   const handleCall = (type: HandleCallType) => {
     switch (type) {
-      case 'accept': {
-        socket.emit('videoCallAccepted', { caller });
-        return;
-      }
+      case 'accept':
+        return socket.emit('videoCallAccepted', { caller });
       case 'reject':
-        return;
+        return socket.emit('videoCallRejected', { caller });
     }
   };
   return (

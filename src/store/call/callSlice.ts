@@ -14,6 +14,7 @@ export interface CallState {
   isReceivingCall: boolean;
   remoteStream?: MediaStream;
   localStream?: MediaStream;
+  activeConversationId?: number;
 }
 
 const initialState: CallState = {
@@ -51,6 +52,13 @@ export const callSlice = createSlice({
     setLocalStream: (state, action: PayloadAction<MediaStream>) => {
       state.localStream = action.payload;
     },
+    setIsCallInProgress: (state, action: PayloadAction<boolean>) => {
+      state.isCallInProgress = action.payload;
+      state.isCalling = false;
+    },
+    setActiveConversationId: (state, action: PayloadAction<number>) => {
+      state.activeConversationId = action.payload;
+    },
   },
 });
 
@@ -63,5 +71,7 @@ export const {
   setCaller,
   setRemoteStream,
   setLocalStream,
+  setIsCallInProgress,
+  setActiveConversationId,
 } = callSlice.actions;
 export default callSlice.reducer;

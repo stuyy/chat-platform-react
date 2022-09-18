@@ -25,15 +25,18 @@ import { DarkTheme, LightTheme } from '../utils/themes';
 import Peer from 'peerjs';
 import { AuthContext } from '../utils/context/AuthContext';
 import {
+  setActiveConversationId,
   setCall,
   setCaller,
   setConnection,
+  setIsCallInProgress,
   setIsReceivingCall,
   setLocalStream,
   setPeer,
   setRemoteStream,
 } from '../store/call/callSlice';
 import { CallReceiveDialog } from '../components/calls/CallReceiveDialog';
+import { useVideoCallRejected } from '../utils/hooks/sockets/useVideoCallRejected';
 
 export const AppPage = () => {
   const { user } = useContext(AuthContext);
@@ -104,6 +107,7 @@ export const AppPage = () => {
       if (isReceivingCall) return;
       dispatch(setCaller(data.caller));
       dispatch(setIsReceivingCall(true));
+      // dispatch(setActiveConversationId(data.conversationId));
     });
 
     return () => {
@@ -167,6 +171,7 @@ export const AppPage = () => {
     socket.on('onVideoCallAccept', (data: AcceptedVideoCallPayload) => {
       console.log('video call was accepted!');
       console.log(data);
+      dispatch(setIsCallInProgress(true));
       if (!peer) return console.log('No peer....');
       if (data.caller.id === user!.id) {
         console.log(peer.id);
@@ -191,6 +196,8 @@ export const AppPage = () => {
       socket.off('onVideoCallAccept');
     };
   }, [peer]);
+
+  useVideoCallRejected();
 
   useEffect(() => {
     if (connection) {

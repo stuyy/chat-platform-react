@@ -100,16 +100,17 @@ export const MessagePanel: FC<Props> = ({
       }
     }
   };
+
   return (
     <>
       <MessagePanelStyle>
-        {/* {callState.isCalling || callState.isCallInProgress ? (
+        {callState.isCalling || callState.isCallInProgress ? (
           <ConversationCall />
         ) : (
           <MessagePanelHeader />
-        )} */}
-        <MessagePanelHeader />
-        <ConversationCall />
+        )}
+        {/* <MessagePanelHeader />
+        <ConversationCall /> */}
         <MessagePanelBody>
           <MessageContainer />
         </MessagePanelBody>

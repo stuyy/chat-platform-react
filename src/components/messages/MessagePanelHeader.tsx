@@ -14,6 +14,7 @@ import { FaVideo } from 'react-icons/fa';
 import { getRecipientFromConversation } from '../../utils/helpers';
 import { DataConnection } from 'peerjs';
 import {
+  setActiveConversationId,
   setCall,
   setConnection,
   setIsCalling,
@@ -47,22 +48,21 @@ export const MessagePanelHeader = () => {
   const groupName = group?.title || 'Group';
   const headerTitle = type === 'group' ? groupName : displayName;
 
-  const handleVideoCall = async () => {
+  const callUser = async () => {
     console.log(recipient);
     if (!recipient) return console.log('Recipient undefined');
     if (!user) return console.log('User undefined');
-
+    socket.emit('onVideoCallInitiate', {
+      conversationId: conversation!.id,
+      recipientId: recipient.id,
+    });
     const stream = await navigator.mediaDevices.getUserMedia({
       video: true,
       audio: true,
     });
-
     dispatch(setLocalStream(stream));
-
-    socket.emit('onVideoCallInitiate', {
-      conversationId: conversation?.id,
-      recipientId: recipient.id,
-    });
+    dispatch(setIsCalling(true));
+    dispatch(setActiveConversationId(conversation!.id));
   };
 
   return (
@@ -79,7 +79,7 @@ export const MessagePanelHeader = () => {
         </div>
         <GroupHeaderIcons>
           {type === 'private' && (
-            <FaVideo size={30} cursor="pointer" onClick={handleVideoCall} />
+            <FaVideo size={30} cursor="pointer" onClick={callUser} />
           )}
           {type === 'group' && user?.id === group?.owner?.id && (
             <PersonAdd
