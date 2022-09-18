@@ -133,6 +133,8 @@ export const ConversationSidebarItemStyle = styled.div<ConversationSidebarItemPr
   }
 `;
 
+export const CallSidebarItemContainer = styled.div``;
+
 export const ConversationSidebarItemDetails = styled.div`
   word-break: break-all;
   display: flex;
@@ -245,6 +247,17 @@ export const MessagePanelBody = styled.div`
   flex: 1 1 auto;
   overflow-y: auto;
   min-height: 0;
+  height: calc(100% - 600px);
+`;
+
+export const ConversationCallContainer = styled.div`
+  height: 600px;
+  background-color: #0e0e0e;
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  
 `;
 
 export const MessageContainerStyle = styled.div`
@@ -602,7 +615,7 @@ export const UserSidebarStyle = styled.div`
   }
 `;
 
-export const ConversationSidebarStyle = styled.div`
+export const SidebarStyle = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -615,7 +628,7 @@ export const ConversationSidebarStyle = styled.div`
   }
 `;
 
-export const ConversationSidebarHeader = styled.header`
+export const SidebarHeader = styled.header`
   height: 90px;
   padding: 10px 30px;
   box-sizing: border-box;
@@ -626,7 +639,7 @@ export const ConversationSidebarHeader = styled.header`
   gap: 20px;
 `;
 
-export const ConversationsScrollableContainer = styled.div`
+export const ScrollableContainer = styled.div`
   flex: 1 1 auto;
   overflow-y: auto;
   min-height: 0;
@@ -831,5 +844,53 @@ export const SystemMessageContainer = styled.div`
     font-style: italic;
     padding-left: 28px;
     color: #656565;
+  }
+`;
+
+export const CallReceiveDialogContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 325px;
+  background-color: #1f1f1f;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 999999999;
+  border-radius: 10px;
+  padding: 32px 0;
+
+  & .content {
+    text-align: center;
+  }
+
+  & .icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    & div {
+      height: 50px;
+      width: 50px;
+      background-color: #151515;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+
+  & .accept {
+    color: #00ff0a;
+    font-size: 30px;
+  }
+
+  & .reject {
+    color: #ff0000;
+    font-size: 30px;
   }
 `;

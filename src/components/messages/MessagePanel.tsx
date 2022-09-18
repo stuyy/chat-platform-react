@@ -20,6 +20,7 @@ import {
   MessagePanelStyle,
   MessageTypingStatus,
 } from '../../utils/styles';
+import { ConversationCall } from '../conversations/ConversationCall';
 import { MessageAttachmentContainer } from './attachments/MessageAttachmentContainer';
 import { MessageContainer } from './MessageContainer';
 import { MessageInputField } from './MessageInputField';
@@ -52,6 +53,7 @@ export const MessagePanel: FC<Props> = ({
   const selectedType = useSelector(
     (state: RootState) => state.selectedConversationType.type
   );
+  const callState = useSelector((state: RootState) => state.call);
   const recipient = getRecipientFromConversation(conversation, user);
 
   useEffect(() => {
@@ -101,7 +103,13 @@ export const MessagePanel: FC<Props> = ({
   return (
     <>
       <MessagePanelStyle>
+        {/* {callState.isCalling || callState.isCallInProgress ? (
+          <ConversationCall />
+        ) : (
+          <MessagePanelHeader />
+        )} */}
         <MessagePanelHeader />
+        <ConversationCall />
         <MessagePanelBody>
           <MessageContainer />
         </MessagePanelBody>

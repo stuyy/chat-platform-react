@@ -24,6 +24,8 @@ import { FriendRequestPage } from './pages/friends/FriendRequestPage';
 import { SettingsPage } from './pages/settings/SettingsPage';
 import { SettingsProfilePage } from './pages/settings/SettingsProfilePage';
 import { SettingsAppearancePage } from './pages/settings/SettingsAppearancePage';
+import { CallsPage } from './pages/calls/CallsPage';
+import { CurrentCallPage } from './pages/calls/CurrentCallPage';
 
 enableMapSet();
 
@@ -78,6 +80,9 @@ function App() {
           <Route path="settings" element={<SettingsPage />}>
             <Route path="profile" element={<SettingsProfilePage />} />
             <Route path="appearance" element={<SettingsAppearancePage />} />
+          </Route>
+          <Route path="calls" element={<CallsPage />}>
+            <Route path="current" element={<CurrentCallPage />} />
           </Route>
         </Route>
       </Routes>

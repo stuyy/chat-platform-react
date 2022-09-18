@@ -15,6 +15,7 @@
     "akar-icons": "^1.9.20",
     "axios": "^0.27.2",
     "date-fns": "^2.29.2",
+    "peerjs": "^1.4.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.34.2",
