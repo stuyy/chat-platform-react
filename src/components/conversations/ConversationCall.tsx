@@ -28,7 +28,7 @@ export const ConversationCall = () => {
     if (localVideoRef.current && localStream) {
       console.log('updating local video ref');
       localVideoRef.current.srcObject = localStream;
-      localVideoRef.current.play();
+      localVideoRef.current.muted = true;
     }
   }, [localStream]);
   useEffect(() => {
@@ -36,7 +36,6 @@ export const ConversationCall = () => {
     if (remoteVideoRef.current && remoteStream) {
       console.log('updating remote video ref');
       remoteVideoRef.current.srcObject = remoteStream;
-      remoteVideoRef.current.play();
     }
   }, [remoteStream]);
 
