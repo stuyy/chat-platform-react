@@ -256,8 +256,37 @@ export const ConversationCallContainer = styled.div`
   flex: 1 1 auto;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const VideoContainer = styled.div`
+  display: flex;
   gap: 20px;
-  
+`;
+
+export const VideoContainerItem = styled.div`
+  width: 400px;
+  height: 400px;
+  & video {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+`;
+
+export const VideoContainerActionButtons = styled.div`
+  display: flex;
+  gap: 10px;
+  & div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222222;
+    font-size: 32px;
+    padding: 18px;
+    border-radius: 50%;
+  }
 `;
 
 export const MessageContainerStyle = styled.div`

@@ -30,6 +30,7 @@ type Props = {
   sendTypingStatus: () => void;
   isRecipientTyping: boolean;
 };
+
 export const MessagePanel: FC<Props> = ({
   sendTypingStatus,
   isRecipientTyping,
