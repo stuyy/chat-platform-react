@@ -924,3 +924,17 @@ export const CallReceiveDialogContainer = styled.div`
     font-size: 30px;
   }
 `;
+
+export const MiniVideo = styled.div`
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  height: 300px;
+  width: 400px;
+  z-index: 99;
+  & video {
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+  }
+`;

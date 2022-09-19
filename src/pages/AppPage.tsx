@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { UserSidebar } from '../components/sidebars/UserSidebar';
 import { AppDispatch, RootState } from '../store';
 import {
@@ -9,7 +9,7 @@ import {
 } from '../store/friends/friendsSlice';
 import { SocketContext } from '../utils/context/SocketContext';
 import { useToast } from '../utils/hooks/useToast';
-import { LayoutPage } from '../utils/styles';
+import { LayoutPage, MiniVideo } from '../utils/styles';
 import {
   AcceptedVideoCallPayload,
   AcceptFriendRequestResponse,
@@ -42,22 +42,42 @@ import { useVideoCallHangUp } from '../utils/hooks/sockets/useVideoCallHangUp';
 
 export const AppPage = () => {
   const { user } = useContext(AuthContext);
+  const { pathname } = useLocation();
   const socket = useContext(SocketContext);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { peer, call, isReceivingCall, caller, connection, localStream } =
-    useSelector((state: RootState) => state.call);
+  const {
+    peer,
+    call,
+    isReceivingCall,
+    isCallInProgress,
+    caller,
+    connection,
+    localStream,
+    activeConversationId,
+  } = useSelector((state: RootState) => state.call);
   const { info } = useToast({ theme: 'dark' });
-  const storageTheme = localStorage.getItem('theme') as SelectableTheme;
   const { theme } = useSelector((state: RootState) => state.settings);
-
+  const storageTheme = localStorage.getItem('theme') as SelectableTheme;
+  const remoteVideoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     dispatch(fetchFriendRequestThunk());
   }, [dispatch]);
 
   useEffect(() => {
     if (!user) return;
-    const newPeer = new Peer(user.peer.id);
+    const newPeer = new Peer(user.peer.id, {
+      config: {
+        iceServers: [
+          {
+            url: 'stun:stun.l.google.com:19302',
+          },
+          {
+            url: 'stun:stun1.l.google.com:19302',
+          },
+        ],
+      },
+    });
     dispatch(setPeer(newPeer));
   }, []);
 
@@ -147,6 +167,11 @@ export const AppPage = () => {
       console.log('Stream Was Received from Remote Peer');
       console.log('the remote stream:', remoteStream.id);
       dispatch(setRemoteStream(remoteStream));
+      console.log(remoteStream);
+      if (remoteVideoRef.current && remoteStream) {
+        remoteVideoRef.current.srcObject = remoteStream;
+        remoteVideoRef.current.play();
+      }
     });
     call.on('close', () => console.log('call was closed'));
     return () => {
@@ -176,6 +201,8 @@ export const AppPage = () => {
           const newCall = peer.call(data.acceptor.peer.id, localStream);
           dispatch(setCall(newCall));
         }
+      } else {
+        dispatch(setActiveConversationId(data.conversation.id));
       }
     });
 
