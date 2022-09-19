@@ -131,40 +131,28 @@ export const AppPage = () => {
    */
   useEffect(() => {
     if (!peer) return;
-    console.log('inside peer useEffect hook...');
-    console.log(peer);
-    peer.on('call', (incomingCall) => {
-      console.log('Receiving Call');
-      console.log(incomingCall);
-      navigator.mediaDevices
-        .getUserMedia({
-          video: true,
-          audio: true,
-        })
-        .then((stream) => {
-          console.log('Got new local media stream');
-          incomingCall.answer(stream);
-          dispatch(setLocalStream(stream));
-          console.log('answering call');
-          dispatch(setCall(incomingCall));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    peer.on('call', async (incomingCall) => {
+      const constraints = { video: true, audio: true };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      console.log('Receiving Call & Got Local Stream:', stream.id);
+      incomingCall.answer(stream);
+      dispatch(setLocalStream(stream));
+      dispatch(setCall(incomingCall));
     });
-  }, [peer, call, dispatch]);
+  }, [peer, dispatch]);
 
   useEffect(() => {
-    console.log('an update was made to call, calling callback');
     if (!call) return;
-    console.log('call exists!');
     call.on('stream', (remoteStream) => {
-      console.log('new remote stream, dispatching setRemoteStream');
+      console.log('Stream Was Received from Remote Peer');
+      console.log('the remote stream:', remoteStream.id);
       dispatch(setRemoteStream(remoteStream));
     });
-    call.on('close', () => {
-      console.log('call was closed');
-    });
+    call.on('close', () => console.log('call was closed'));
+    return () => {
+      call.off('stream');
+      call.off('close');
+    };
   }, [call]);
 
   /**
@@ -174,8 +162,6 @@ export const AppPage = () => {
    */
   useEffect(() => {
     socket.on('onVideoCallAccept', (data: AcceptedVideoCallPayload) => {
-      console.log('video call was accepted!');
-      console.log(data);
       dispatch(setIsCallInProgress(true));
       dispatch(setIsReceivingCall(false));
       if (!peer) return console.log('No peer....');
@@ -183,9 +169,10 @@ export const AppPage = () => {
         console.log(peer.id);
         const connection = peer.connect(data.acceptor.peer.id);
         dispatch(setConnection(connection));
-        console.log(localStream);
+        if (!connection) return console.log('No connection');
         if (localStream) {
           console.log('local stream for caller exists!');
+          console.log('My local stream:', localStream.id);
           const newCall = peer.call(data.acceptor.peer.id, localStream);
           dispatch(setCall(newCall));
         }
@@ -213,6 +200,9 @@ export const AppPage = () => {
         });
         connection.on('data', (data) => {
           console.log('data received', data);
+        });
+        connection.on('close', () => {
+          console.log('connection closed');
         });
       }
       return () => {

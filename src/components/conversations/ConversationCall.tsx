@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState, useContext } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  useContext,
+  useMemo,
+  useCallback,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import {
@@ -28,17 +35,28 @@ export const ConversationCall = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    console.log(microphoneEnabled);
+    return () => {
+      console.log('Unmounting Component...');
+    };
+  }, []);
+
+  useEffect(() => {
     console.log('local stream was updated...');
+    console.log(localStream);
     if (localVideoRef.current && localStream) {
       console.log('updating local video ref');
+      console.log(`Updating local stream ${localStream.id}`);
       localVideoRef.current.srcObject = localStream;
       localVideoRef.current.muted = true;
     }
   }, [localStream]);
   useEffect(() => {
     console.log('remote stream was updated...');
+    console.log(remoteStream);
     if (remoteVideoRef.current && remoteStream) {
       console.log('updating remote video ref');
+      console.log(`Updating remote stream ${remoteStream.id}`);
       remoteVideoRef.current.srcObject = remoteStream;
     }
   }, [remoteStream]);
@@ -46,8 +64,7 @@ export const ConversationCall = () => {
   const toggleMicrophone = () =>
     localStream &&
     setMicrophoneEnabled((prev) => {
-      console.log('setting audio to ', prev);
-      localStream.getTracks()[0].enabled = !prev;
+      localStream.getAudioTracks()[0].enabled = !prev;
       return !prev;
     });
 
