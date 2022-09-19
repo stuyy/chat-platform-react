@@ -286,6 +286,7 @@ export const VideoContainerActionButtons = styled.div`
     font-size: 32px;
     padding: 18px;
     border-radius: 50%;
+    cursor: pointer;
   }
 `;
 

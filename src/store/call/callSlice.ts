@@ -6,6 +6,7 @@ export interface CallState {
   isCalling: boolean;
   isCallInProgress: boolean;
   caller?: User;
+  receiver?: User;
   peer?: Peer;
   call?: MediaConnection;
   connection?: DataConnection;
@@ -43,6 +44,9 @@ export const callSlice = createSlice({
     setCaller: (state, action: PayloadAction<User>) => {
       state.caller = action.payload;
     },
+    setReceiver: (state, action: PayloadAction<User>) => {
+      state.receiver = action.payload;
+    },
     setRemoteStream: (state, action: PayloadAction<MediaStream>) => {
       state.remoteStream = action.payload;
     },
@@ -57,14 +61,16 @@ export const callSlice = createSlice({
       state.activeConversationId = action.payload;
     },
     resetState: (state) => {
-      state.caller = undefined;
-      state.isCallInProgress = false;
       state.isCalling = false;
-      state.activeConversationId = undefined;
-      state.localStream = undefined;
-      state.remoteStream = undefined;
+      state.isCallInProgress = false;
+      state.caller = undefined;
+      state.call = undefined;
       state.connection = undefined;
       state.isReceivingCall = false;
+      state.remoteStream = undefined;
+      state.localStream = undefined;
+      state.activeConversationId = undefined;
+      state.receiver = undefined;
     },
   },
 });
@@ -81,5 +87,6 @@ export const {
   setIsCallInProgress,
   setActiveConversationId,
   resetState,
+  setReceiver,
 } = callSlice.actions;
 export default callSlice.reducer;

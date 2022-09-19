@@ -33,19 +33,20 @@ import {
   setIsReceivingCall,
   setLocalStream,
   setPeer,
+  setReceiver,
   setRemoteStream,
 } from '../store/call/callSlice';
 import { CallReceiveDialog } from '../components/calls/CallReceiveDialog';
 import { useVideoCallRejected } from '../utils/hooks/sockets/useVideoCallRejected';
+import { useVideoCallHangUp } from '../utils/hooks/sockets/useVideoCallHangUp';
 
 export const AppPage = () => {
   const { user } = useContext(AuthContext);
   const socket = useContext(SocketContext);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { peer, call, isReceivingCall, caller, connection } = useSelector(
-    (state: RootState) => state.call
-  );
+  const { peer, call, isReceivingCall, caller, connection, localStream } =
+    useSelector((state: RootState) => state.call);
   const { info } = useToast({ theme: 'dark' });
   const storageTheme = localStorage.getItem('theme') as SelectableTheme;
   const { theme } = useSelector((state: RootState) => state.settings);
@@ -106,6 +107,7 @@ export const AppPage = () => {
       console.log(data);
       if (isReceivingCall) return;
       dispatch(setCaller(data.caller));
+      dispatch(setReceiver(user!));
       dispatch(setIsReceivingCall(true));
       // dispatch(setActiveConversationId(data.conversationId));
     });
@@ -140,6 +142,7 @@ export const AppPage = () => {
           audio: true,
         })
         .then((stream) => {
+          console.log('Got new local media stream');
           incomingCall.answer(stream);
           dispatch(setLocalStream(stream));
           console.log('answering call');
@@ -156,9 +159,11 @@ export const AppPage = () => {
     if (!call) return;
     console.log('call exists!');
     call.on('stream', (remoteStream) => {
-      console.log('received remotestream');
-      console.log('dispatching setRemoteStream action...');
+      console.log('new remote stream, dispatching setRemoteStream');
       dispatch(setRemoteStream(remoteStream));
+    });
+    call.on('close', () => {
+      console.log('call was closed');
     });
   }, [call]);
 
@@ -178,27 +183,22 @@ export const AppPage = () => {
         console.log(peer.id);
         const connection = peer.connect(data.acceptor.peer.id);
         dispatch(setConnection(connection));
-        navigator.mediaDevices
-          .getUserMedia({
-            video: true,
-            audio: true,
-          })
-          .then((stream) => {
-            const newCall = peer.call(data.acceptor.peer.id, stream);
-            dispatch(setCall(newCall));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        console.log(localStream);
+        if (localStream) {
+          console.log('local stream for caller exists!');
+          const newCall = peer.call(data.acceptor.peer.id, localStream);
+          dispatch(setCall(newCall));
+        }
       }
     });
 
     return () => {
       socket.off('onVideoCallAccept');
     };
-  }, [peer]);
+  }, [localStream, peer]);
 
   useVideoCallRejected();
+  useVideoCallHangUp();
 
   useEffect(() => {
     if (connection) {

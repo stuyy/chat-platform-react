@@ -16,10 +16,12 @@ import { DataConnection } from 'peerjs';
 import {
   setActiveConversationId,
   setCall,
+  setCaller,
   setConnection,
   setIsCalling,
   setLocalStream,
   setPeer,
+  setReceiver,
 } from '../../store/call/callSlice';
 import { SocketContext } from '../../utils/context/SocketContext';
 
@@ -63,6 +65,8 @@ export const MessagePanelHeader = () => {
     dispatch(setLocalStream(stream));
     dispatch(setIsCalling(true));
     dispatch(setActiveConversationId(conversation!.id));
+    dispatch(setCaller(user));
+    dispatch(setReceiver(recipient));
   };
 
   return (
