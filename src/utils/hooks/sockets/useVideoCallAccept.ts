@@ -25,6 +25,7 @@ export function useVideoCallAccept() {
 
   useEffect(() => {
     socket.on('onVideoCallAccept', (data: AcceptedVideoCallPayload) => {
+      console.log('videoCallAccepted');
       dispatch(setIsCallInProgress(true));
       dispatch(setIsReceivingCall(false));
       if (!peer) return console.log('No peer....');

@@ -14,7 +14,6 @@ export function useVideoCallRejected() {
     });
 
     return () => {
-      console.log('removing onVideoCallRejected listener');
       socket.off('onVideoCallRejected');
     };
   }, []);

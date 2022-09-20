@@ -29,18 +29,9 @@ export const ConversationCall = () => {
   const socket = useContext(SocketContext);
   const [microphoneEnabled, setMicrophoneEnabled] = useState(true);
   const [videoEnabled, setVideoEnabled] = useState(true);
-  const { localStream, remoteStream, call, caller, receiver } = useSelector(
+  const { localStream, remoteStream, caller, receiver } = useSelector(
     (state: RootState) => state.call
   );
-  const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    console.log(microphoneEnabled);
-    return () => {
-      console.log('Unmounting Component...');
-    };
-  }, []);
-
   useEffect(() => {
     console.log('local stream was updated...');
     console.log(localStream);

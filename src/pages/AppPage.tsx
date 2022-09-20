@@ -37,6 +37,7 @@ import { useVideoCallRejected } from '../utils/hooks/sockets/useVideoCallRejecte
 import { useVideoCallHangUp } from '../utils/hooks/sockets/useVideoCallHangUp';
 import { useVideoCallAccept } from '../utils/hooks/sockets/useVideoCallAccept';
 import { useFriendRequestReceived } from '../utils/hooks/sockets/friend-requests/useFriendRequestReceived';
+import { useVideoCall } from '../utils/hooks/sockets/call/useVideoCall';
 
 export const AppPage = () => {
   const { user } = useContext(AuthContext);
@@ -71,6 +72,7 @@ export const AppPage = () => {
   }, []);
 
   useFriendRequestReceived();
+  useVideoCall();
 
   useEffect(() => {
     console.log('Registering all events for AppPage');
@@ -101,23 +103,11 @@ export const AppPage = () => {
       dispatch(removeFriendRequest(payload));
     });
 
-    socket.on('onVideoCall', (data: VideoCallPayload) => {
-      console.log('receiving video call....');
-      console.log(data);
-      if (isReceivingCall) return;
-      dispatch(setCaller(data.caller));
-      dispatch(setReceiver(user!));
-      dispatch(setIsReceivingCall(true));
-      // dispatch(setActiveConversationId(data.conversationId));
-    });
-
     return () => {
-      console.log('Removing all event listeners');
       socket.off('onFriendRequestCancelled');
       socket.off('onFriendRequestRejected');
       socket.off('onFriendRequestReceived');
       socket.off('onFriendRequestAccepted');
-      socket.off('onVideoCall');
     };
   }, [socket, isReceivingCall]);
 
