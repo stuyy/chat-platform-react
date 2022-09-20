@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import {
   ConversationCallContainer,
-  VideoContainer,
+  MediaContainer,
   VideoContainerActionButtons,
   VideoContainerItem,
 } from '../../utils/styles';
@@ -72,7 +72,7 @@ export const ConversationVideoCall = () => {
 
   return (
     <ConversationCallContainer>
-      <VideoContainer>
+      <MediaContainer>
         {localStream && (
           <VideoContainerItem>
             <video ref={localVideoRef} playsInline autoPlay />
@@ -83,7 +83,7 @@ export const ConversationVideoCall = () => {
             <video ref={remoteVideoRef} playsInline autoPlay />
           </VideoContainerItem>
         )}
-      </VideoContainer>
+      </MediaContainer>
       <VideoContainerActionButtons>
         <div>
           {videoEnabled ? (
