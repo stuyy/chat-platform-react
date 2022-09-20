@@ -114,7 +114,9 @@ export enum CDN_URL {
 
 export enum SenderEvents {
   VIDEO_CALL_INITIATE = 'onVideoCallInitiate',
+  VIDEO_CALL_ACCEPT = 'videoCallAccepted',
   VOICE_CALL_INITIATE = 'onVoiceCallInitiate',
+  VOICE_CALL_ACCEPT = 'onVoiceCallAccepted',
 }
 
 export enum ReceiverEvents {
