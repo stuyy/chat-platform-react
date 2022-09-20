@@ -33,6 +33,7 @@ import { useVideoCall } from '../utils/hooks/sockets/call/useVideoCall';
 import { useVoiceCall } from '../utils/hooks/sockets/call/useVoiceCall';
 import { useVoiceCallAccepted } from '../utils/hooks/sockets/call/useVoiceCallAccepted';
 import { useVoiceCallHangUp } from '../utils/hooks/sockets/call/useVoiceCallHangUp';
+import { useVoiceCallRejected } from '../utils/hooks/sockets/call/useVoiceCallRejected';
 
 export const AppPage = () => {
   const { user } = useContext(AuthContext);
@@ -148,6 +149,7 @@ export const AppPage = () => {
   useVoiceCall();
   useVoiceCallAccepted();
   useVoiceCallHangUp();
+  useVoiceCallRejected();
 
   useEffect(() => {
     if (connection) {

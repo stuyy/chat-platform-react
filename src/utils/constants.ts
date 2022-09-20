@@ -126,4 +126,6 @@ export enum ReceiverEvents {
 export enum WebsocketEvents {
   VOICE_CALL_ACCEPTED = 'onVoiceCallAccepted',
   VOICE_CALL_HANG_UP = 'onVoiceCallHangUp',
+  VOICE_CALL_REJECTED = 'onVoiceCallRejected',
+  VIDEO_CALL_REJECTED = 'onVideoCallRejected',
 }
