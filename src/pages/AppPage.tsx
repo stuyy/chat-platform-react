@@ -1,12 +1,9 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { UserSidebar } from '../components/sidebars/UserSidebar';
 import { AppDispatch, RootState } from '../store';
-import {
-  addFriendRequest,
-  removeFriendRequest,
-} from '../store/friends/friendsSlice';
+import { removeFriendRequest } from '../store/friends/friendsSlice';
 import { SocketContext } from '../utils/context/SocketContext';
 import { useToast } from '../utils/hooks/useToast';
 import { LayoutPage } from '../utils/styles';
@@ -14,9 +11,7 @@ import {
   AcceptFriendRequestResponse,
   FriendRequest,
   SelectableTheme,
-  VideoCallPayload,
 } from '../utils/types';
-import { IoMdPersonAdd } from 'react-icons/io';
 import { BsFillPersonCheckFill } from 'react-icons/bs';
 import { fetchFriendRequestThunk } from '../store/friends/friendsThunk';
 import { ThemeProvider } from 'styled-components';
@@ -25,11 +20,8 @@ import Peer from 'peerjs';
 import { AuthContext } from '../utils/context/AuthContext';
 import {
   setCall,
-  setCaller,
-  setIsReceivingCall,
   setLocalStream,
   setPeer,
-  setReceiver,
   setRemoteStream,
 } from '../store/call/callSlice';
 import { CallReceiveDialog } from '../components/calls/CallReceiveDialog';
@@ -38,6 +30,7 @@ import { useVideoCallHangUp } from '../utils/hooks/sockets/useVideoCallHangUp';
 import { useVideoCallAccept } from '../utils/hooks/sockets/useVideoCallAccept';
 import { useFriendRequestReceived } from '../utils/hooks/sockets/friend-requests/useFriendRequestReceived';
 import { useVideoCall } from '../utils/hooks/sockets/call/useVideoCall';
+import { useVoiceCall } from '../utils/hooks/sockets/call/useVoiceCall';
 
 export const AppPage = () => {
   const { user } = useContext(AuthContext);
@@ -145,6 +138,7 @@ export const AppPage = () => {
   useVideoCallAccept();
   useVideoCallRejected();
   useVideoCallHangUp();
+  useVoiceCall();
 
   useEffect(() => {
     if (connection) {

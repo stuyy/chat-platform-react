@@ -55,7 +55,7 @@ export const MessagePanelConversationHeader = () => {
   const voiceCallUser = async () => {
     if (!recipient) return console.log('Recipient undefined');
     socket.emit(SenderEvents.VOICE_CALL_INITIATE, {
-      conversation: conversation!.id,
+      conversationId: conversation!.id,
       recipientId: recipient.id,
     });
     const constraints = { video: false, audio: true };

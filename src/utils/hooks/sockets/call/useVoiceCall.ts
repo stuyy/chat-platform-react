@@ -6,19 +6,20 @@ import {
   setReceiver,
   setIsReceivingCall,
 } from '../../../../store/call/callSlice';
+import { ReceiverEvents } from '../../../constants';
 import { AuthContext } from '../../../context/AuthContext';
 import { SocketContext } from '../../../context/SocketContext';
 import { CallPayload } from '../../../types';
 
-export function useVideoCall() {
+export function useVoiceCall() {
   const socket = useContext(SocketContext);
   const dispatch = useDispatch<AppDispatch>();
   const { user } = useContext(AuthContext);
   const { isReceivingCall } = useSelector((state: RootState) => state.call);
 
   useEffect(() => {
-    socket.on('onVideoCall', (data: CallPayload) => {
-      console.log('receiving video call....');
+    socket.on(ReceiverEvents.VOICE_CALL, (data: CallPayload) => {
+      console.log('receiving voice call....');
       console.log(data);
       if (isReceivingCall) return;
       dispatch(setCaller(data.caller));
@@ -27,7 +28,7 @@ export function useVideoCall() {
     });
 
     return () => {
-      socket.off('onVideoCall');
+      socket.off(ReceiverEvents.VOICE_CALL);
     };
   }, [isReceivingCall]);
 }

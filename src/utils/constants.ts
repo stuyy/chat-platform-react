@@ -116,3 +116,7 @@ export enum SenderEvents {
   VIDEO_CALL_INITIATE = 'onVideoCallInitiate',
   VOICE_CALL_INITIATE = 'onVoiceCallInitiate',
 }
+
+export enum ReceiverEvents {
+  VOICE_CALL = 'onVoiceCall',
+}
