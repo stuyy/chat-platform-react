@@ -32,6 +32,7 @@ import { useFriendRequestReceived } from '../utils/hooks/sockets/friend-requests
 import { useVideoCall } from '../utils/hooks/sockets/call/useVideoCall';
 import { useVoiceCall } from '../utils/hooks/sockets/call/useVoiceCall';
 import { useVoiceCallAccepted } from '../utils/hooks/sockets/call/useVoiceCallAccepted';
+import { useVoiceCallHangUp } from '../utils/hooks/sockets/call/useVoiceCallHangUp';
 
 export const AppPage = () => {
   const { user } = useContext(AuthContext);
@@ -146,6 +147,7 @@ export const AppPage = () => {
   useVideoCallHangUp();
   useVoiceCall();
   useVoiceCallAccepted();
+  useVoiceCallHangUp();
 
   useEffect(() => {
     if (connection) {
