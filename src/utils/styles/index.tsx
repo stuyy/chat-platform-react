@@ -790,6 +790,12 @@ export const GroupRecipientSidebarItem = styled.div<GroupRecipientSidebarItemPro
   opacity: ${({ online }) => !online && 0.2};
 `;
 
+export const MessagePanelHeaderIcons = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+`;
+
 export const GroupHeaderIcons = styled.div`
   display: flex;
   gap: 20px;
