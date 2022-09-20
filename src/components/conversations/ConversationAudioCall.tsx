@@ -68,12 +68,12 @@ export const ConversationAudioCall = () => {
       <MediaContainer>
         {localStream && (
           <AudioContainerItem>
-            <audio ref={localAudioRef} playsInline autoPlay />
+            <audio ref={localAudioRef} autoPlay controls />
           </AudioContainerItem>
         )}
         {remoteStream && (
           <AudioContainerItem>
-            <audio ref={remoteAudioRef} playsInline autoPlay />
+            <audio ref={remoteAudioRef} autoPlay controls />
           </AudioContainerItem>
         )}
       </MediaContainer>

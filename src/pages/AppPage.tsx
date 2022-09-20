@@ -31,15 +31,15 @@ import { useVideoCallAccept } from '../utils/hooks/sockets/useVideoCallAccept';
 import { useFriendRequestReceived } from '../utils/hooks/sockets/friend-requests/useFriendRequestReceived';
 import { useVideoCall } from '../utils/hooks/sockets/call/useVideoCall';
 import { useVoiceCall } from '../utils/hooks/sockets/call/useVoiceCall';
+import { useVoiceCallAccepted } from '../utils/hooks/sockets/call/useVoiceCallAccepted';
 
 export const AppPage = () => {
   const { user } = useContext(AuthContext);
   const socket = useContext(SocketContext);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { peer, call, isReceivingCall, caller, connection } = useSelector(
-    (state: RootState) => state.call
-  );
+  const { peer, call, isReceivingCall, caller, connection, callType } =
+    useSelector((state: RootState) => state.call);
   const { info } = useToast({ theme: 'dark' });
   const { theme } = useSelector((state: RootState) => state.settings);
   const storageTheme = localStorage.getItem('theme') as SelectableTheme;
@@ -114,7 +114,9 @@ export const AppPage = () => {
   useEffect(() => {
     if (!peer) return;
     peer.on('call', async (incomingCall) => {
-      const constraints = { video: true, audio: true };
+      console.log('Incoming Call!!!!!');
+      const constraints = { video: callType === 'video', audio: true };
+      console.log(constraints);
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       console.log('Receiving Call & Got Local Stream:', stream.id);
       incomingCall.answer(stream);
@@ -139,6 +141,7 @@ export const AppPage = () => {
   useVideoCallRejected();
   useVideoCallHangUp();
   useVoiceCall();
+  useVoiceCallAccepted();
 
   useEffect(() => {
     if (connection) {

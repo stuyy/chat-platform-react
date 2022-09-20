@@ -305,7 +305,7 @@ export type CallPayload = {
 
 export type HandleCallType = 'accept' | 'reject';
 
-export type AcceptedVideoCallPayload = {
+export type AcceptedCallPayload = {
   acceptor: User;
   caller: User;
   conversation: Conversation;

@@ -10,7 +10,7 @@ import {
 } from '../../../store/call/callSlice';
 import { AuthContext } from '../../context/AuthContext';
 import { SocketContext } from '../../context/SocketContext';
-import { AcceptedVideoCallPayload } from '../../types';
+import { AcceptedCallPayload } from '../../types';
 
 /**
  * This useEffect will only trigger logic for the person who initiated
@@ -24,10 +24,11 @@ export function useVideoCallAccept() {
   const { peer, localStream } = useSelector((state: RootState) => state.call);
 
   useEffect(() => {
-    socket.on('onVideoCallAccept', (data: AcceptedVideoCallPayload) => {
+    socket.on('onVideoCallAccept', (data: AcceptedCallPayload) => {
       console.log('videoCallAccepted');
       dispatch(setIsCallInProgress(true));
       dispatch(setIsReceivingCall(false));
+      dispatch(setActiveConversationId(data.conversation.id));
       if (!peer) return console.log('No peer....');
       if (data.caller.id === user!.id) {
         console.log(peer.id);
@@ -40,8 +41,6 @@ export function useVideoCallAccept() {
           const newCall = peer.call(data.acceptor.peer.id, localStream);
           dispatch(setCall(newCall));
         }
-      } else {
-        dispatch(setActiveConversationId(data.conversation.id));
       }
     });
     return () => {
