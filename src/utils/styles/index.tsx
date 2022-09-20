@@ -275,9 +275,7 @@ export const VideoContainerItem = styled.div`
   }
 `;
 
-export const AudioContainerItem = styled.div`
-
-`
+export const AudioContainerItem = styled.div``;
 export const VideoContainerActionButtons = styled.div`
   display: flex;
   gap: 10px;
@@ -891,18 +889,17 @@ export const CallReceiveDialogContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 325px;
+  width: 250px;
   background-color: #1f1f1f;
   color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 30px;
   z-index: 999999999;
   border-radius: 10px;
-  padding: 32px 0;
-
+  padding: 32px 24px;
   & .content {
     text-align: center;
   }

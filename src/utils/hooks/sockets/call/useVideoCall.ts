@@ -5,6 +5,7 @@ import {
   setCaller,
   setReceiver,
   setIsReceivingCall,
+  setCallType,
 } from '../../../../store/call/callSlice';
 import { AuthContext } from '../../../context/AuthContext';
 import { SocketContext } from '../../../context/SocketContext';
@@ -24,6 +25,7 @@ export function useVideoCall() {
       dispatch(setCaller(data.caller));
       dispatch(setReceiver(user!));
       dispatch(setIsReceivingCall(true));
+      dispatch(setCallType('video'));
     });
 
     return () => {

@@ -8,7 +8,7 @@ import { useContext } from 'react';
 import { SocketContext } from '../../utils/context/SocketContext';
 
 export const CallReceiveDialog = () => {
-  const { caller } = useSelector((state: RootState) => state.call);
+  const { caller, callType } = useSelector((state: RootState) => state.call);
   const socket = useContext(SocketContext);
   const handleCall = (type: HandleCallType) => {
     switch (type) {
@@ -22,7 +22,10 @@ export const CallReceiveDialog = () => {
     <CallReceiveDialogContainer>
       <UserAvatar user={caller!} />
       <div className="content">
-        <span>{caller!.username} wants to calladasdasdsadsadsadsadad you</span>
+        <span>
+          {caller!.username} wants to {callType === 'audio' ? 'voice' : 'video'}{' '}
+          call you
+        </span>
       </div>
       <div className="icons">
         <div className="accept" onClick={() => handleCall('accept')}>

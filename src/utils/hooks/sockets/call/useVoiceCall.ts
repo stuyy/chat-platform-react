@@ -5,6 +5,7 @@ import {
   setCaller,
   setReceiver,
   setIsReceivingCall,
+  setCallType,
 } from '../../../../store/call/callSlice';
 import { ReceiverEvents } from '../../../constants';
 import { AuthContext } from '../../../context/AuthContext';
@@ -25,6 +26,7 @@ export function useVoiceCall() {
       dispatch(setCaller(data.caller));
       dispatch(setReceiver(user!));
       dispatch(setIsReceivingCall(true));
+      dispatch(setCallType('audio'));
     });
 
     return () => {
