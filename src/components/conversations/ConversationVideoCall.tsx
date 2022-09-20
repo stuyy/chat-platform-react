@@ -23,7 +23,7 @@ import {
 import { ImPhoneHangUp } from 'react-icons/im';
 import { SocketContext } from '../../utils/context/SocketContext';
 
-export const ConversationCall = () => {
+export const ConversationVideoCall = () => {
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
   const socket = useContext(SocketContext);

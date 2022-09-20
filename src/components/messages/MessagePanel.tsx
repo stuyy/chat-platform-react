@@ -20,7 +20,6 @@ import {
   MessagePanelStyle,
   MessageTypingStatus,
 } from '../../utils/styles';
-import { ConversationCall } from '../conversations/ConversationCall';
 import { MessageAttachmentContainer } from './attachments/MessageAttachmentContainer';
 import { MessageContainer } from './MessageContainer';
 import { MessageInputField } from './MessageInputField';
