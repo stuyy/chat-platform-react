@@ -111,3 +111,8 @@ export enum CDN_URL {
   ORIGINAL = 'https://chuachat.ams3.cdn.digitaloceanspaces.com/original/',
   PREVIEW = 'https://chuachat.ams3.digitaloceanspaces.com/preview/',
 }
+
+export enum SenderEvents {
+  VIDEO_CALL_INITIATE = 'onVideoCallInitiate',
+  VOICE_CALL_INITIATE = 'onVoiceCallInitiate',
+}

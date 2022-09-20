@@ -315,3 +315,14 @@ export type SetVideoRefPayload = {
   localVideoRef?: React.RefObject<HTMLVideoElement>;
   remoteVideoRef?: React.RefObject<HTMLVideoElement>;
 };
+
+export type CallInitiatePayload = {
+  localStream: MediaStream;
+  isCalling: boolean;
+  activeConversationId: number;
+  caller: User;
+  receiver: User;
+  type: CallType;
+};
+
+export type CallType = 'video' | 'audio';

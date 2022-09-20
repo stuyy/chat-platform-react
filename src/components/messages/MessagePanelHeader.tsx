@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../store';
@@ -10,24 +10,23 @@ import { GroupHeaderIcons, MessagePanelHeaderStyle } from '../../utils/styles';
 import { PersonAdd, PeopleGroup } from 'akar-icons';
 import { AddGroupRecipientModal } from '../modals/AddGroupRecipientModal';
 import { toggleSidebar } from '../../store/groupRecipientsSidebarSlice';
-import { FaVideo } from 'react-icons/fa';
+import { FaPhoneAlt, FaVideo } from 'react-icons/fa';
 import { getRecipientFromConversation } from '../../utils/helpers';
-import { DataConnection } from 'peerjs';
 import {
+  initiateCallState,
   setActiveConversationId,
-  setCall,
   setCaller,
-  setConnection,
   setIsCalling,
   setLocalStream,
-  setPeer,
   setReceiver,
 } from '../../store/call/callSlice';
 import { SocketContext } from '../../utils/context/SocketContext';
+import { SenderEvents } from '../../utils/constants';
+import { CallInitiatePayload, CallType } from '../../utils/types';
 
 export const MessagePanelHeader = () => {
   const [showModal, setShowModal] = useState(false);
-  const { user } = useContext(AuthContext);
+  const user = useContext(AuthContext).user!;
   const { id } = useParams();
   const socket = useContext(SocketContext);
   const { peer, connection, call } = useSelector(
@@ -50,7 +49,7 @@ export const MessagePanelHeader = () => {
   const groupName = group?.title || 'Group';
   const headerTitle = type === 'group' ? groupName : displayName;
 
-  const callUser = async () => {
+  const videoCallUser = async () => {
     console.log(recipient);
     if (!recipient) return console.log('Recipient undefined');
     if (!user) return console.log('User undefined');
@@ -69,6 +68,27 @@ export const MessagePanelHeader = () => {
     dispatch(setReceiver(recipient));
   };
 
+  const voiceCallUser = async () => {
+    if (!recipient) return console.log('Recipient undefined');
+    socket.emit(SenderEvents.VOICE_CALL_INITIATE, {
+      conversation: conversation!.id,
+      recipientId: recipient.id,
+    });
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: false,
+      audio: true,
+    });
+    const payload: CallInitiatePayload = {
+      localStream: stream,
+      activeConversationId: conversation!.id,
+      isCalling: true,
+      caller: user,
+      receiver: recipient,
+      type: 'audio',
+    };
+    dispatch(initiateCallState(payload));
+  };
+
   return (
     <>
       {showModal && (
@@ -83,7 +103,10 @@ export const MessagePanelHeader = () => {
         </div>
         <GroupHeaderIcons>
           {type === 'private' && (
-            <FaVideo size={30} cursor="pointer" onClick={callUser} />
+            <FaPhoneAlt size={24} cursor="pointer" onClick={voiceCallUser} />
+          )}
+          {type === 'private' && (
+            <FaVideo size={30} cursor="pointer" onClick={videoCallUser} />
           )}
           {type === 'group' && user?.id === group?.owner?.id && (
             <PersonAdd

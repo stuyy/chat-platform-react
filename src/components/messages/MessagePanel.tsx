@@ -111,8 +111,6 @@ export const MessagePanel: FC<Props> = ({
         ) : (
           <MessagePanelHeader />
         )}
-        {/* <MessagePanelHeader />
-        <ConversationCall /> */}
         <MessagePanelBody>
           <MessageContainer />
         </MessagePanelBody>
