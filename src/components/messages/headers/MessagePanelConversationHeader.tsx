@@ -36,7 +36,7 @@ export const MessagePanelConversationHeader = () => {
       receiver: recipient!,
       isCalling: true,
       activeConversationId: conversation.id,
-      type,
+      callType: type,
     };
 
   const videoCallUser = async () => {

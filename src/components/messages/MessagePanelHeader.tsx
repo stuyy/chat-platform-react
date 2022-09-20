@@ -15,6 +15,9 @@ export const MessagePanelHeader = () => {
 
   const showCallPanel = isCalling || isCallInProgress;
   const isRouteActive = activeConversationId === parseInt(routeId!);
+  console.log(isRouteActive);
+  console.log(callType === 'video');
+  console.log(callType);
   if (!showCallPanel)
     return type === 'private' ? (
       <MessagePanelConversationHeader />

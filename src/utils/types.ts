@@ -322,7 +322,7 @@ export type CallInitiatePayload = {
   activeConversationId: number;
   caller: User;
   receiver: User;
-  type: CallType;
+  callType: CallType;
 };
 
 export type CallType = 'video' | 'audio';

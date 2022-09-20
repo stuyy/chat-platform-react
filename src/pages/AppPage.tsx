@@ -115,6 +115,7 @@ export const AppPage = () => {
     if (!peer) return;
     peer.on('call', async (incomingCall) => {
       console.log('Incoming Call!!!!!');
+      console.log(callType);
       const constraints = { video: callType === 'video', audio: true };
       console.log(constraints);
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
@@ -123,7 +124,10 @@ export const AppPage = () => {
       dispatch(setLocalStream(stream));
       dispatch(setCall(incomingCall));
     });
-  }, [peer, dispatch]);
+    return () => {
+      peer.off('call');
+    };
+  }, [peer, callType, dispatch]);
 
   useEffect(() => {
     if (!call) return;

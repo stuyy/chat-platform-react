@@ -255,9 +255,10 @@ export const ConversationCallContainer = styled.div`
   background-color: #0e0e0e;
   flex: 1 1 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
+  padding: 18px 0;
 `;
 
 export const MediaContainer = styled.div`
@@ -269,8 +270,8 @@ export const VideoContainerItem = styled.div`
   width: 400px;
   height: 400px;
   & video {
-    width: 100%;
-    height: 100%;
+    width: 400px;
+    height: 400px;
     pointer-events: none;
   }
 `;

@@ -32,7 +32,7 @@ export const ConversationAudioCall = () => {
       console.log('AUDIO: updating local video ref');
       console.log(`AUDIO: Updating local stream ${localStream.id}`);
       localAudioRef.current.srcObject = localStream;
-      // localAudioRef.current.muted = true;
+      localAudioRef.current.muted = true;
     }
   }, [localStream]);
   useEffect(() => {
@@ -45,26 +45,27 @@ export const ConversationAudioCall = () => {
     }
   }, [remoteStream]);
 
-  // const toggleMicrophone = () =>
-  //   localStream &&
-  //   setMicrophoneEnabled((prev) => {
-  //     localStream.getAudioTracks()[0].enabled = !prev;
-  //     return !prev;
-  //   });
+  const toggleMicrophone = () =>
+    localStream &&
+    setMicrophoneEnabled((prev) => {
+      localStream.getAudioTracks()[0].enabled = !prev;
+      return !prev;
+    });
 
-  // const toggleVideo = () =>
-  //   localStream &&
-  //   setVideoEnabled((prev) => {
-  //     localStream.getVideoTracks()[0].enabled = !prev;
-  //     return !prev;
-  //   });
+  const toggleVideo = () =>
+    localStream &&
+    setVideoEnabled((prev) => {
+      localStream.getVideoTracks()[0].enabled = !prev;
+      return !prev;
+    });
 
-  // const closeCall = () => {
-  //   socket.emit('videoCallHangUp', { caller, receiver });
-  // };
+  const closeCall = () => {
+    socket.emit('videoCallHangUp', { caller, receiver });
+  };
 
   return (
     <ConversationCallContainer>
+      <div className="invisible"></div>
       <MediaContainer>
         {localStream && (
           <AudioContainerItem>
@@ -77,7 +78,7 @@ export const ConversationAudioCall = () => {
           </AudioContainerItem>
         )}
       </MediaContainer>
-      {/* <VideoContainerActionButtons>
+      <VideoContainerActionButtons>
         <div>
           {videoEnabled ? (
             <BiVideo onClick={toggleVideo} />
@@ -95,7 +96,7 @@ export const ConversationAudioCall = () => {
         <div>
           <ImPhoneHangUp onClick={closeCall} />
         </div>
-      </VideoContainerActionButtons> */}
+      </VideoContainerActionButtons>
     </ConversationCallContainer>
   );
 };
