@@ -11,6 +11,7 @@ import { AuthContext } from '../../utils/context/AuthContext';
 import { isGroupOwner } from '../../utils/helpers';
 import { ContextMenu, ContextMenuItem } from '../../utils/styles';
 import { IoMdExit, IoIosArchive } from 'react-icons/io';
+import { Edit } from 'akar-icons';
 
 export const GroupSidebarContextMenu: FC = () => {
   const { id } = useParams();
@@ -36,12 +37,20 @@ export const GroupSidebarContextMenu: FC = () => {
     );
   };
 
+  const renameGroup = () => {};
+
   return (
     <ContextMenu top={points.y} left={points.x}>
       <ContextMenuItem onClick={leaveGroup}>
         <IoMdExit size={20} color="#ff0000" />
         <span style={{ color: '#ff0000' }}>Leave Group</span>
       </ContextMenuItem>
+      {user?.id === contextMenuGroup?.owner.id && (
+        <ContextMenuItem onClick={leaveGroup}>
+          <Edit size={20} color="#fff" />
+          <span style={{ color: '#fff' }}>Rename Group</span>
+        </ContextMenuItem>
+      )}
       <ContextMenuItem>
         <IoIosArchive size={20} color="#fff" />
         <span style={{ color: '#fff' }}>Archive Group</span>
