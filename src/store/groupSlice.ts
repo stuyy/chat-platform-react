@@ -11,12 +11,14 @@ import {
   removeGroupRecipient as removeGroupRecipientAPI,
   updateGroupOwner as updateGroupOwnerAPI,
   leaveGroup as leaveGroupAPI,
+  updateGroupDetails as updateGroupDetailsAPI,
 } from '../utils/api';
 import {
   CreateGroupParams,
   Group,
   Points,
   RemoveGroupRecipientParams,
+  UpdateGroupDetailsPayload,
   UpdateGroupOwnerParams,
 } from '../utils/types';
 
@@ -58,6 +60,19 @@ export const leaveGroupThunk = createAsyncThunk('groups/leave', (id: number) =>
   leaveGroupAPI(id)
 );
 
+export const updateGroupDetailsThunk = createAsyncThunk(
+  'groups/update/details',
+  async (payload: UpdateGroupDetailsPayload, thunkAPI) => {
+    try {
+      const { data } = await updateGroupDetailsAPI(payload);
+      console.log('Updated Group Successful. Dispatching updateGroup');
+      thunkAPI.dispatch(updateGroup(data));
+    } catch (err) {
+      thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 export const groupsSlice = createSlice({
   name: 'groups',
   initialState,
@@ -67,6 +82,7 @@ export const groupsSlice = createSlice({
       state.groups.unshift(action.payload);
     },
     updateGroup: (state, action: PayloadAction<Group>) => {
+      console.log('Inside updateGroup');
       const updatedGroup = action.payload;
       const existingGroup = state.groups.find((g) => g.id === updatedGroup.id);
       const index = state.groups.findIndex((g) => g.id === updatedGroup.id);
@@ -119,6 +135,9 @@ export const groupsSlice = createSlice({
       })
       .addCase(leaveGroupThunk.fulfilled, (state, action) => {
         console.log('leaveGroupThunk.fulfilled');
+      })
+      .addCase(updateGroupDetailsThunk.fulfilled, (state, action) => {
+        console.log('updateGroupDetailsThunk.fulfilled');
       });
   },
 });

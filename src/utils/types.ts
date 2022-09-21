@@ -206,6 +206,7 @@ export type DivMouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
 export type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
 export type DragEvent = React.DragEvent<HTMLTextAreaElement>;
 export type ClipboardEvent = React.ClipboardEvent<HTMLTextAreaElement>;
+export type FormEvent = React.FormEvent<HTMLFormElement>;
 
 export type FriendRequestStatus = 'accepted' | 'pending' | 'rejected';
 
@@ -327,3 +328,8 @@ export type CallInitiatePayload = {
 };
 
 export type CallType = 'video' | 'audio';
+
+export type UpdateGroupDetailsPayload = {
+  id: number;
+  data: FormData;
+};
