@@ -7,6 +7,7 @@ import { setShowEditGroupModal } from '../../store/groupSlice';
 import { useKeydown } from '../../utils/hooks';
 import { OverlayStyle } from '../../utils/styles';
 import { DivMouseEvent } from '../../utils/types';
+import { EditGroupForm } from '../forms/EditGroupForm';
 
 export const EditGroupModal = () => {
   const ref = createRef<HTMLDivElement>();
@@ -31,7 +32,7 @@ export const EditGroupModal = () => {
           />
         </ModalHeader>
         <ModalContentBody>
-          {/* <SendFriendRequestForm setShowModal={setShowModal} /> */}
+          <EditGroupForm />
         </ModalContentBody>
       </ModalContainer>
     </OverlayStyle>

@@ -150,6 +150,7 @@ export type Group = {
   createdAt: number;
   lastMessageSent: MessageType;
   lastMessageSentAt: Date;
+  avatar?: string;
 };
 
 export type GroupMessageEventPayload = {
