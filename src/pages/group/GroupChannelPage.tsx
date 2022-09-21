@@ -11,6 +11,7 @@ import {
 } from '../../store/groupMessageSlice';
 import { GroupMessageType } from '../../utils/types';
 import { GroupRecipientsSidebar } from '../../components/sidebars/group-recipients/GroupRecipientsSidebar';
+import { EditGroupModal } from '../../components/modals/EditGroupModal';
 
 export const GroupChannelPage = () => {
   const { id } = useParams();
@@ -18,6 +19,9 @@ export const GroupChannelPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [isRecipientTyping, setIsRecipientTyping] = useState(false);
 
+  const { showEditGroupModal } = useSelector(
+    (state: RootState) => state.groups
+  );
   const showSidebar = useSelector(
     (state: RootState) => state.groupSidebar.showSidebar
   );
@@ -46,6 +50,7 @@ export const GroupChannelPage = () => {
 
   return (
     <>
+      {showEditGroupModal && <EditGroupModal />}
       <ConversationChannelPageStyle>
         <MessagePanel
           sendTypingStatus={sendTypingStatus}

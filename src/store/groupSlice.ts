@@ -18,19 +18,20 @@ import {
   Points,
   RemoveGroupRecipientParams,
   UpdateGroupOwnerParams,
-  User,
 } from '../utils/types';
 
 export interface GroupState {
   groups: Group[];
   showGroupContextMenu: boolean;
   selectedGroupContextMenu?: Group;
+  showEditGroupModal: boolean;
   points: Points;
 }
 
 const initialState: GroupState = {
   groups: [],
   showGroupContextMenu: false,
+  showEditGroupModal: false,
   points: { x: 0, y: 0 },
 };
 
@@ -90,6 +91,9 @@ export const groupsSlice = createSlice({
     setContextMenuLocation: (state, action: PayloadAction<Points>) => {
       state.points = action.payload;
     },
+    setShowEditGroupModal: (state, action: PayloadAction<boolean>) => {
+      state.showEditGroupModal = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -134,6 +138,7 @@ export const {
   toggleContextMenu,
   setContextMenuLocation,
   setSelectedGroup,
+  setShowEditGroupModal,
 } = groupsSlice.actions;
 
 export default groupsSlice.reducer;

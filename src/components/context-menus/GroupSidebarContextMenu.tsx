@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from '../../store';
 import {
   leaveGroupThunk,
   selectGroupById,
+  setShowEditGroupModal,
   toggleContextMenu,
 } from '../../store/groupSlice';
 import { AuthContext } from '../../utils/context/AuthContext';
@@ -27,17 +28,12 @@ export const GroupSidebarContextMenu: FC = () => {
     (state: RootState) => state.groups.selectedGroupContextMenu
   );
 
-  const isOwner = isGroupOwner(user, group);
-
   const leaveGroup = () => {
     if (!contextMenuGroup) return;
-    console.log(contextMenuGroup);
     dispatch(leaveGroupThunk(contextMenuGroup.id)).finally(() =>
       dispatch(toggleContextMenu(false))
     );
   };
-
-  const renameGroup = () => {};
 
   return (
     <ContextMenu top={points.y} left={points.x}>
@@ -46,9 +42,9 @@ export const GroupSidebarContextMenu: FC = () => {
         <span style={{ color: '#ff0000' }}>Leave Group</span>
       </ContextMenuItem>
       {user?.id === contextMenuGroup?.owner.id && (
-        <ContextMenuItem onClick={leaveGroup}>
+        <ContextMenuItem onClick={() => dispatch(setShowEditGroupModal(true))}>
           <Edit size={20} color="#fff" />
-          <span style={{ color: '#fff' }}>Rename Group</span>
+          <span style={{ color: '#fff' }}>Edit Group</span>
         </ContextMenuItem>
       )}
       <ContextMenuItem>
