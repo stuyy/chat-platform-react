@@ -28,6 +28,7 @@ export interface GroupState {
   selectedGroupContextMenu?: Group;
   showEditGroupModal: boolean;
   points: Points;
+  isSavingChanges: boolean;
 }
 
 const initialState: GroupState = {
@@ -35,6 +36,7 @@ const initialState: GroupState = {
   showGroupContextMenu: false,
   showEditGroupModal: false,
   points: { x: 0, y: 0 },
+  isSavingChanges: false,
 };
 
 export const fetchGroupsThunk = createAsyncThunk('groups/fetch', () => {
@@ -67,6 +69,7 @@ export const updateGroupDetailsThunk = createAsyncThunk(
       const { data } = await updateGroupDetailsAPI(payload);
       console.log('Updated Group Successful. Dispatching updateGroup');
       thunkAPI.dispatch(updateGroup(data));
+      thunkAPI.fulfillWithValue(data);
     } catch (err) {
       thunkAPI.rejectWithValue(err);
     }
@@ -109,6 +112,9 @@ export const groupsSlice = createSlice({
     },
     setShowEditGroupModal: (state, action: PayloadAction<boolean>) => {
       state.showEditGroupModal = action.payload;
+    },
+    setIsSavingChanges: (state, action: PayloadAction<boolean>) => {
+      state.isSavingChanges = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -158,6 +164,7 @@ export const {
   setContextMenuLocation,
   setSelectedGroup,
   setShowEditGroupModal,
+  setIsSavingChanges,
 } = groupsSlice.actions;
 
 export default groupsSlice.reducer;

@@ -22,10 +22,14 @@ export const InputField = styled.input`
   background-color: inherit;
   color: #fff;
   font-size: 18px;
+  font-weight: 500;
   width: 100%;
   box-sizing: border-box;
   padding: 0;
   margin: 4px 0;
+  &:disabled {
+    color: #3b3b3b;
+  }
 `;
 
 export const InputContainer = styled.div<InputContainerProps>`
