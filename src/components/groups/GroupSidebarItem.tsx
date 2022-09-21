@@ -1,6 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { CDN_URL } from '../../utils/constants';
 import { ConversationSidebarItemStyle } from '../../utils/styles';
 import { ContextMenuEvent, Group } from '../../utils/types';
+import { PeopleGroup } from 'akar-icons';
 
 import styles from './index.module.scss';
 
@@ -35,7 +37,17 @@ export const GroupSidebarItem: React.FC<Props> = ({ group, onContextMenu }) => {
       onContextMenu={(e) => onContextMenu(e, group)}
       selected={parseInt(id!) === group.id}
     >
-      <div className={styles.groupAvatar}></div>
+      {group.avatar ? (
+        <img
+          src={CDN_URL.BASE.concat(group.avatar)}
+          alt="avatar"
+          className={styles.groupAvatar}
+        />
+      ) : (
+        <div className={styles.defaultGroupAvatar}>
+          <PeopleGroup size={28} />
+        </div>
+      )}
       <div>
         <span className="title">{getTransformedTitle()}</span>
         <span className={styles.groupLastMessage}>

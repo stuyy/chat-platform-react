@@ -9,8 +9,17 @@
   color: rgb(163, 163, 163);
 }
 .groupAvatar {
-  background-color: rgb(255, 170, 11);
   height: 56px;
   width: 56px;
   border-radius: 50%;
+}
+
+.defaultGroupAvatar {
+  background-color: rgb(36, 36, 36);
+  height: 56px;
+  width: 56px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
