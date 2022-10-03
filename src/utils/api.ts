@@ -192,3 +192,5 @@ export const updateStatusMessage = (data: UpdateStatusParams) =>
 
 export const updateGroupDetails = ({ id, data }: UpdateGroupDetailsPayload) =>
   axiosClient.patch<Group>(`/groups/${id}/details`, data, config);
+
+export const logoutUser = () => axiosClient.post('/auth/logout', {}, config);

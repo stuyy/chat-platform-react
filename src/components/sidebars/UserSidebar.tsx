@@ -11,10 +11,17 @@ import { AuthContext } from '../../utils/context/AuthContext';
 import { UpdatePresenceStatusModal } from '../modals/UpdatePresenceStatusModal';
 import { RiLogoutCircleLine } from 'react-icons/ri';
 import { UserAvatar } from '../users/UserAvatar';
+import { logoutUser as logoutUserAPI } from '../../utils/api';
+import { useNavigate } from 'react-router-dom';
 
 export const UserSidebar = () => {
   const [showModal, setShowModal] = useState(false);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    logoutUserAPI().finally(() => navigate('/login', { replace: true }));
+  };
 
   return (
     <>
@@ -30,7 +37,7 @@ export const UserSidebar = () => {
         </UserSidebarScrollableContainer>
 
         <UserSidebarFooter>
-          <RiLogoutCircleLine size={30} />
+          <RiLogoutCircleLine size={30} onClick={() => logoutUser()} />
         </UserSidebarFooter>
       </UserSidebarStyle>
     </>
