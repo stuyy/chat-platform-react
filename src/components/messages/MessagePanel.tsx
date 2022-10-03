@@ -53,12 +53,13 @@ export const MessagePanel: FC<Props> = ({
   const selectedType = useSelector(
     (state: RootState) => state.selectedConversationType.type
   );
-  const callState = useSelector((state: RootState) => state.call);
+
   const recipient = getRecipientFromConversation(conversation, user);
 
   useEffect(() => {
     return () => {
       dispatch(clearAllMessages());
+      dispatch(removeAllAttachments());
     };
   }, []);
 
