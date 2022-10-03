@@ -19,6 +19,8 @@ import {
   AddGroupUserMessagePayload,
   GroupMessageEventPayload,
   RemoveGroupUserMessagePayload,
+  UpdateGroupAction,
+  GroupParticipantLeftPayload,
 } from '../../utils/types';
 
 export const GroupPage = () => {
@@ -71,26 +73,21 @@ export const GroupPage = () => {
      */
     socket.on(
       'onGroupReceivedNewUser',
-      (payload: AddGroupUserMessagePayload) => {
+      ({ group }: AddGroupUserMessagePayload) => {
         console.log('Received onGroupReceivedNewUser');
-        dispatch(updateGroup(payload.group));
+        dispatch(updateGroup({ group }));
       }
     );
 
     socket.on(
       'onGroupRecipientRemoved',
-      (payload: RemoveGroupUserMessagePayload) => {
+      ({ group }: RemoveGroupUserMessagePayload) => {
         console.log('onGroupRecipientRemoved');
-        console.log(payload);
-        dispatch(updateGroup(payload.group));
+        dispatch(updateGroup({ group }));
       }
     );
 
     socket.on('onGroupRemoved', (payload: RemoveGroupUserMessagePayload) => {
-      console.log('onGroupRemoved');
-      console.log('user is logged in was removed from the group');
-      console.log('navigating...');
-      console.log('id:', id);
       dispatch(removeGroup(payload.group));
       if (id && parseInt(id) === payload.group.id) {
         console.log('Navigating User to /groups');
@@ -98,20 +95,22 @@ export const GroupPage = () => {
       }
     });
 
-    socket.on('onGroupParticipantLeft', (payload) => {
-      console.log('onGroupParticipantLeft received');
-      console.log(payload);
-      dispatch(updateGroup(payload.group));
-      if (payload.userId === user?.id) {
-        console.log('payload.userId matches user.id...');
-        dispatch(removeGroup(payload.group));
-        navigate('/groups');
+    socket.on(
+      'onGroupParticipantLeft',
+      ({ group, userId }: GroupParticipantLeftPayload) => {
+        console.log('onGroupParticipantLeft received');
+        dispatch(updateGroup({ group }));
+        if (userId === user?.id) {
+          console.log('payload.userId matches user.id...');
+          dispatch(removeGroup(group));
+          navigate('/groups');
+        }
       }
-    });
+    );
 
-    socket.on('onGroupOwnerUpdate', (payload: Group) => {
+    socket.on('onGroupOwnerUpdate', (group: Group) => {
       console.log('received onGroupOwnerUpdate');
-      dispatch(updateGroup(payload));
+      dispatch(updateGroup({ group }));
     });
 
     return () => {
