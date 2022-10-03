@@ -6,9 +6,10 @@ import defaultAvatar from '../../__assets__/default_avatar.jpg';
 
 type Props = {
   user: User;
+  onClick?: (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
 };
 
-export const UserAvatar: FC<Props> = ({ user }) => {
+export const UserAvatar: FC<Props> = ({ user, onClick }) => {
   const getProfilePicture = () => {
     const { profile } = user;
     return profile && profile.avatar
@@ -16,5 +17,11 @@ export const UserAvatar: FC<Props> = ({ user }) => {
       : defaultAvatar;
   };
 
-  return <UserAvatarContainer src={getProfilePicture()} alt="avatar" />;
+  return (
+    <UserAvatarContainer
+      src={getProfilePicture()}
+      alt="avatar"
+      onClick={onClick}
+    />
+  );
 };
